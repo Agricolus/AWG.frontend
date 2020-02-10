@@ -5,7 +5,7 @@
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 1.5;
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -74,6 +74,10 @@
 .btn-block + .btn-block {
   margin-top: 0.5rem;
 }
+body,
+html {
+  font-size: 16px;
+}
 .app {
   height: 100vh;
   overflow: hidden;
@@ -87,7 +91,7 @@
   display: flex;
   flex-flow: row nowrap;
 }
-.main-container {
+.main {
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
@@ -108,8 +112,6 @@
   height: 100%;
   overflow-y: auto;
   display: flex;
-  font-family: Montserrat, sans-serif;
-  font-size: 0.9rem;
   flex-flow: column;
   box-shadow: -2px 2px 3px 1px rgba(60, 60, 60, 0.4) inset;
   scrollbar-width: thin;
@@ -135,36 +137,66 @@
   opacity: 1;
   font-size: 1.7em;
 }
-.sidebar section header {
-  height: 400px;
+.sidebar section .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  min-height: 100px;
+  font-size: 1.4rem;
+}
+.sidebar section .header label:first-child {
+  margin-bottom: 10px;
+  font-weight: bold;
 }
 .sidebar section .nav {
   padding: 0;
+  margin: 0;
 }
 .sidebar section .nav .nav-item {
-  display: flex;
-  align-items: center;
   overflow: hidden;
   white-space: nowrap;
   height: 60px;
   position: relative;
-  font-size: 18px;
+  font-size: 1.2rem;
 }
-.sidebar section .nav .nav-item .nav-item-content {
+.sidebar section .nav .nav-item .nav-link {
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
   padding-left: 25px;
+  color: #ffffff;
 }
-.sidebar section .nav .nav-item .nav-item-content .nav-item-icon {
+.sidebar section .nav .nav-item .nav-link:hover {
+  color: #a3a0fb !important;
+}
+.sidebar section .nav .nav-item .nav-link:hover i {
+  color: #a3a0fb;
+}
+.sidebar section .nav .nav-item .nav-link i {
   color: #a5a4bf;
   width: 40px;
-  font-size: 20px;
+  font-size: 1.2rem;
 }
-.sidebar section .nav .nav-item.active {
+.sidebar section .nav .nav-item .nav-link.router-link-active {
   background: rgba(0, 0, 0, 0.1) 0% 0% no-repeat padding-box;
   border-left: 3px solid #a3a0fb;
   color: #a3a0fb;
 }
-.sidebar section .nav .nav-item.active .nav-item-icon {
+.sidebar section .nav .nav-item .nav-link.router-link-active i {
   color: #a3a0fb;
+}
+.sidebar footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  height: 40px;
+  color: #ffffff;
+  text-align: center;
+}
+.sidebar footer img {
+  width: 60%;
 }
 @font-face {
   font-family: "source-sans-pro";
