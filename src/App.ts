@@ -1,17 +1,15 @@
-import Vue from "vue"
-import Component from "vue-class-component";
-import FullLayout from "./layout/fullLayout.vue";
-import Sidebar from "./layout/sidebar.vue";
+import Vue from "vue";
+import Component from 'vue-class-component';
 
-@Component({
-  name: "full",
-  components: {
-    FullLayout,
-    Sidebar
+import CONFIGURATION from "./config";
+
+@Component({})
+export default class App extends Vue {
+  get appconfig() {
+    return CONFIGURATION;
   }
-}
-)
-export default class App extends Vue
-{
-
+  mounted (): void {
+    if (CONFIGURATION.env == 'development')
+      console.debug("global configuration:", CONFIGURATION);
+  }
 }
