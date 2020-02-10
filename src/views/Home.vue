@@ -1,6 +1,10 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="/assets/logo.png">
+    HOMEPAGE
+
+
   </div>
 </template>
+<script src="./Home.ts" lang="ts"/>
+
 

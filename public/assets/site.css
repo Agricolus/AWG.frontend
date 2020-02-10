@@ -1,0 +1,175 @@
+@import "../libs/font-awesome/css/all.min.css";
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  font-size: 18px;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 8px 15px;
+  border: none;
+  font-family: source-sans-pro;
+}
+.btn:focus {
+  outline: 0;
+}
+.btn:disabled {
+  opacity: 0.65;
+  pointer-events: none;
+}
+@media screen and (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}
+.btn-primary {
+  color: #ffffff;
+  background-color: #43425d;
+  border-color: #43425d;
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: #4d4f5c;
+}
+.btn-primary:focus {
+  background-color: #4d4f5c;
+}
+.btn-outline {
+  color: #007bff;
+  background-color: transparent;
+  background-image: none;
+  border-color: #007bff;
+}
+.btn-outline:hover {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+.btn-outline:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+.btn-lg,
+.btn-group-lg > .btn {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+.btn-sm,
+.btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+.btn-block + .btn-block {
+  margin-top: 0.5rem;
+}
+.app {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  font-family: source-sans-pro;
+}
+.app-body {
+  height: 100vh;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+}
+.main-container {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  height: 100%;
+  background-size: cover;
+  background-color: #ffffff;
+  background-position: center, center;
+  position: relative;
+  box-shadow: -2px 2px 3px 1px rgba(60, 60, 60, 0.4) inset;
+  max-width: 100%;
+}
+.sidebar {
+  flex: 0 0 260px;
+  order: -1;
+  z-index: 3;
+  position: relative;
+  overflow-x: hidden !important;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  font-family: Montserrat, sans-serif;
+  font-size: 0.9rem;
+  flex-flow: column;
+  box-shadow: -2px 2px 3px 1px rgba(60, 60, 60, 0.4) inset;
+  scrollbar-width: thin;
+  background: #43425d 0% 0% no-repeat padding-box;
+  color: #ffffff;
+}
+.sidebar header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 260px;
+  height: 70px;
+  /* UI Properties */
+  background: rgba(0, 0, 0, 0.1) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.05);
+  opacity: 1;
+}
+.sidebar header .title {
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 5px;
+  color: #ffffff;
+  opacity: 1;
+  font-size: 1.7em;
+}
+.sidebar section header {
+  height: 400px;
+}
+.sidebar section .nav {
+  padding: 0;
+}
+.sidebar section .nav .nav-item {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 60px;
+  position: relative;
+  font-size: 18px;
+}
+.sidebar section .nav .nav-item .nav-item-content {
+  padding-left: 25px;
+}
+.sidebar section .nav .nav-item .nav-item-content .nav-item-icon {
+  color: #a5a4bf;
+  width: 40px;
+  font-size: 20px;
+}
+.sidebar section .nav .nav-item.active {
+  background: rgba(0, 0, 0, 0.1) 0% 0% no-repeat padding-box;
+  border-left: 3px solid #a3a0fb;
+  color: #a3a0fb;
+}
+.sidebar section .nav .nav-item.active .nav-item-icon {
+  color: #a3a0fb;
+}
+@font-face {
+  font-family: "source-sans-pro";
+  src: url("font/source-sans-pro.regular.ttf") format("truetype");
+}
+body {
+  margin: 0;
+}

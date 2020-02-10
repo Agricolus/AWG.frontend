@@ -1,0 +1,88 @@
+// out:false, main: ../site.less
+.sidebar {
+  flex: 0 0 260px;
+  order: -1;
+  z-index: 3;
+  position: relative;
+  overflow-x: hidden !important;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  font-family: Montserrat, sans-serif;
+  font-size: .9rem;
+  flex-flow: column;
+  box-shadow: -2px 2px 3px 1px rgba(60, 60, 60, 0.4) inset;
+  //scrollbar per firefox
+  scrollbar-width: thin;
+  background: @blu-gray-1 0% 0% no-repeat padding-box;
+  color: @white-1;
+
+  // scrollbar-color: @red-default #ccc;
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 260px;
+    height: 70px;
+    /* UI Properties */
+    background: @trasparency-1 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 3px @trasparency-2;
+    opacity: 1;
+
+    .title {
+      text-align: center;
+      font-weight: bold;
+      letter-spacing: 5px;
+      color: @white-1;
+      opacity: 1;
+      font-size: 1.7em;
+    }
+  }
+
+  section {
+
+    header{
+      height: 400px;
+    }
+    .nav {
+
+      padding: 0;
+      .nav-item {
+
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        white-space: nowrap;
+        height: 60px;
+        position: relative;
+        font-size: 18px;
+
+        .nav-item-content {
+          padding-left: 25px;
+
+          .nav-item-icon {
+
+            color: @gray-purple;
+            width: 40px;
+            font-size: 20px;
+
+          }
+        }
+
+
+
+        &.active {
+          background: @trasparency-1 0% 0% no-repeat padding-box;
+          border-left: 3px solid @purple-1;
+          color:  @purple-1;
+          .nav-item-icon{
+            color:  @purple-1;
+          }
+        }
+      }
+    }
+
+  }
+
+  footer {}
+}
