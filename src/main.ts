@@ -6,14 +6,10 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-import { CONFIG_PROMISE, CONFIGURATION } from "./config";
-
-console.debug("configuration imported at app startup", CONFIGURATION);
+import { CONFIG_PROMISE } from "./config";
 
 CONFIG_PROMISE.then((configuration) =>
 {
-  console.debug("configuration resolved at app startup", configuration, CONFIGURATION);
-
   //VUE APPLICATION STARTUP
   new Vue({
     router,
