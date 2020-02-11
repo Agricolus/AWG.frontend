@@ -1,8 +1,8 @@
 {
   "env": "development",
   "auth": {
-    "isAuthenticationNeeded": "boolean",
-    "authenticationServerUrl": "string",
+    "isAuthenticationNeeded": false,
+    "authenticationServerUrl": "http://docker.agricolus.com:3000",
     "redirectUrl": "string"
   },
   "api": {
