@@ -6,7 +6,7 @@
     "redirectUrl": "string"
   },
   "api": {
-    "apiServerUrl": "string"
+    "apiServerUrl": "<apiServerUrl>"
 
   }
 }
