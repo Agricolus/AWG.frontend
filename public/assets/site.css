@@ -14,6 +14,7 @@
   padding: 8px 15px;
   border: none;
   font-family: source-sans-pro;
+  cursor: pointer;
 }
 .btn:focus {
   outline: 0;
@@ -38,6 +39,12 @@
 }
 .btn-primary:focus {
   background-color: #4d4f5c;
+}
+.btn-primary.btn-icon i:first-child {
+  padding-right: 0px;
+}
+.btn-primary i:first-child {
+  padding-right: 15px;
 }
 .btn-outline {
   color: #007bff;
@@ -76,7 +83,7 @@
 }
 body,
 html {
-  font-size: 16px;
+  font-size: 14px;
 }
 .app {
   height: 100vh;
@@ -197,6 +204,182 @@ html {
 }
 .sidebar footer img {
   width: 60%;
+}
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+.table thead {
+  background: #f5f6fa 0% 0% no-repeat padding-box;
+}
+.table thead th {
+  vertical-align: bottom;
+  color: #a3a6b4;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: bold;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.table thead .btn-colum {
+  background: #ffffff !important;
+}
+.table tbody tr {
+  height: 48px;
+}
+.table tbody tr:hover {
+  background: rgba(0, 74, 225, 0.16) 0% 0% no-repeat padding-box;
+}
+.table tbody tr:hover .btn-colum {
+  background: #ffffff 0% 0% no-repeat padding-box;
+}
+.table tbody tr:hover .btn-colum .btn-icon {
+  display: block;
+}
+.table tbody td {
+  padding: 0.85rem;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: normal;
+  font-size: 1rem;
+  color: #43425d;
+}
+.table tbody .btn-colum {
+  width: 30px;
+}
+.table tbody .btn-colum .btn-icon {
+  display: none;
+}
+.table-hover .table-active:hover > td,
+.table-hover .table-active:hover > th {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+@media (max-width: 575.98px) {
+  .table-responsive-sm {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .table-responsive-sm > .table-bordered {
+    border: 0;
+  }
+}
+@media (max-width: 767.98px) {
+  .table-responsive-md {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .table-responsive-md > .table-bordered {
+    border: 0;
+  }
+}
+@media (max-width: 991.98px) {
+  .table-responsive-lg {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .table-responsive-lg > .table-bordered {
+    border: 0;
+  }
+}
+@media (max-width: 1199.98px) {
+  .table-responsive-xl {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .table-responsive-xl > .table-bordered {
+    border: 0;
+  }
+}
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+.table-responsive > .table-bordered {
+  border: 0;
+}
+.stations {
+  font-family: source-sans-pro;
+  padding: 65px 30px;
+  height: calc(100% - 130px);
+  overflow: hidden;
+  display: flex;
+  flex-flow: column nowrap;
+}
+.stations header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stations header .search-box {
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-radius: 2px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+  background: #ffffff 0% 0% no-repeat padding-box;
+  font-size: 1.3rem;
+  padding: 5px 10px 5px 20px;
+}
+.stations header input[type="text"] {
+  padding: 5px 27.5px;
+  position: relative;
+  border: none;
+  background-color: unset;
+  font-size: 1.3rem;
+  font-family: source-sans-pro;
+  color: #a9a9a9;
+  width: 400px;
+}
+.stations header input[type="text"]:focus {
+  outline: none !important;
+}
+.stations header input[type="text"]::placeholder {
+  color: #a9a9a9;
+  text-align: center;
+}
+.stations header i {
+  z-index: 9999;
+  color: #b1abab;
+}
+.stations section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stations section.first {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  flex: 0;
+}
+.stations section.second {
+  flex: 1;
+  overflow-y: scroll;
+  justify-content: flex-start;
+  flex-flow: column;
+}
+.green-status {
+  color: #60f219;
+}
+.red-status {
+  color: #F21920;
 }
 @font-face {
   font-family: "source-sans-pro";
