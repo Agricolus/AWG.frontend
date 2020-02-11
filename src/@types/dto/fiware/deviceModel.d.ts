@@ -16,8 +16,8 @@ declare namespace dto {
     manufacturerName: string;
     name: string;
     description: string;
-    documentation: Uri;
-    image: Uri;
+    documentation: string;
+    image: string;
     dateModified: Date;
     dateCreated: Date;
   }

@@ -2,7 +2,7 @@ declare namespace dto {
   interface WeatherObserved {
     id: string;
     type: string;
-    dataProvider: Uri;
+    dataProvider: string;
     dateModified: Date;
     dateCreated: Date;
     name: string;

@@ -1,7 +1,7 @@
 declare namespace dto {
   enum PressureTendencyEnum {
-    raising,
-    falling,
-    steady
+    raising = "raising",
+    falling = "falling",
+    steady = "steady"
   }
 }
