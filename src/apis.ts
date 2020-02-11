@@ -1,5 +1,5 @@
 import axios from "axios";
-import CONFIGURATION from "./config";
+import CONFIGURATION from "@/config";
 
 let accessToken: string | null = null;
 
@@ -30,11 +30,10 @@ if (CONFIGURATION.auth?.isAuthenticationNeeded) {
         console.debug("rest call error: ", error);
       });
   }
-
 }
 
 //calls to measures endpoints
-let measuresApiEndpoint = CONFIGURATION.api?.apiServerUrl.concat("/api/measures/");
+let measuresApiEndpoint = CONFIGURATION.api?.apiServerUrl.concat("/api/measures");
 export async function getLastMeasure(stationId: string): Promise<dto.WeatherObserved> {
   console.debug("dummy call to getLastMeasure", `${measuresApiEndpoint}/last?stationId=${stationId}`);
   return {
@@ -257,128 +256,203 @@ export async function getMeasureList(stationId: string, from: Date | null = null
 
 
 //calls to stations endpoints
-let stationsApiEndpoint = CONFIGURATION.api?.apiServerUrl.concat("/api/stations/");
-export async function getAllActiveStations(): Promise<dto.DeviceModel[]> {
+let stationsApiEndpoint = CONFIGURATION.api?.apiServerUrl.concat("/api/stations");
+export async function getAllActiveStations(): Promise<dto.Device[]> {
   console.debug("dummy call to getAllActiveStations", stationsApiEndpoint);
   return [{
     id: "station-1",
     type: "station-type",
     source: "station-source",
     dataProvider: "station-dataprovider",
-    category: "station-category",
-    deviceClass: "station-devclass",
+    category: ["station-category"],
     controlledProperty: ["station-property-1", "station-property-2"],
-    function: ["station-function-1", "station-function-2"],
+    controlledAsset: ["station-asset-1", "station-aseet-2"],
     supportedProtocol: ["station-supportedProtocol-1", "station-supportedProtocol-2"],
-    supportedUnits: ["station-supportedUnits-1", "station-supportedUnits-2"],
-    energyLimitationClass: "station-energyclass",
-    brandName: "station-brandname",
-    modelName: "station-modelname",
-    manufacturerName: "station-manufacturer",
+    mnc: "station-mnc",
+    mcc: "station-mcc",
+    macAddress: ["station-mac-1", "station-mac-2"],
+    ipAddress: ["station-IP-address-1"],
+    configuration: { wathever: "whenever" },
+    location: { geojson: "should be" },
     name: "station-name",
     description: "station-string",
-    documentation: "station-documentation",
-    image: "station-image",
+    dateInstalled: new Date(),
+    dateFirstUsed: new Date(),
+    dateManufactured: new Date(),
+    hardwareVersion: "hwv-0.0.0.0",
+    softwareVersion: "swv-0.0.0.0",
+    firmwareVersion: "fwv-0.0.0.0",
+    osVersion: "fwv-0.0.0.0",
+    dateLastCalibration: new Date(),
+    serialNumber: "station-serial-number",
+    provider: { wathever: "whenever" },
+    refDeviceModel: "station-ref-dev-model",
+    batteryLevel: 0,
+    rssi: 1000,
+    deviceState: "broken",
+    dateLastValueReported: new Date(),
+    value: "station-value-??",
     dateModified: new Date(),
     dateCreated: new Date(),
+    owner: [{ mine: "mine of mine", your: "not at all" }]
   },
   {
     id: "station-2",
     type: "station-type",
     source: "station-source",
     dataProvider: "station-dataprovider",
-    category: "station-category",
-    deviceClass: "station-devclass",
+    category: ["station-category"],
     controlledProperty: ["station-property-1", "station-property-2"],
-    function: ["station-function-1", "station-function-2"],
+    controlledAsset: ["station-asset-1", "station-aseet-2"],
     supportedProtocol: ["station-supportedProtocol-1", "station-supportedProtocol-2"],
-    supportedUnits: ["station-supportedUnits-1", "station-supportedUnits-2"],
-    energyLimitationClass: "station-energyclass",
-    brandName: "station-brandname",
-    modelName: "station-modelname",
-    manufacturerName: "station-manufacturer",
+    mnc: "station-mnc",
+    mcc: "station-mcc",
+    macAddress: ["station-mac-1", "station-mac-2"],
+    ipAddress: ["station-IP-address-1"],
+    configuration: { wathever: "whenever" },
+    location: { geojson: "should be" },
     name: "station-name",
     description: "station-string",
-    documentation: "station-documentation",
-    image: "station-image",
+    dateInstalled: new Date(),
+    dateFirstUsed: new Date(),
+    dateManufactured: new Date(),
+    hardwareVersion: "hwv-0.0.0.0",
+    softwareVersion: "swv-0.0.0.0",
+    firmwareVersion: "fwv-0.0.0.0",
+    osVersion: "fwv-0.0.0.0",
+    dateLastCalibration: new Date(),
+    serialNumber: "station-serial-number",
+    provider: { wathever: "whenever" },
+    refDeviceModel: "station-ref-dev-model",
+    batteryLevel: 0,
+    rssi: 1000,
+    deviceState: "broken",
+    dateLastValueReported: new Date(),
+    value: "station-value-??",
     dateModified: new Date(),
     dateCreated: new Date(),
+    owner: [{ mine: "mine of mine", your: "not at all" }]
   }];
 }
 
-export async function getStation(stationId: string): Promise<dto.DeviceModel> {
+export async function getStation(stationId: string): Promise<dto.Device> {
   console.debug("dummy call to getStation", `${stationsApiEndpoint}/${stationId}`);
   return {
     id: "station-1",
     type: "station-type",
     source: "station-source",
     dataProvider: "station-dataprovider",
-    category: "station-category",
-    deviceClass: "station-devclass",
+    category: ["station-category"],
     controlledProperty: ["station-property-1", "station-property-2"],
-    function: ["station-function-1", "station-function-2"],
+    controlledAsset: ["station-asset-1", "station-aseet-2"],
     supportedProtocol: ["station-supportedProtocol-1", "station-supportedProtocol-2"],
-    supportedUnits: ["station-supportedUnits-1", "station-supportedUnits-2"],
-    energyLimitationClass: "station-energyclass",
-    brandName: "station-brandname",
-    modelName: "station-modelname",
-    manufacturerName: "station-manufacturer",
+    mnc: "station-mnc",
+    mcc: "station-mcc",
+    macAddress: ["station-mac-1", "station-mac-2"],
+    ipAddress: ["station-IP-address-1"],
+    configuration: { wathever: "whenever" },
+    location: { geojson: "should be" },
     name: "station-name",
     description: "station-string",
-    documentation: "station-documentation",
-    image: "station-image",
+    dateInstalled: new Date(),
+    dateFirstUsed: new Date(),
+    dateManufactured: new Date(),
+    hardwareVersion: "hwv-0.0.0.0",
+    softwareVersion: "swv-0.0.0.0",
+    firmwareVersion: "fwv-0.0.0.0",
+    osVersion: "fwv-0.0.0.0",
+    dateLastCalibration: new Date(),
+    serialNumber: "station-serial-number",
+    provider: { wathever: "whenever" },
+    refDeviceModel: "station-ref-dev-model",
+    batteryLevel: 0,
+    rssi: 1000,
+    deviceState: "broken",
+    dateLastValueReported: new Date(),
+    value: "station-value-??",
     dateModified: new Date(),
     dateCreated: new Date(),
+    owner: [{ mine: "mine of mine", your: "not at all" }]
   };
 }
-export async function createStation(organizationId: string, station: dto.CreateStation): Promise<dto.DeviceModel> {
+export async function createStation(organizationId: string, station: dto.CreateStation): Promise<dto.Device> {
   console.debug("dummy call to createStation", `${stationsApiEndpoint}/station?organizationId=${organizationId}`);
   return {
     id: "station-3",
     type: "station-type",
     source: "station-source",
     dataProvider: "station-dataprovider",
-    category: "station-category",
-    deviceClass: "station-devclass",
+    category: ["station-category"],
     controlledProperty: ["station-property-1", "station-property-2"],
-    function: ["station-function-1", "station-function-2"],
+    controlledAsset: ["station-asset-1", "station-aseet-2"],
     supportedProtocol: ["station-supportedProtocol-1", "station-supportedProtocol-2"],
-    supportedUnits: ["station-supportedUnits-1", "station-supportedUnits-2"],
-    energyLimitationClass: "station-energyclass",
-    brandName: "station-brandname",
-    modelName: "station-modelname",
-    manufacturerName: "station-manufacturer",
+    mnc: "station-mnc",
+    mcc: "station-mcc",
+    macAddress: ["station-mac-1", "station-mac-2"],
+    ipAddress: ["station-IP-address-1"],
+    configuration: { wathever: "whenever" },
+    location: { geojson: "should be" },
     name: "station-name",
     description: "station-string",
-    documentation: "station-documentation",
-    image: "station-image",
+    dateInstalled: new Date(),
+    dateFirstUsed: new Date(),
+    dateManufactured: new Date(),
+    hardwareVersion: "hwv-0.0.0.0",
+    softwareVersion: "swv-0.0.0.0",
+    firmwareVersion: "fwv-0.0.0.0",
+    osVersion: "fwv-0.0.0.0",
+    dateLastCalibration: new Date(),
+    serialNumber: "station-serial-number",
+    provider: { wathever: "whenever" },
+    refDeviceModel: "station-ref-dev-model",
+    batteryLevel: 0,
+    rssi: 1000,
+    deviceState: "broken",
+    dateLastValueReported: new Date(),
+    value: "station-value-??",
     dateModified: new Date(),
     dateCreated: new Date(),
+    owner: [{ mine: "mine of mine", your: "not at all" }]
   };
 }
-export async function updateStation(stationId: string, station: dto.UpdateStation): Promise<dto.DeviceModel> {
+export async function updateStation(stationId: string, station: dto.UpdateStation): Promise<dto.Device> {
   console.debug("dummy call to updateStation", `${stationsApiEndpoint}/station/${stationId}`);
   return {
     id: "station-1",
-    type: "station-type-updated",
-    source: "station-source-updated",
-    dataProvider: "station-dataprovider-updated",
-    category: "station-category-updated",
-    deviceClass: "station-devclass-updated",
-    controlledProperty: ["station-property-1-updated", "station-property-2-updated"],
-    function: ["station-function-1-updated", "station-function-2-updated"],
-    supportedProtocol: ["station-supportedProtocol-1-updated", "station-supportedProtocol-2-updated"],
-    supportedUnits: ["station-supportedUnits-1", "station-supportedUnits-2"],
-    energyLimitationClass: "station-energyclass-updated",
-    brandName: "station-brandname-updated",
-    modelName: "station-modelname-updated",
-    manufacturerName: "station-manufacturer-updated",
-    name: "station-name-updated",
-    description: "station-string-updated",
-    documentation: "station-documentation-updated",
-    image: "station-image-updated",
+    type: "station-type",
+    source: "station-source",
+    dataProvider: "station-dataprovider",
+    category: ["station-category"],
+    controlledProperty: ["station-property-1", "station-property-2"],
+    controlledAsset: ["station-asset-1", "station-aseet-2"],
+    supportedProtocol: ["station-supportedProtocol-1", "station-supportedProtocol-2"],
+    mnc: "station-mnc",
+    mcc: "station-mcc",
+    macAddress: ["station-mac-1", "station-mac-2"],
+    ipAddress: ["station-IP-address-1"],
+    configuration: { wathever: "whenever" },
+    location: { geojson: "should be" },
+    name: "station-name (updated)",
+    description: "station-string",
+    dateInstalled: new Date(),
+    dateFirstUsed: new Date(),
+    dateManufactured: new Date(),
+    hardwareVersion: "hwv-0.0.0.0",
+    softwareVersion: "swv-0.0.0.0",
+    firmwareVersion: "fwv-0.0.0.0",
+    osVersion: "fwv-0.0.0.0",
+    dateLastCalibration: new Date(),
+    serialNumber: "station-serial-number",
+    provider: { wathever: "whenever" },
+    refDeviceModel: "station-ref-dev-model",
+    batteryLevel: 0,
+    rssi: 1000,
+    deviceState: "broken",
+    dateLastValueReported: new Date(),
+    value: "station-value-??",
     dateModified: new Date(),
     dateCreated: new Date(),
+    owner: [{ mine: "mine of mine", your: "not at all" }]
   };
 }
 export async function deleteStation(stationId: string): Promise<void> {
