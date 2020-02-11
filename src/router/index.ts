@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Dashboard from "../views/Dashboard.vue";
 import Stations from "../views/Stations.vue";
-import User from "../views/User.vue";
 import FullLayout from '@/layout/fullLayout.vue'
 
 Vue.use(VueRouter)
@@ -22,22 +20,10 @@ const routes = [
         component: Home
       },
       {
-        path: 'dashboard',
-        name: 'Dashboard',
-        meta: { track: false },
-        component: Dashboard
-      },
-      {
         path: 'stations',
         name: 'Stations',
         meta: { track: false },
         component: Stations
-      },
-      {
-        path: 'user',
-        name: 'User',
-        meta: { track: false },
-        component: User
       }
     ]
   },

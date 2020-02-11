@@ -16,29 +16,16 @@
             Homepage
           </router-link>
         </li>
-
         <li class="nav-item">
           <router-link to="stations" class="nav-link">
             <i class="fas fa-th-list nav-item-icon"></i>
             MyStations
           </router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="dashboard" class="nav-link">
-            <i class="fas fa-chart-line nav-item-icon"></i>
-            Dashboard
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="user" class="nav-link">
-            <i class="fas fa-user nav-item-icon"></i>
-            User
-          </router-link>
-        </li>
       </ul>
     </section>
-    <footer> 
-     <img src="/assets/img/Powered BY FIWARE_H_cmyk_ white.png"/>
+    <footer>
+      <img src="/assets/img/Powered BY FIWARE_H_cmyk_ white.png" />
     </footer>
   </div>
 </template>

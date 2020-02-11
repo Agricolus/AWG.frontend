@@ -7,12 +7,15 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@types/leaflet": "^1.5.8",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "leaflet": "^1.6.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.2",
     "vue-property-decorator": "^8.3.0",
     "vue-router": "^3.1.5",
+    "vue2-leaflet": "^2.5.2",
     "vuex": "^3.1.2"
   },
   "devDependencies": {

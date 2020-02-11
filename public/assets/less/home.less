@@ -1,0 +1,43 @@
+// out:false, main: ../site.less
+.home {
+  font-family: source-sans-pro;
+  padding: 35px 80px;
+  height: calc(~'100% - 70px');
+  overflow: hidden;
+  display: flex;
+  flex-flow: column nowrap;
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .title {
+      font-size: 2rem;
+      color: @gray-purple;
+      font-weight: bold;
+      letter-spacing: 3px
+    }
+  }
+
+
+  section {
+    display: flex;
+
+
+
+    &.first {
+      padding-top: 30px;
+      padding-bottom: 15px;
+      flex: 1;
+    }
+
+    &.second {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+  }
+}

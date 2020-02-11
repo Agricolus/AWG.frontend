@@ -1,0 +1,32 @@
+// out:false, main: ../site.less
+.map {
+  height: 100%;
+  width: 100%;
+}
+
+.map .leaflet-popup-content-wrapper {
+  background: @blu;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 24px;
+  font-family: source-sans-pro;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  font-weight: normal;
+
+
+  .leaflet-popup-content {
+    margin: 0;
+    padding: 8px 20px 8px 15px;
+    text-align: center;
+  }
+}
+
+.map.leaflet-container a.leaflet-popup-close-button {
+  color: @white-1;
+}
+
+.map .leaflet-popup-tip-container {
+  width: 0;
+  height: 0;
+}
