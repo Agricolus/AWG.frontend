@@ -34,17 +34,18 @@
   border-color: #43425d;
 }
 .btn-primary:hover {
-  color: #fff;
-  background-color: #4d4f5c;
+  background-color: #4c7cde;
+  border-color: #4c7cde;
 }
 .btn-primary:focus {
-  background-color: #4d4f5c;
+  background-color: #4c7cde;
+  border-color: #4c7cde;
 }
-.btn-primary.btn-icon i:first-child {
-  padding-right: 0px;
-}
-.btn-primary i:first-child {
+.btn-primary .left-icon {
   padding-right: 15px;
+}
+.btn-primary .right-icon {
+  padding-left: 15px;
 }
 .btn-outline {
   color: #007bff;
@@ -236,7 +237,7 @@ html {
 .table tbody tr:hover .btn-colum {
   background: #ffffff 0% 0% no-repeat padding-box;
 }
-.table tbody tr:hover .btn-colum .btn-icon {
+.table tbody tr:hover .btn-colum button {
   display: block;
 }
 .table tbody td {
@@ -250,7 +251,7 @@ html {
 .table tbody .btn-colum {
   width: 30px;
 }
-.table tbody .btn-colum .btn-icon {
+.table tbody .btn-colum button {
   display: none;
 }
 .table-hover .table-active:hover > td,
@@ -317,8 +318,8 @@ html {
 }
 .stations {
   font-family: source-sans-pro;
-  padding: 65px 30px;
-  height: calc(100% - 130px);
+  padding: 35px 80px;
+  height: calc(100% - 70px);
   overflow: hidden;
   display: flex;
   flex-flow: column nowrap;
@@ -380,6 +381,65 @@ html {
 }
 .red-status {
   color: #F21920;
+}
+.home {
+  font-family: source-sans-pro;
+  padding: 35px 80px;
+  height: calc(100% - 70px);
+  overflow: hidden;
+  display: flex;
+  flex-flow: column nowrap;
+}
+.home header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home header .title {
+  font-size: 2rem;
+  color: #a5a4bf;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+.home section {
+  display: flex;
+}
+.home section.first {
+  padding-top: 30px;
+  padding-bottom: 15px;
+  flex: 1;
+}
+.home section.second {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.map {
+  height: 100%;
+  width: 100%;
+}
+.map .leaflet-popup-content-wrapper {
+  background: #004ae1;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 24px;
+  font-family: source-sans-pro;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  font-weight: normal;
+}
+.map .leaflet-popup-content-wrapper .leaflet-popup-content {
+  margin: 0;
+  padding: 8px 20px 8px 15px;
+  text-align: center;
+}
+.map.leaflet-container a.leaflet-popup-close-button {
+  color: #ffffff;
+}
+.map .leaflet-popup-tip-container {
+  width: 0;
+  height: 0;
 }
 @font-face {
   font-family: "source-sans-pro";
