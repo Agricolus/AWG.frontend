@@ -9,7 +9,7 @@ export default class Stations extends Vue {
 
   needle: string | null = null; //text to search for
 
-  stations: dto.DeviceModel[] | null = null;
+  stations: dto.Device[] | null = null;
 
   get filteredStations() {
     if (!this.stations) return null;
