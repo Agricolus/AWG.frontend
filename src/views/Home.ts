@@ -1,10 +1,17 @@
 import Vue from "vue"
 import Component from "vue-class-component";
+import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
+import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-
 @Component({
-  name: "home"
+  name: "home",
+  components: {
+    'l-map': LMap,
+    'l-tile-layer': LTileLayer,
+    'l-marker': LMarker,
+    'l-popup': LPopup
+  }
 }
 )
 export default class Home extends Vue {
