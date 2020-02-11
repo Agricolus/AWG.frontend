@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Dashboard from "../views/Dashboard.vue";
-import Stations from "../views/Stations.vue";
-import User from "../views/User.vue";
+import Home from '@/views/Home.vue'
+import Dashboard from "@/views/Dashboard.vue";
+import Stations from "@/views/Stations.vue";
+import User from "@/views/User.vue";
 import FullLayout from '@/layout/fullLayout.vue'
 
 Vue.use(VueRouter)
