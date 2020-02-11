@@ -6,7 +6,7 @@
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 1.5;
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -15,12 +15,13 @@
   padding: 8px 15px;
   border: none;
   font-family: source-sans-pro;
+  cursor: pointer;
 
-  &:focus{
+  &:focus {
     outline: 0;
   }
 
-  &:disabled{
+  &:disabled {
     opacity: 0.65;
     pointer-events: none;
   }
@@ -32,46 +33,61 @@
   }
 }
 
+
 .btn-primary {
   color: @white-1;
   background-color: @blu-gray-1;
   border-color: @blu-gray-1;
-  &:hover{
+
+  &:hover {
     color: #fff;
     background-color: @blu-gray-2;
   }
 
-  &:focus{
+  &:focus {
     background-color: @blu-gray-2;
+  }
+
+  &.btn-icon{
+    i:first-child {
+      padding-right: 0px;
+    } 
+  }
+
+  i:first-child {
+    padding-right: 15px;
   }
 }
 
-.btn-outline{
+.btn-outline {
   color: #007bff;
   background-color: transparent;
   background-image: none;
   border-color: #007bff;
 
-  &:hover{
+  &:hover {
     color: #fff;
     background-color: #007bff;
     border-color: #007bff;
   }
-  &:focus{
+
+  &:focus {
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
   }
 }
 
 
 
-.btn-lg, .btn-group-lg > .btn {
+.btn-lg,
+.btn-group-lg>.btn {
   padding: 0.5rem 1rem;
   font-size: 1.25rem;
   line-height: 1.5;
   border-radius: 0.3rem;
 }
 
-.btn-sm, .btn-group-sm > .btn {
+.btn-sm,
+.btn-group-sm>.btn {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -83,6 +99,6 @@
   width: 100%;
 }
 
-.btn-block + .btn-block {
+.btn-block+.btn-block {
   margin-top: 0.5rem;
 }

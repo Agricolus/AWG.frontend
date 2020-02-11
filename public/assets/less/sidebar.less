@@ -8,16 +8,12 @@
   height: 100%;
   overflow-y: auto;
   display: flex;
-  font-family: Montserrat, sans-serif;
-  font-size: .9rem;
   flex-flow: column;
   box-shadow: -2px 2px 3px 1px rgba(60, 60, 60, 0.4) inset;
-  //scrollbar per firefox
   scrollbar-width: thin;
   background: @blu-gray-1 0% 0% no-repeat padding-box;
   color: @white-1;
 
-  // scrollbar-color: @red-default #ccc;
   header {
     display: flex;
     align-items: center;
@@ -41,48 +37,89 @@
 
   section {
 
-    header{
-      height: 400px;
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-flow: column;
+      min-height: 100px;
+      font-size: 1.4rem;
+
+      label {
+        &:first-child {
+          margin-bottom: 10px;
+          font-weight: bold;
+        }
+      }
     }
+
     .nav {
 
       padding: 0;
+      margin: 0;
+
       .nav-item {
 
-        display: flex;
-        align-items: center;
         overflow: hidden;
         white-space: nowrap;
         height: 60px;
         position: relative;
-        font-size: 18px;
+        font-size: 1.2rem;
 
-        .nav-item-content {
+
+        .nav-link {
+
+          text-decoration: none;
+          height: 100%;
+          display: flex;
+          align-items: center;
+
           padding-left: 25px;
+          color: @white-1;
 
-          .nav-item-icon {
+          &:hover {
+            color: @purple-1  !important;
+          }
 
+          &:hover i {
+            color: @purple-1;
+          }
+
+          i {
             color: @gray-purple;
             width: 40px;
-            font-size: 20px;
+            font-size: 1.2rem;
+          }
+
+          &.router-link-active {
+            background: @trasparency-1 0% 0% no-repeat padding-box;
+            border-left: 3px solid @purple-1;
+            color: @purple-1;
+
+            i {
+              color: @purple-1;
+            }
 
           }
         }
 
 
 
-        &.active {
-          background: @trasparency-1 0% 0% no-repeat padding-box;
-          border-left: 3px solid @purple-1;
-          color:  @purple-1;
-          .nav-item-icon{
-            color:  @purple-1;
-          }
-        }
+
       }
     }
 
   }
 
-  footer {}
+  footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    height: 40px;
+    color: @white-1;
+    text-align: center;
+    img{
+      width: 60%;
+    }
+  }
 }
