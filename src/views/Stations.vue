@@ -8,7 +8,7 @@
     </header>
     <section class="first">
       <button class="btn btn-primary">
-        <i class="fas fa-plus"></i>
+        <i class="fas fa-plus left-icon"></i>
         ADD A NEW STATIONS
       </button>
     </section>
@@ -36,7 +36,7 @@
             <td>{{ station.dateCreated | dateformat }}</td>
             <td>{{ station.type }} </td>
             <td class="btn-colum">
-              <button class="btn btn-primary btn-sm btn-icon">
+              <button class="btn btn-primary btn-sm">
                 <i class="fas fa-arrow-right"></i>
               </button>
             </td>
