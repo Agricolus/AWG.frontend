@@ -8,19 +8,21 @@ export default class Card extends Vue {
 
 
   @Prop()
-  title!: string;
+  title: string;
 
   @Prop()
-  mainInformation!: string;
+  mainInformation: string;
 
   @Prop()
-  unit!: string;
+  unit: string;
 
   @Prop()
-  icon!: string
+  icon: string
 
   @Prop()
-  secondaryInformations!: Array<string>;
+  min: string;
 
+  @Prop()
+  max: string;
 
 }

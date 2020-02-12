@@ -9,10 +9,7 @@ import * as api from "@/apis";
 @Component({
   name: "home",
   components: {
-    'l-map': LMap,
-    'l-tile-layer': LTileLayer,
-    'l-marker': LMarker,
-    'l-popup': LPopup
+    LMap, LTileLayer, LMarker, LPopup
   }
 }
 )

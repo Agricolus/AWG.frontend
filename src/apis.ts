@@ -69,44 +69,25 @@ export async function getLastMeasure(stationId: string): Promise<dto.WeatherObse
   };// as dto.WeatherObserved;
 }
 
-export async function getLastDailyMeasure(stationId: string, from: Date | null = null, to: Date | null = null): Promise<dto.DailyMeasureDetail[]> {
+export async function getLastDailyMeasure(stationId: string, from: Date | null = null, to: Date | null = null): Promise<dto.DailyMeasureDetail> {
   console.debug("dummy call to getLastDailyMeasure", `${measuresApiEndpoint}/daily?stationId=${stationId}&from=${from}&to=${to}`);
-  return [
-    {
-      stationId: 'station-1',
-      date: new Date(),
-      precipitations: 1,
-      solarRadiations: 2,
-      avgSolarRadiations: 3,
-      minWindSpeed: 4,
-      avgWindSpeed: 5,
-      maxWindSpeed: 6,
-      minTemperature: 7,
-      avgTemperature: 8,
-      maxTemperature: 9,
-      minRelativeHumidity: 10,
-      avgRelativeHumidity: 11,
-      maxRelativeHumidity: 12,
-      windDirection: 13,
-    },
-    {
-      stationId: 'station-2',
-      date: new Date(),
-      precipitations: 1,
-      solarRadiations: 2,
-      avgSolarRadiations: 3,
-      minWindSpeed: 4,
-      avgWindSpeed: 5,
-      maxWindSpeed: 6,
-      minTemperature: 7,
-      avgTemperature: 8,
-      maxTemperature: 9,
-      minRelativeHumidity: 10,
-      avgRelativeHumidity: 11,
-      maxRelativeHumidity: 12,
-      windDirection: 13,
-    }
-  ] as dto.DailyMeasureDetail[];
+  return {
+    stationId: 'station-1',
+    date: new Date(),
+    precipitations: 1,
+    solarRadiations: 2,
+    avgSolarRadiations: 3,
+    minWindSpeed: 4,
+    avgWindSpeed: 5,
+    maxWindSpeed: 6,
+    minTemperature: 7,
+    avgTemperature: 8,
+    maxTemperature: 9,
+    minRelativeHumidity: 10,
+    avgRelativeHumidity: 11,
+    maxRelativeHumidity: 12,
+    windDirection: 13,
+  } as dto.DailyMeasureDetail
 }
 
 export async function getLastWeeklyMeasure(stationId: string, from: Date | null = null, to: Date | null = null): Promise<dto.WeeklyMeasureDetail[]> {

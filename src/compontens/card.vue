@@ -3,12 +3,16 @@
 		<div class="header">{{title}}</div>
 		<div class="body">
 			<div class="main-info">
-				<i v-if="icon" :class="icon" />
+				<i v-if="icon" class="left-icon" :class="icon" />
 				<label>{{mainInformation}}</label>
 				<small v-if="unit">{{unit}}</small>
 			</div>
-			<div v-for="(i, index) in secondaryInformations" class="sec-info" :key="index">
-				<label>{{i}}</label>
+			<div v-if="min" class="info">
+				<label>min {{min}}</label>
+				<small>{{unit}}</small>
+			</div>
+			<div v-if="max" class="info">
+				<label>max {{max}}</label>
 				<small>{{unit}}</small>
 			</div>
 		</div>
