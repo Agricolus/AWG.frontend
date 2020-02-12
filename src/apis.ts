@@ -1,5 +1,8 @@
-import axios from "axios";
 import CONFIGURATION from "@/config";
+import axios from "axios";
+import { WeatherTypeEnum } from './enums/weatherTypeEnum';
+import { PressureTendencyEnum } from './enums/pressureTendencyEnum';
+import { WeatherMeasureVisibilityEnum } from './enums/weatherMeasureVisibilityEnum';
 
 let accessToken: string | null = null;
 
@@ -49,16 +52,16 @@ export async function getLastMeasure(stationId: string): Promise<dto.WeatherObse
     source: "observation-source",
     refDevice: "observation-refdev",
     refPointOfInterest: "observation-refpoi",
-    weatherType: dto.WeatherTypeEnum.thunder,
+    weatherType: WeatherTypeEnum.thunder,
     dewPoint: 123,
-    visibility: dto.WeatherMeasureVisibilityEnum.veryPoor,
+    visibility: WeatherMeasureVisibilityEnum.veryPoor,
     temperature: 21,
     relativeHumidity: 50,
     precipitation: 5,
     windDirection: 234,
     windSpeed: 12,
     atmosphericPressure: 1234,
-    pressureTendency: dto.PressureTendencyEnum.raising,
+    pressureTendency: PressureTendencyEnum.raising,
     solarRadiation: 2,
     illuminance: 3,
     streamGauge: 4,
@@ -209,16 +212,16 @@ export async function getMeasureList(stationId: string, from: Date | null = null
     source: "observation-source",
     refDevice: "observation-refdev",
     refPointOfInterest: "observation-refpoi",
-    weatherType: dto.WeatherTypeEnum.thunder,
+    weatherType: WeatherTypeEnum.thunder,
     dewPoint: 123,
-    visibility: dto.WeatherMeasureVisibilityEnum.veryPoor,
+    visibility: WeatherMeasureVisibilityEnum.veryPoor,
     temperature: 21,
     relativeHumidity: 50,
     precipitation: 5,
     windDirection: 234,
     windSpeed: 12,
     atmosphericPressure: 1234,
-    pressureTendency: dto.PressureTendencyEnum.raising,
+    pressureTendency: PressureTendencyEnum.raising,
     solarRadiation: 2,
     illuminance: 3,
     streamGauge: 4,
@@ -237,16 +240,16 @@ export async function getMeasureList(stationId: string, from: Date | null = null
     source: "observation-source",
     refDevice: "observation-refdev",
     refPointOfInterest: "observation-refpoi",
-    weatherType: dto.WeatherTypeEnum.thunder,
+    weatherType: WeatherTypeEnum.thunder,
     dewPoint: 123,
-    visibility: dto.WeatherMeasureVisibilityEnum.veryPoor,
+    visibility: WeatherMeasureVisibilityEnum.veryPoor,
     temperature: 21,
     relativeHumidity: 50,
     precipitation: 5,
     windDirection: 234,
     windSpeed: 12,
     atmosphericPressure: 1234,
-    pressureTendency: dto.PressureTendencyEnum.raising,
+    pressureTendency: PressureTendencyEnum.raising,
     solarRadiation: 2,
     illuminance: 3,
     streamGauge: 4,
@@ -910,3 +913,4 @@ const __MOKED_STATIONS_DATAS: dto.Device[] = [{
   dateCreated: new Date(),
   owner: [{ mine: "mine of mine", your: "not at all" }]
 }];
+
