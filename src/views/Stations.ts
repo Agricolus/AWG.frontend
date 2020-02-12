@@ -28,7 +28,7 @@ export default class Stations extends Vue {
 
   goToDetails(stationId: string) {
     this.$router.push({
-      name: 'StationDetails', params: {
+      name: 'station-details', params: {
         stationId: stationId
       }
     })

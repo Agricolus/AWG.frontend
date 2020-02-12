@@ -10,26 +10,23 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Main',
+    name: 'main',
     redirect: "/home",
     component: FullLayout,
     children: [
       {
         path: 'home',
-        name: 'Home',
-        meta: { track: false },
+        name: 'home',
         component: Home
       },
       {
-        path: 'stations',
-        name: 'Stations',
-        meta: { track: false },
+        path: '/stations',
+        name: 'stations',
         component: Stations
       },
       {
-        path: 'stationDetails/:stationId',
-        name: 'StationDetails',
-        meta: { track: false },
+        path: '/stationdetails/:stationId',
+        name: 'station-details',
         component: StationsDetails,
         props: true
       }

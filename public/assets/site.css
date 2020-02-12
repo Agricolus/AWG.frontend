@@ -113,6 +113,7 @@ html {
   position: relative;
   box-shadow: -2px 2px 3px 1px rgba(60, 60, 60, 0.4) inset;
   max-width: 100%;
+  overflow: auto;
 }
 .sidebar {
   flex: 0 0 260px;
@@ -396,6 +397,34 @@ html {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+}
+.stationDetails section.map-container {
+  min-height: 33%;
+}
+.stationDetails section.daily-summary-section {
+  overflow-x: auto;
+  flex-wrap: no-wrap;
+  flex-direction: row;
+}
+.stationDetails section.daily-summary-section h3 {
+  width: 100%;
+}
+.stationDetails section.daily-summary-section div.daily-summary {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  border: 1px solid red;
+  width: 100px;
+  justify-content: space-between;
+}
+.stationDetails section.daily-summary-section div.daily-summary .icon {
+  justify-self: center;
+}
+.stationDetails section.daily-summary-section div.daily-summary .temperatures {
+  justify-self: center;
+}
+.stationDetails section.daily-summary-section div.daily-summary .temperatures span {
+  display: block;
 }
 .home {
   font-family: source-sans-pro;

@@ -101,5 +101,40 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+
+    &.map-container {
+      min-height: 33%;
+    }
+
+    &.daily-summary-section {
+      overflow-x: auto;
+      flex-wrap: no-wrap;
+      flex-direction: row;
+
+      h3 {
+        width: 100%;
+      }
+
+      div.daily-summary {
+        display: flex;
+        flex-direction: column;
+        height: 150px;
+        border: 1px solid red;
+        width: 100px;
+        justify-content: space-between;
+
+        .icon {
+          justify-self: center;
+        }
+
+        .temperatures {
+          justify-self: center;
+
+          & span {
+            display: block;
+          }
+        }
+      }
+    }
   }
 }
