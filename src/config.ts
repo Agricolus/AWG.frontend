@@ -12,14 +12,14 @@ export const CONFIG_PROMISE = axios.get(configpath).then((response) => {
   Object.assign(CONFIGURATION, response.data);
   return CONFIGURATION;
 },
-() => {
-  throw "Catastrofic error! unable to load ".concat(configpath);
-});
+  () => {
+    throw "Catastrofic error! unable to load ".concat(configpath);
+  });
 
 export default CONFIGURATION;
 
 
-interface IConfiguration {
+export interface IConfiguration {
   env?: string,
   auth?: {
     isAuthenticationNeeded: boolean,
