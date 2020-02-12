@@ -1,14 +1,14 @@
 import Vue from "vue";
 import Component from 'vue-class-component';
 
-import CONFIGURATION from "./config";
+import CONFIGURATION, { IConfiguration } from "./config";
 
 @Component({})
 export default class App extends Vue {
-  get appconfig() {
+  get appconfig(): IConfiguration {
     return CONFIGURATION;
   }
-  mounted (): void {
+  created(): void {
     if (CONFIGURATION.env == 'development')
       console.debug("global configuration:", CONFIGURATION);
   }
