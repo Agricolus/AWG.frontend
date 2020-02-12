@@ -1,4 +1,7 @@
 @import "../libs/font-awesome/css/all.min.css";
+* {
+  box-sizing: border-box;
+}
 .btn {
   display: inline-block;
   font-weight: 400;
@@ -382,8 +385,17 @@ html {
 .red-status {
   color: #F21920;
 }
+.stationDetails {
+  font-family: source-sans-pro;
+  padding: 35px 80px;
+  height: calc(100% - 70px);
+  display: flex;
+  flex-flow: column nowrap;
+}
 .stationDetails section {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 .home {
   font-family: source-sans-pro;
@@ -453,18 +465,42 @@ html {
   opacity: 1;
   display: flex;
   flex-flow: column;
-  margin-right: 20px;
-  margin-bottom: 20px;
+  margin: 0px 30px 25px 0px;
   padding: 10px 15px;
+  flex: 1 1 calc(20% - 30px);
+  border-radius: 5px;
 }
 .card .header {
-  font-size: 20px;
+  font-size: 15px;
   color: #43425d;
   opacity: 0.5;
+  text-align: left;
 }
-.card .body .info label {
+.card .body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  padding: 15px 0px;
+}
+.card .body .main-info {
+  font-weight: bold;
+  padding: 10px;
   color: #4d4f5c;
+}
+.card .body .main-info label {
   font-size: 2rem;
+}
+.card .body .main-info small {
+  margin-left: 2px;
+  font-size: 1.5rem;
+}
+.card .body .sec-info {
+  color: #43425D;
+  opacity: 0.5;
+}
+.card .body .sec-info label {
+  font-size: 1rem;
 }
 @font-face {
   font-family: "source-sans-pro";

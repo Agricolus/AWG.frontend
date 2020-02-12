@@ -2,45 +2,32 @@
 	<div class="stationDetails">
 		<header></header>
 		<section>
-			<div class="card">
-				<div class="header">ID</div>
-				<div class="body">
-					<div class="info">
-						<label>{{stationId}}</label>
-					</div>
-				</div>
-				<div class="footer"></div>
-			</div>
-			<div class="card" v-if="lastMeasure">
-				<div class="header">LastUpdate</div>
-				<div class="body">
-					<div class="info">
-						<label>{{lastMeasure.dateCreated | dateformat('hh:mm')}}</label>
-					</div>
-				</div>
-				<div class="footer"></div>
-			</div>
-			<div class="card">
-				<div class="header">Weather Type</div>
-				<div class="body">
-					<div class="info">
-						<label>Soooole</label>
-						<img />
-					</div>
-				</div>
-				<div class="footer"></div>
-			</div>
-			<div class="card">
-				<div class="header">Wind Direction</div>
-				<div class="body">
-					<div class="info">
-						<i class="fab fa-telegram-plane"></i>
-						<label>Soooole</label>
-						<img />
-					</div>
-				</div>
-				<div class="footer"></div>
-			</div>
+			<card title="ID" mainInformation="St1"></card>
+			<card title="Last Update" mainInformation="15.38"></card>
+			<card title="ID" mainInformation="St1"></card>
+			<card title="Wind Direction" mainInformation="SSW" icon="fab fa-telegram-plane"></card>
+			<card title="Solar Radiation" mainInformation="700" unit="w/m2"></card>
+
+			<card
+				title="Temperature"
+				mainInformation="13.96"
+				unit="°C"
+				:secondaryInformations="['min 13.72', 'max 14.20']"
+			></card>
+			<card title="Precipitation" mainInformation="22" unit="mm"></card>
+			<card
+				title="Relaty Humidity"
+				mainInformation="39"
+				unit="%"
+				:secondaryInformations="['min 13.72', 'max 14.20']"
+			></card>
+			<card title="Wind Speed" mainInformation="15" unit="km/h"></card>
+			<card
+				title="Wind Speed"
+				mainInformation="8"
+				unit="atm"
+				:secondaryInformations="['min 13.72', 'max 14.20']"
+			></card>
 		</section>
 	</div>
 </template>

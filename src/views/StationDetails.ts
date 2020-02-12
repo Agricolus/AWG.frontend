@@ -1,9 +1,13 @@
 import Vue from "vue"
 import { Component, Prop } from "vue-property-decorator";
 import * as api from "@/apis";
+import Card from "@/compontens/card.vue";
 
 @Component({
-  name: "stationDetails"
+  name: "stationDetails",
+  components: {
+    Card
+  }
 })
 export default class StationDetails extends Vue {
 
@@ -14,7 +18,6 @@ export default class StationDetails extends Vue {
 
 
   async mounted() {
-    debugger
     this.lastMeasure = await api.getLastMeasure(this.stationId);
 
     console.debug("lastMeasure", this.lastMeasure);
