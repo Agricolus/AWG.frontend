@@ -382,6 +382,9 @@ html {
 .red-status {
   color: #F21920;
 }
+.stationDetails section {
+  display: flex;
+}
 .home {
   font-family: source-sans-pro;
   padding: 35px 80px;
@@ -440,6 +443,25 @@ html {
 .map .leaflet-popup-tip-container {
   width: 0;
   height: 0;
+}
+.card {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+  display: flex;
+  flex-flow: column;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+}
+.card .header {
+  font-size: 20px;
+  color: #43425d;
+  opacity: 0.5;
+}
+.card .body .info label {
+  color: #4d4f5c;
+  font-size: 2rem;
 }
 @font-face {
   font-family: "source-sans-pro";

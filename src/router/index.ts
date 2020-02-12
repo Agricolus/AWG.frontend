@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Stations from "../views/Stations.vue";
+import StationsDetails from "../views/StationDetails.vue"
 import FullLayout from '@/layout/fullLayout.vue'
 
 Vue.use(VueRouter)
@@ -24,6 +25,13 @@ const routes = [
         name: 'Stations',
         meta: { track: false },
         component: Stations
+      },
+      {
+        path: 'stationDetails/:stationId',
+        name: 'StationDetails',
+        meta: { track: false },
+        component: StationsDetails,
+        props: true
       }
     ]
   },

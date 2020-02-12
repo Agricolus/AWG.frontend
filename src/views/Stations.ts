@@ -7,9 +7,11 @@ import * as api from "@/apis";
 })
 export default class Stations extends Vue {
 
+  $router: any
   needle: string | null = null; //text to search for
 
   stations: dto.Device[] | null = null;
+
 
   get filteredStations() {
     if (!this.stations) return null;
@@ -21,7 +23,14 @@ export default class Stations extends Vue {
 
   async mounted() {
     this.stations = await api.getAllActiveStations();
-    console.debug("stations", this.stations);
+  }
+
+  goToDetails(stationId: string) {
+    this.$router.push({
+      name: 'StationDetails', params: {
+        stationId: stationId
+      }
+    })
   }
 
 }
