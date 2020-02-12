@@ -4,7 +4,8 @@ import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-import * as api from "@/apis";
+// import * as api from "@/apis";
+import stationsService from "@/services/stations.ts";
 
 @Component({
   name: "home",
@@ -61,7 +62,7 @@ export default class Home extends Vue {
   }
 
   async mounted() {
-    this.stations = await api.getAllActiveStations();
+    this.stations = await stationsService.getAllActiveStations();
     navigator.geolocation.getCurrentPosition((position) => {
       this.userPosition = [position.coords.latitude, position.coords.longitude];
       this.center = this.userPosition;

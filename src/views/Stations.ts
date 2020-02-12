@@ -1,6 +1,6 @@
 import Vue from "vue"
 import { Component } from "vue-property-decorator";
-import * as api from "@/apis";
+import stationsService from "@/services/stations";
 
 @Component({
   name: "stations"
@@ -20,7 +20,7 @@ export default class Stations extends Vue {
   }
 
   async mounted() {
-    this.stations = await api.getAllActiveStations();
+    this.stations = await stationsService.getAllActiveStations();
     console.debug("stations", this.stations);
   }
 
