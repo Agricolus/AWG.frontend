@@ -25,14 +25,11 @@ export default class Home extends Vue {
 
   center: Array<number> = [47.413220, -1.219482];
   markerLatLng: Array<number> = [47.313220, -1.319482]
-
-
-  markerAttribution = 'idStation';   // TO RECOVER THE ID OF STATION
   icon: L.Icon = L.icon({
     iconUrl: '/assets/img/pin.png',
     iconSize: [32, 37],
     iconAnchor: [16, 37],
-    popupAnchor: [0, 65]
+    popupAnchor: [0, 75]
   })
 
   stations: dto.Device[] | null = null;
@@ -62,13 +59,6 @@ export default class Home extends Vue {
       }).slice(0, 9);
     return [];
   }
-
-  showStation(e: any) {
-    console.log(e.target.options.attribution);
-  }
-
-
-
 
   async mounted() {
     this.stations = await api.getAllActiveStations();
