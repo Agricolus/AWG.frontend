@@ -1,4 +1,7 @@
 @import "../libs/font-awesome/css/all.min.css";
+* {
+  box-sizing: border-box;
+}
 .btn {
   display: inline-block;
   font-weight: 400;
@@ -41,12 +44,6 @@
   background-color: #4c7cde;
   border-color: #4c7cde;
 }
-.btn-primary .left-icon {
-  padding-right: 15px;
-}
-.btn-primary .right-icon {
-  padding-left: 15px;
-}
 .btn-outline {
   color: #007bff;
   background-color: transparent;
@@ -81,6 +78,12 @@
 }
 .btn-block + .btn-block {
   margin-top: 0.5rem;
+}
+.left-icon {
+  padding-right: 15px;
+}
+.right-icon {
+  padding-left: 15px;
 }
 body,
 html {
@@ -382,6 +385,18 @@ html {
 .red-status {
   color: #F21920;
 }
+.stationDetails {
+  font-family: source-sans-pro;
+  padding: 35px 80px;
+  height: calc(100% - 70px);
+  display: flex;
+  flex-flow: column nowrap;
+}
+.stationDetails section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
 .home {
   font-family: source-sans-pro;
   padding: 35px 80px;
@@ -443,6 +458,52 @@ html {
 .map .leaflet-popup-tip-container {
   width: 0;
   height: 0;
+}
+.card {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+  display: flex;
+  flex-flow: column;
+  margin: 0px 30px 25px 0px;
+  padding: 10px 15px;
+  flex: 1 1 calc(20% - 30px);
+  border-radius: 5px;
+}
+.card .header {
+  font-size: 15px;
+  color: #43425d;
+  opacity: 0.5;
+  text-align: left;
+}
+.card .body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  padding: 15px 0px;
+}
+.card .body .main-info {
+  font-weight: bold;
+  padding: 10px;
+  color: #4d4f5c;
+}
+.card .body .main-info i {
+  font-size: 1.5rem;
+}
+.card .body .main-info label {
+  font-size: 2rem;
+}
+.card .body .main-info small {
+  margin-left: 2px;
+  font-size: 1.5rem;
+}
+.card .body .info {
+  color: #43425D;
+  opacity: 0.5;
+}
+.card .body .info label {
+  font-size: 1rem;
 }
 @font-face {
   font-family: "source-sans-pro";

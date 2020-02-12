@@ -36,7 +36,7 @@
 						<td>{{ station.dateCreated | dateformat }}</td>
 						<td>{{ station.type }}</td>
 						<td class="btn-colum">
-							<button class="btn btn-primary btn-sm">
+							<button class="btn btn-primary btn-sm" @click="goToDetails(station.id)">
 								<i class="fas fa-arrow-right"></i>
 							</button>
 						</td>

@@ -1,0 +1,59 @@
+// out:false, main: ../site.less
+.card {
+  background: @white-1 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 6px @trasparency-1;
+  opacity: 1;
+  display: flex;
+  flex-flow: column;
+  margin: 0px 30px 25px 0px;
+  padding: 10px 15px;
+  flex: 1 1 calc(~'20% - 30px');
+  border-radius: 5px;
+
+
+  .header {
+    font-size: 15px;
+    color: @blu-gray-1;
+    opacity: 0.5;
+    text-align: left;
+  }
+
+  .body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    padding: 15px 0px;
+
+    .main-info {
+      font-weight: bold;
+      padding: 10px;
+      color: @blu-gray-2;
+
+      i {
+        font-size: 1.5rem;
+      }
+
+      label {
+
+        font-size: 2rem;
+      }
+
+      small {
+        margin-left: 2px;
+        font-size: 1.5rem;
+      }
+    }
+
+    .info {
+      color: #43425D;
+      opacity: 0.5;
+
+      label {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .footer {}
+}
