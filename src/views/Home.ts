@@ -43,8 +43,8 @@ export default class Home extends Vue {
       return this.stations.filter(station => station.dateLastValueReported).sort((stationA, stationB) => {
         let stationAdate = stationA.dateLastValueReported?.getTime() as number;
         let stationBdate = stationB.dateLastValueReported?.getTime() as number;
-        return stationAdate - stationBdate;
-      }).slice(0, 9);
+        return stationBdate - stationAdate;
+      }).slice(0, 10);
     if (this.userPosition) //user position: sort by distance
       return this.stations.filter(station => station.location).sort((stationA, stationB) => {
         let userLat = (this.userPosition as number[])[0];
@@ -55,8 +55,8 @@ export default class Home extends Vue {
         let stationBLon = stationB.location.coordinates[1];
         let stationAdistance = distance(userLat, userLon, stationALat, stationALon);
         let stationBdistance = distance(userLat, userLon, stationBLat, stationBLon);
-        return stationAdistance - stationBdistance;
-      }).slice(0, 9);
+        return stationBdistance - stationAdistance;
+      }).slice(0, 10);
     return [];
   }
 

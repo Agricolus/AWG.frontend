@@ -36,7 +36,7 @@
 						</td>
 						<td>{{ station.location }}</td>
 						<td>{{ station.id }}</td>
-						<td>{{ station.dataCreated | dateformat }}</td>
+						<td>{{ station.dateCreated | dateformat }}</td>
 						<td>{{ station.type }}</td>
 					</tr>
 				</tbody>
