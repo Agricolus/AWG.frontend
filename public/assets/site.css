@@ -434,6 +434,9 @@ html {
   padding: 8px 20px 8px 15px;
   text-align: center;
 }
+.map .leaflet-popup-content-wrapper .leaflet-popup-content strong {
+  display: block;
+}
 .map.leaflet-container a.leaflet-popup-close-button {
   color: #ffffff;
 }
