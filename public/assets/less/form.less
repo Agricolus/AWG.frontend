@@ -1,0 +1,23 @@
+// out:false, main: ../site.less
+select {
+
+  height: 39px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 6px @trasparency-1;
+  opacity: 1;
+  border: none;
+  color: @light-gray-2;
+  font-family: inherit;
+  font-size: 1.3rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+
+  &:focus {
+    outline: none !important;
+  }
+
+  &:after {
+    color: red;
+  }
+
+}

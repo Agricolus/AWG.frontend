@@ -3,7 +3,7 @@
 		<header>
 			<label class="title">Agri Weather Gateway</label>
 		</header>
-		<section class="first">
+		<section class="map-section">
 			<l-map class="map" :zoom="zoom" :min-zoom="minZoom" :max-zoom="maxZoom" :center="center">
 				<l-tile-layer :url="url"></l-tile-layer>
 				<template v-for="station in filteredStations">
@@ -16,7 +16,7 @@
 				</template>
 			</l-map>
 		</section>
-		<section class="second">
+		<section class="table-section">
 			<table class="table">
 				<thead>
 					<tr>
