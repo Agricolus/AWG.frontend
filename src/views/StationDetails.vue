@@ -130,13 +130,13 @@
 			</template>
 		</section>
 		<section class="charts">
-			<div class="precipitation">
+			<div class="card precipitation">
 				<precipitations-chart :precipitations="precipitations"></precipitations-chart>
 			</div>
-			<div class="temperature">
+			<div class="card temperature">
 				<temperatures-chart :temperatures="temperatures"></temperatures-chart>
 			</div>
-			<div class="pressure"></div>
+			<div class="card pressure"></div>
 			<div class="humidity"></div>
 			<div class="windspeed"></div>
 		</section>

@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import ECharts from 'vue-echarts';
-import 'echarts/lib/chart/line';
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
-import 'echarts/lib/component/dataset';
+import 'echarts/lib/component/grid';
+import 'echarts/lib/component/axis';
+import 'echarts/lib/chart/line';
 
 @Component({
   components: {
@@ -24,15 +25,17 @@ export default class TemperaturesChart extends Vue {
       xAxis: {
         type: 'time',
         min: 'dataMin',
-        axisLabel: {
-          showMinLabel: true,
-          showMaxLabel: true,
-          interval: 0
-        }
+        axisLabel: { color: 'rgba(67, 66, 93, 0.5)', interval: 0 },
+        splitLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' }, interval: 0 },
+        // minorSplitLine: { show: true, lineStyle: { color: 'rgba(0, 0, 0, 0.1)' } },
+        axisLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' } },
       },
       yAxis: {
         type: 'value',
-        axisLabel: { formatter: '{value} °C' }
+        axisLabel: { formatter: '{value} °C', color: 'rgba(67, 66, 93, 0.5)' },
+        splitLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' }, interval: 0 },
+        // minorSplitLine: { show: true, lineStyle: { color: 'rgba(0, 0, 0, 0.1)' } },
+        axisLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' } },
       },
       dataset: {
         source: this.temperatures,
