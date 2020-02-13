@@ -8,11 +8,12 @@ import L from 'leaflet';
 import dayjs from 'dayjs';
 
 import TemperaturesChart from "./charts/temperature.vue";
+import PrecipitationsChart from "./charts/precipitations.vue";
 
 @Component({
   name: "stationDetails",
   components: {
-    Card, LMap, LTileLayer, LMarker, LPopup, TemperaturesChart
+    Card, LMap, LTileLayer, LMarker, LPopup, TemperaturesChart, PrecipitationsChart
   }
 })
 export default class StationDetails extends Vue {
@@ -61,6 +62,14 @@ export default class StationDetails extends Vue {
       return { time: dayjs(dm.date).startOf('day').toDate(), avg: dm.avgTemperature, min: dm.minTemperature, max: dm.maxTemperature }
     })
   }
+
+  get precipitations() {
+    if (!this.dailyMeasures) return null;
+    return this.dailyMeasures.map(dm => {
+      return { time: dayjs(dm.date).startOf('day').toDate(), precipitation: dm.precipitations }
+    })
+  }
+
 
   openPopup(event: any) {
     event.openPopup();

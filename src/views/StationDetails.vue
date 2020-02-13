@@ -124,7 +124,9 @@
 			</template>
 		</section>
 		<section class="charts">
-			<div class="precipitation"></div>
+			<div class="precipitation">
+				<precipitations-chart :precipitations="precipitations"></precipitations-chart>
+			</div>
 			<div class="temperature">
 				<temperatures-chart :temperatures="temperatures"></temperatures-chart>
 			</div>

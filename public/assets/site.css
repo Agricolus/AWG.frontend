@@ -435,6 +435,11 @@ html {
   height: 350px;
   border: 1px solid red;
 }
+.stationDetails section.charts .precipitations {
+  width: 50%;
+  height: 350px;
+  border: 1px solid blue;
+}
 .home {
   font-family: source-sans-pro;
   padding: 35px 80px;

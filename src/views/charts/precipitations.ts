@@ -9,7 +9,7 @@ import 'echarts/lib/component/tooltip';
     chart: ECharts
   }
 })
-export default class TemperatureBarChart extends Vue {
+export default class PrecipitationsChart extends Vue {
 
   @Prop()
   precipitations: { time: Date, precipitation: number }[];

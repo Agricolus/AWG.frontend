@@ -11,7 +11,7 @@ import 'echarts/lib/component/dataset';
     chart: ECharts
   }
 })
-export default class TemperatureBarChart extends Vue {
+export default class TemperaturesChart extends Vue {
 
   @Prop()
   temperatures: { time: Date, avg: number, min?: number, max?: number }[];
