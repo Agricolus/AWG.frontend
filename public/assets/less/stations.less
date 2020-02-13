@@ -111,7 +111,7 @@
     select {
       flex: 1;
       margin-right: 25px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
   }
 
@@ -120,13 +120,20 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
 
+    &.daily-measure-section {
+      margin-right: -30px;
+    }
+
+
     &.map-container {
       min-height: 45vh;
+      border-radius: 5px;
     }
 
     &.daily-summary-section {
       flex-wrap: no-wrap;
       flex-direction: row;
+      margin-right: -30px;
 
       h3 {
         width: 100%;

@@ -10,6 +10,10 @@ export default class Card extends Vue {
   @Prop()
   title: string;
 
+
+  @Prop()
+  weatherIcon: string;
+
   @Prop()
   mainInformation: string;
 

@@ -22,7 +22,7 @@
 				</select>
 			</div>
 		</header>
-		<section v-if="lastMeasure && dailyMeasure && station">
+		<section v-if="lastMeasure && dailyMeasure && station" class="daily-measure-section">
 			<card v-if="stationId" title="ID" :mainInformation="stationId"></card>
 			<card
 				v-if="lastMeasure.dateCreated"
@@ -32,7 +32,7 @@
 			<card
 				v-if="lastMeasure.weatherType"
 				title="Weather Condition"
-				:mainInformation="lastMeasure.weatherType"
+				:weatherIcon="lastMeasure.weatherType| weatherConditionIcon"
 			></card>
 			<card
 				v-if="lastMeasure.windDirection"
@@ -120,6 +120,7 @@
 			<template v-for="measure in dailyMeasures">
 				<card
 					class="card-daily-summary"
+					:weatherIcon="'sunnyDay'| weatherConditionIcon"
 					:key="measure.id"
 					:title="measure.date | dateformat('ddd DD')"
 					:min="measure.minTemperature"

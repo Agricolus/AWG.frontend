@@ -1,4 +1,6 @@
 @import "../libs/font-awesome/css/all.min.css";
+@import "../libs/weather-icons/css/weather-icons.min.css";
+@import "../libs/weather-icons/css/weather-icons-wind.min.css";
 * {
   box-sizing: border-box;
 }
@@ -405,19 +407,24 @@ html {
 .stationDetails header select {
   flex: 1;
   margin-right: 25px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 .stationDetails section {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+.stationDetails section.daily-measure-section {
+  margin-right: -30px;
+}
 .stationDetails section.map-container {
   min-height: 45vh;
+  border-radius: 5px;
 }
 .stationDetails section.daily-summary-section {
   flex-wrap: no-wrap;
   flex-direction: row;
+  margin-right: -30px;
 }
 .stationDetails section.daily-summary-section h3 {
   width: 100%;
@@ -511,12 +518,15 @@ html {
   align-items: center;
   justify-content: center;
   flex-flow: column;
-  padding: 15px 0px;
+  padding: 20px 0px;
+  flex: 1;
 }
 .card .body .main-info {
   font-weight: bold;
-  padding: 10px;
   color: #4d4f5c;
+}
+.card .body .main-info.weather i {
+  font-size: 2.5rem;
 }
 .card .body .main-info i {
   font-size: 1.5rem;
@@ -531,6 +541,7 @@ html {
 .card .body .info {
   color: #43425D;
   opacity: 0.5;
+  padding-top: 10px;
 }
 .card .body .info label {
   font-size: 1rem;
