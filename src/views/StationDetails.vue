@@ -80,7 +80,7 @@
 				unit="atm"
 			></card>
 		</section>
-		<section class="map-container">
+		<section class="map-container" v-if="station && stations">
 			<l-map
 				class="map"
 				:zoom="zoom"
@@ -122,6 +122,15 @@
 					</span>
 				</div>
 			</template>
+		</section>
+		<section class="charts">
+			<div class="precipitation"></div>
+			<div class="temperature">
+				<temperatures-chart :temperatures="temperatures"></temperatures-chart>
+			</div>
+			<div class="pressure"></div>
+			<div class="humidity"></div>
+			<div class="windspeed"></div>
 		</section>
 	</div>
 </template>

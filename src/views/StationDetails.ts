@@ -1,5 +1,5 @@
 import Vue from "vue"
-import { Component, Prop } from "vue-property-decorator";
+import { Component, Prop, Watch } from "vue-property-decorator";
 import measuresService from "@/services/measures_mock";
 import stationService from "@/services/stations_mock";
 import Card from "@/compontens/card.vue";
@@ -7,11 +7,12 @@ import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
 import L from 'leaflet';
 import dayjs from 'dayjs';
 
+import TemperaturesChart from "./charts/temperature.vue";
 
 @Component({
   name: "stationDetails",
   components: {
-    Card, LMap, LTileLayer, LMarker, LPopup
+    Card, LMap, LTileLayer, LMarker, LPopup, TemperaturesChart
   }
 })
 export default class StationDetails extends Vue {
@@ -54,6 +55,12 @@ export default class StationDetails extends Vue {
     return this.station.location.coordinates;
   }
 
+  get temperatures() {
+    if (!this.dailyMeasures) return null;
+    return this.dailyMeasures.map(dm => {
+      return { time: dayjs(dm.date).startOf('day').toDate(), avg: dm.avgTemperature, min: dm.minTemperature, max: dm.maxTemperature }
+    })
+  }
 
   openPopup(event: any) {
     event.openPopup();
@@ -63,7 +70,9 @@ export default class StationDetails extends Vue {
     this.$router.push({ name: "station-details", params: { stationId: (evt.target as any).value } })
   }
 
-  async mounted() {
+  @Watch("stationId", { immediate: true })
+  async stationIdWatcher(n, o) {
+    if (!n || n == o) return;
     this.lastMeasure = await measuresService.getLastMeasure(this.stationId);
 
     let from = dayjs().subtract(7, 'day');
@@ -71,6 +80,16 @@ export default class StationDetails extends Vue {
     this.dailyMeasures = await measuresService.getLastDailyMeasures(this.stationId, from.toDate(), to);
 
     this.dailyMeasure = this.dailyMeasures[0];
+  }
+
+  async mounted() {
+    // this.lastMeasure = await measuresService.getLastMeasure(this.stationId);
+
+    // let from = dayjs().subtract(7, 'day');
+    // let to = new Date();
+    // this.dailyMeasures = await measuresService.getLastDailyMeasures(this.stationId, from.toDate(), to);
+
+    // this.dailyMeasure = this.dailyMeasures[0];
 
     this.stations = await stationService.getAllActiveStations();
   }
