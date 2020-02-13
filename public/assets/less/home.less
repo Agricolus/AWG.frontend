@@ -1,9 +1,9 @@
 // out:false, main: ../site.less
 .home {
   font-family: source-sans-pro;
-  padding: 35px 80px;
-  height: calc(~'100% - 70px');
-  overflow: hidden;
+  padding: 35px 100px;
+  height: 100%;
+  overflow: auto;
   display: flex;
   flex-flow: column nowrap;
 
@@ -24,15 +24,14 @@
   section {
     display: flex;
 
-
-
-    &.first {
+    &.map-section {
       padding-top: 30px;
       padding-bottom: 15px;
       flex: 1;
+      min-height: 55vh;
     }
 
-    &.second {
+    &.table-section {
       display: flex;
       flex-flow: column;
       align-items: center;

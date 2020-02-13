@@ -1,21 +1,26 @@
 <template>
 	<div class="stationDetails">
 		<header>
-			<select>
-				<option value="Italy" selected>Italy</option>
-			</select>
-			<select>
-				<option value="Umbria">Umbria</option>
-			</select>
-			<select @change="changeStation">
-				<option value="Stazione">Stazione</option>
-				<option
-					v-for="s in stations"
-					:key="s.id"
-					:value="s.id"
-					:selected="s.id == station.id"
-				>{{ s.name }}</option>
-			</select>
+			<div class="station-select">
+				<div>
+					<select>
+						<option value="Italy" selected>Select country</option>
+					</select>
+					<select>
+						<option value="Umbria">Select region</option>
+					</select>
+				</div>
+
+				<select @change="changeStation">
+					<option value="Stazione">Select station</option>
+					<option
+						v-for="s in stations"
+						:key="s.id"
+						:value="s.id"
+						:selected="s.id == station.id"
+					>{{ s.name }}</option>
+				</select>
+			</div>
 		</header>
 		<section v-if="lastMeasure && dailyMeasure && station">
 			<card v-if="stationId" title="ID" :mainInformation="stationId"></card>
@@ -113,14 +118,14 @@
 		<section class="daily-summary-section">
 			<h3>Last seven days</h3>
 			<template v-for="measure in dailyMeasures">
-				<div :key="measure.id" class="daily-summary">
-					<span class="date">{{ measure.date | dateformat("ddd DD") }}</span>
-					<span class="icon">X</span>
-					<span class="temperatures">
-						<span class="temp-min">{{ measure.minTemperature }}</span>
-						<span class="temp-max">{{ measure.maxTemperature }}</span>
-					</span>
-				</div>
+				<card
+					class="card-daily-summary"
+					:key="measure.id"
+					:title="measure.date | dateformat('ddd DD')"
+					:min="measure.minTemperature"
+					:max="measure.maxTemperature"
+					unit="°C"
+				></card>
 			</template>
 		</section>
 	</div>

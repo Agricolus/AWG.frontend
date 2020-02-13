@@ -253,7 +253,7 @@ html {
   color: #43425d;
 }
 .table tbody .btn-colum {
-  width: 30px;
+  min-width: 50px;
 }
 .table tbody .btn-colum button {
   display: none;
@@ -323,7 +323,7 @@ html {
 .stations {
   font-family: source-sans-pro;
   padding: 35px 80px;
-  height: calc(100% - 70px);
+  height: 100%;
   overflow: hidden;
   display: flex;
   flex-flow: column nowrap;
@@ -337,7 +337,7 @@ html {
   display: flex;
   align-items: center;
   position: relative;
-  border-radius: 2px;
+  border-radius: 5px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
   background: #ffffff 0% 0% no-repeat padding-box;
   font-size: 1.3rem;
@@ -389,9 +389,23 @@ html {
 .stationDetails {
   font-family: source-sans-pro;
   padding: 35px 80px;
-  height: calc(100% - 70px);
+  height: 100%;
   display: flex;
   flex-flow: column nowrap;
+  overflow: auto;
+}
+.stationDetails header .station-select {
+  width: 40vw;
+  display: flex;
+  flex-flow: column;
+}
+.stationDetails header .station-select :first-child {
+  display: flex;
+}
+.stationDetails header select {
+  flex: 1;
+  margin-right: 25px;
+  margin-bottom: 20px;
 }
 .stationDetails section {
   display: flex;
@@ -399,38 +413,23 @@ html {
   justify-content: space-evenly;
 }
 .stationDetails section.map-container {
-  min-height: 33%;
+  min-height: 45vh;
 }
 .stationDetails section.daily-summary-section {
-  overflow-x: auto;
   flex-wrap: no-wrap;
   flex-direction: row;
 }
 .stationDetails section.daily-summary-section h3 {
   width: 100%;
 }
-.stationDetails section.daily-summary-section div.daily-summary {
-  display: flex;
-  flex-direction: column;
-  height: 150px;
-  border: 1px solid red;
-  width: 100px;
-  justify-content: space-between;
-}
-.stationDetails section.daily-summary-section div.daily-summary .icon {
-  justify-self: center;
-}
-.stationDetails section.daily-summary-section div.daily-summary .temperatures {
-  justify-self: center;
-}
-.stationDetails section.daily-summary-section div.daily-summary .temperatures span {
-  display: block;
+.stationDetails section.daily-summary-section .card-daily-summary {
+  flex: 10%;
 }
 .home {
   font-family: source-sans-pro;
-  padding: 35px 80px;
-  height: calc(100% - 70px);
-  overflow: hidden;
+  padding: 35px 100px;
+  height: 100%;
+  overflow: auto;
   display: flex;
   flex-flow: column nowrap;
 }
@@ -448,12 +447,13 @@ html {
 .home section {
   display: flex;
 }
-.home section.first {
+.home section.map-section {
   padding-top: 30px;
   padding-bottom: 15px;
   flex: 1;
+  min-height: 55vh;
 }
-.home section.second {
+.home section.table-section {
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -462,6 +462,7 @@ html {
 .map {
   height: 100%;
   width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 .map .leaflet-popup-content-wrapper {
   background: #004ae1;
@@ -533,6 +534,24 @@ html {
 }
 .card .body .info label {
   font-size: 1rem;
+}
+select {
+  height: 39px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+  border: none;
+  color: #b1abab;
+  font-family: inherit;
+  font-size: 1.3rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+select:focus {
+  outline: none !important;
+}
+select:after {
+  color: red;
 }
 @font-face {
   font-family: "source-sans-pro";
