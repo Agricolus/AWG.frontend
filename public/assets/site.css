@@ -110,7 +110,7 @@ html {
   flex: 1 1 auto;
   height: 100%;
   background-size: cover;
-  background-color: #ffffff;
+  background-color: #fafafa;
   background-position: center, center;
   position: relative;
   box-shadow: -2px 2px 3px 1px rgba(60, 60, 60, 0.4) inset;
@@ -371,12 +371,15 @@ html {
   align-items: center;
   justify-content: center;
 }
-.stations section.first {
+.stations section.button-section {
   padding-top: 40px;
   padding-bottom: 40px;
   flex: 0;
 }
-.stations section.second {
+.stations section.table-section {
+  padding: 10px;
+  background: #ffffff;
+  border-radius: 5px;
   flex: 1;
   overflow-y: scroll;
   justify-content: flex-start;
@@ -477,6 +480,9 @@ html {
   min-height: 55vh;
 }
 .home section.table-section {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
   display: flex;
   flex-flow: column;
   align-items: center;
