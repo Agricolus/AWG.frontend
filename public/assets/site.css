@@ -443,13 +443,16 @@ html {
   height: 100%;
 }
 .stationDetails section.charts .temperature {
-  width: 50%;
   height: 350px;
+  flex: 1 1 40%;
 }
-.stationDetails section.charts .precipitations {
-  width: 50%;
+.stationDetails section.charts .precipitation {
   height: 350px;
-  border: 1px solid blue;
+  flex: 1 1 40%;
+}
+.stationDetails section.charts .pressure {
+  height: 350px;
+  flex: 2 1 100%;
 }
 .home {
   font-family: source-sans-pro;

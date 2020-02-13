@@ -136,7 +136,9 @@
 			<div class="card temperature">
 				<temperatures-chart :temperatures="temperatures"></temperatures-chart>
 			</div>
-			<div class="card pressure"></div>
+			<div class="card pressure">
+				<pressures-chart :pressures="pressures"></pressures-chart>
+			</div>
 			<div class="humidity"></div>
 			<div class="windspeed"></div>
 		</section>

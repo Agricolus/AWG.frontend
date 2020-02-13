@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import ECharts from 'vue-echarts';
+import 'echarts/lib/component/dataset';
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
 import 'echarts/lib/component/axis';
@@ -11,15 +12,15 @@ import 'echarts/lib/chart/line';
     chart: ECharts
   }
 })
-export default class TemperaturesChart extends Vue {
+export default class PressureChart extends Vue {
 
   @Prop()
-  temperatures: { time: Date, avg: number, min?: number, max?: number }[];
+  pressures: { time: Date, avg: number, min?: number, max?: number }[];
 
   get chartOptions() {
-    if (!this.temperatures) return null;
+    if (!this.pressures) return null;
     let co = {
-      title: { text: 'Temperatures' },
+      title: { text: 'Atmospheric Pressure' },
       tooltip: { trigger: 'axis' },
       xAxis: {
         type: 'time',
@@ -35,7 +36,7 @@ export default class TemperaturesChart extends Vue {
         axisLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' } },
       },
       dataset: {
-        source: this.temperatures,
+        source: this.pressures,
         dimensions: ['time', 'avg', 'min', 'max'],
       },
       series: [{
@@ -43,7 +44,7 @@ export default class TemperaturesChart extends Vue {
         type: 'line',
         smooth: true,
         dimensions: ['time', 'avg'],
-        lineStyle: { type: 'solid' },
+        lineStyle: { type: 'solid', colod: 'rgba(255, 162, 101, 1)' },
         tooltip: { position: 'inside' }
       },
       {
@@ -64,7 +65,7 @@ export default class TemperaturesChart extends Vue {
         tooltip: { position: 'top' }
       }]
     };
-    console.debug("temperatures chart options", co)
+    console.debug("pressures chart options", co)
     return co;
   }
 }

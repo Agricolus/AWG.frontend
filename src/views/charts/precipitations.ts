@@ -23,10 +23,10 @@ export default class PrecipitationsChart extends Vue {
       grid: { show: true, borderColor: 'rgba(0, 0, 0, 0.1)' },
       xAxis: {
         type: 'time',
-        min: 'dataMin',
+        maxInterval: 3600 * 1000 * 24,
         axisLabel: { color: 'rgba(67, 66, 93, 0.5)', interval: 0 },
         splitLine: { show: false },
-        axisLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' } },
+        axisLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' }, interval: 0 },
       },
       yAxis: {
         type: 'value',

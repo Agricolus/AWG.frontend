@@ -9,11 +9,12 @@ import dayjs from 'dayjs';
 
 import TemperaturesChart from "./charts/temperature.vue";
 import PrecipitationsChart from "./charts/precipitations.vue";
+import PressuresChart from "./charts/pressures.vue";
 
 @Component({
   name: "stationDetails",
   components: {
-    Card, LMap, LTileLayer, LMarker, LPopup, TemperaturesChart, PrecipitationsChart
+    Card, LMap, LTileLayer, LMarker, LPopup, TemperaturesChart, PrecipitationsChart, PressuresChart
   }
 })
 export default class StationDetails extends Vue {
@@ -67,6 +68,13 @@ export default class StationDetails extends Vue {
     if (!this.dailyMeasures) return null;
     return this.dailyMeasures.map(dm => {
       return { time: dayjs(dm.date).startOf('day').toDate(), precipitation: dm.precipitations }
+    })
+  }
+
+  get pressures() {
+    if (!this.dailyMeasures) return null;
+    return this.dailyMeasures.map(dm => {
+      return { time: dayjs(dm.date).startOf('day').toDate(), avg: dm.avgTemperature, min: dm.minTemperature, max: dm.maxTemperature }
     })
   }
 
