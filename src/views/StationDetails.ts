@@ -1,7 +1,7 @@
 import Vue from "vue"
 import { Component, Prop, Watch } from "vue-property-decorator";
-import measuresService from "@/services/measures_mock";
-import stationService from "@/services/stations_mock";
+import measuresService from "@/services/measures";
+import stationService from "@/services/stations";
 import Card from "@/compontens/card.vue";
 import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
 import L from 'leaflet';
@@ -120,6 +120,31 @@ export default class StationDetails extends Vue {
     });
   }
 
+  get cardValues() {
+    if (this.timeSelectedIntedval != this.timeIntervals.daily) {
+      if (!this.dailyMeasures) return null;
+      return this.dailyMeasures.slice(0, 7).map(dm => {
+        return {
+          id: dm.date.getTime(),
+          dateformat: 'ddd DD',
+          date: dm.date,
+          minTemperature: dm.minTemperature,
+          maxTemperature: dm.maxTemperature,
+          condition: 'sunnyDay'
+        }
+      });
+    }
+    if (!this.rawMeasures) return null;
+    return this.rawMeasures.slice(0, 7).map(dm => {
+      return {
+        id: dm.id,
+        dateformat: 'ddd DD HH:MM',
+        date: dm.dateObserved,
+        maxTemperature: dm.temperature,
+        condition: dm.weatherType
+      }
+    });
+  }
 
   openPopup(event: any) {
     event.openPopup();

@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import ECharts from 'vue-echarts';
-import 'echarts/lib/chart/bar';
 import 'echarts/lib/component/tooltip';
-import 'echarts/lib/component/grid';
+import 'echarts/lib/component/title';
+import 'echarts/lib/component/axis';
+import 'echarts/lib/chart/line';
 
 @Component({
   components: {
@@ -67,7 +68,8 @@ export default class HumidityChart extends Vue {
         type: 'line',
         smooth: true,
         dimensions: ['time', 'min'],
-        lineStyle: { type: 'dashed' },
+        lineStyle: { color: '#5fe3d1', type: 'dashed' },
+        itemStyle: { color: '#5fe3d1' },
         tooltip: { position: 'bottom' }
       },
       {
@@ -75,8 +77,8 @@ export default class HumidityChart extends Vue {
         type: 'line',
         smooth: true,
         dimensions: ['time', 'max'],
-        lineStyle: { color: '#5FE3A1', type: 'dashed' },
-        itemStyle: { color: '#5FE3A1' },
+        lineStyle: { color: '#7be3a1', type: 'dashed' },
+        itemStyle: { color: '#7be3a1' },
         tooltip: { position: 'top' }
       }]
     };

@@ -44,7 +44,8 @@ export default class TemperaturesChart extends Vue {
         type: 'line',
         smooth: true,
         dimensions: ['time', 'avg'],
-        lineStyle: { type: 'solid' },
+        lineStyle: { color: '#E52CC0', type: 'solid' },
+        itemStyle: { color: '#E52CC0' },
         tooltip: { position: 'inside' },
         areaStyle: {
           color: {
@@ -67,7 +68,8 @@ export default class TemperaturesChart extends Vue {
         type: 'line',
         smooth: true,
         dimensions: ['time', 'min'],
-        lineStyle: { type: 'dashed' },
+        lineStyle: { color: '#e52cf9', type: 'dashed' },
+        itemStyle: { color: '#e52cf9' },
         tooltip: { position: 'bottom' }
       },
       {
@@ -75,8 +77,8 @@ export default class TemperaturesChart extends Vue {
         type: 'line',
         smooth: true,
         dimensions: ['time', 'max'],
-        lineStyle: { color: '#ff0000', type: 'dashed' },
-        itemStyle: { color: '#ff0000' },
+        lineStyle: { color: '#ff2cc0', type: 'dashed' },
+        itemStyle: { color: '#ff2cc0' },
         tooltip: { position: 'top' }
       }]
     };

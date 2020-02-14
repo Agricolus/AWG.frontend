@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import ECharts from 'vue-echarts';
-import 'echarts/lib/component/dataset';
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
 import 'echarts/lib/component/axis';
@@ -54,7 +53,8 @@ export default class PressureChart extends Vue {
         type: 'line',
         smooth: true,
         dimensions: ['time', 'min'],
-        lineStyle: { type: 'dashed' },
+        lineStyle: { color: '#ffa283', type: 'dashed' },
+        itemStyle: { color: '#ffa283' },
         tooltip: { position: 'bottom' }
       },
       {
@@ -62,8 +62,8 @@ export default class PressureChart extends Vue {
         type: 'line',
         smooth: true,
         dimensions: ['time', 'max'],
-        lineStyle: { color: '#ff0000', type: 'dashed' },
-        itemStyle: { color: '#ff0000' },
+        lineStyle: { color: '#ff8766', type: 'dashed' },
+        itemStyle: { color: '#ff8766' },
         tooltip: { position: 'top' }
       }]
     };

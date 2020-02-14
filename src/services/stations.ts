@@ -6,7 +6,7 @@ class StationsServices extends BaseRestService {
 
   constructor() {
     super();
-    this.stationsApiEndpoint = CONFIGURATION.api!.apiServerUrl.concat("/api/stations");;
+    this.stationsApiEndpoint = CONFIGURATION.api.apiServerUrl.concat("/api/stations");;
   }
 
 

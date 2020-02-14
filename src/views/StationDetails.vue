@@ -128,15 +128,16 @@
 					</select>
 				</div>
 			</div>
-			<h3 v-if="timeSelectedIntedval == timeIntervals.daily">Last 24 hours</h3>
-			<h3 v-if="timeSelectedIntedval == timeIntervals.weekly">Last seven days</h3>
-			<h3 v-if="timeSelectedIntedval == timeIntervals.monthly">Last month</h3>
-			<template v-for="measure in dailyMeasures">
+			<h3 v-if="timeSelectedIntedval == timeIntervals.daily">Last 7 hours</h3>
+			<h3
+				v-if="timeSelectedIntedval == timeIntervals.weekly || timeSelectedIntedval == timeIntervals.monthly"
+			>Last seven days</h3>
+			<template v-for="measure in cardValues">
 				<card
 					class="card-daily-summary"
-					:weatherIcon="'sunnyDay'| weatherConditionIcon"
+					:weatherIcon="measure.condition | weatherConditionIcon"
 					:key="measure.id"
-					:title="measure.date | dateformat('ddd DD')"
+					:title="measure.date | dateformat(measure.dateformat)"
 					:min="measure.minTemperature"
 					:max="measure.maxTemperature"
 					unit="°C"
