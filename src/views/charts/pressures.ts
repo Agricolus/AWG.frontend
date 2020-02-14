@@ -22,6 +22,7 @@ export default class PressureChart extends Vue {
     let co = {
       title: { text: 'Atmospheric Pressure' },
       tooltip: { trigger: 'axis' },
+      grid: { right: '5%' },
       xAxis: {
         type: 'time',
         maxInterval: 3600 * 1000 * 24,

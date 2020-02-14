@@ -139,8 +139,10 @@
 			<div class="card pressure">
 				<pressures-chart :pressures="pressures"></pressures-chart>
 			</div>
-			<div class="humidity"></div>
-			<div class="windspeed"></div>
+			<div class="card humidity">
+				<humidity-chart :humidity="humidity"></humidity-chart>
+			</div>
+			<div class="card windspeed"></div>
 		</section>
 	</div>
 </template>

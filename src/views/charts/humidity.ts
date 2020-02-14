@@ -1,25 +1,24 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import ECharts from 'vue-echarts';
+import 'echarts/lib/chart/bar';
 import 'echarts/lib/component/tooltip';
-import 'echarts/lib/component/title';
-import 'echarts/lib/component/axis';
-import 'echarts/lib/chart/line';
+import 'echarts/lib/component/grid';
 
 @Component({
   components: {
     chart: ECharts
   }
 })
-export default class TemperaturesChart extends Vue {
+export default class HumidityChart extends Vue {
 
   @Prop()
-  temperatures: { time: Date, avg: number, min?: number, max?: number }[];
+  humidity: { time: Date, avg: number, min?: number, max?: number }[];
 
   get chartOptions() {
-    if (!this.temperatures) return null;
+    if (!this.humidity) return null;
     let co = {
-      title: { text: 'Temperatures' },
+      title: { text: 'Humidity' },
       tooltip: { trigger: 'axis' },
       grid: { right: '5%', left: '15%' },
       xAxis: {
@@ -36,7 +35,7 @@ export default class TemperaturesChart extends Vue {
         axisLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' } },
       },
       dataset: {
-        source: this.temperatures,
+        source: this.humidity,
         dimensions: ['time', 'avg', 'min', 'max'],
       },
       series: [{
@@ -44,8 +43,23 @@ export default class TemperaturesChart extends Vue {
         type: 'line',
         smooth: true,
         dimensions: ['time', 'avg'],
-        lineStyle: { type: 'solid' },
-        tooltip: { position: 'inside' }
+        lineStyle: { type: 'solid', color: '#5FE3A1' },
+        tooltip: { position: 'inside' },
+        areaStyle: {
+          color: {
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [{
+              offset: 0, color: '#5FE3A1' // color at 0% position
+            }, {
+              offset: 1, color: '#5FE3A11C' // color at 100% position
+            }],
+            global: false // false by default
+          }
+        }
       },
       {
         name: 'minimum',
@@ -60,12 +74,12 @@ export default class TemperaturesChart extends Vue {
         type: 'line',
         smooth: true,
         dimensions: ['time', 'max'],
-        lineStyle: { color: '#ff0000', type: 'dashed' },
-        itemStyle: { color: '#ff0000' },
+        lineStyle: { color: '#5FE3A1', type: 'dashed' },
+        itemStyle: { color: '#5FE3A1' },
         tooltip: { position: 'top' }
       }]
     };
-    console.debug("temperatures chart options", co)
+    console.debug("humidity chart options", co)
     return co;
   }
 }

@@ -454,6 +454,10 @@ html {
   height: 350px;
   flex: 2 1 100%;
 }
+.stationDetails section.charts .humidity {
+  height: 350px;
+  flex: 1 1 100%;
+}
 .home {
   font-family: source-sans-pro;
   padding: 35px 100px;
@@ -479,7 +483,6 @@ html {
 .home section.map-section {
   padding-top: 30px;
   padding-bottom: 15px;
-  flex: 1;
   min-height: 55vh;
 }
 .home section.table-section {
