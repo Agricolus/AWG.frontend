@@ -1,6 +1,6 @@
 import Vue from "vue"
 import { Component } from "vue-property-decorator";
-import stationsService from "@/services/stations";
+import { stationsService } from "@/services";
 
 @Component({
   name: "stations"

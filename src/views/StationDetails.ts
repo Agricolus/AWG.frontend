@@ -1,7 +1,10 @@
 import Vue from "vue"
 import { Component, Prop, Watch } from "vue-property-decorator";
-import measuresService from "@/services/measures";
-import stationService from "@/services/stations";
+// import measuresService from "@/services/measures";
+// import stationService from "@/services/stations";
+
+import { stationsService, measuresService } from "@/services";
+
 import Card from "@/compontens/card.vue";
 import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
 import L from 'leaflet';
@@ -190,7 +193,7 @@ export default class StationDetails extends Vue {
   }
 
   async mounted() {
-    this.stations = await stationService.getAllActiveStations();
+    this.stations = await stationsService.getAllActiveStations();
   }
 
 }
