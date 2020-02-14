@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
+import { TemperatureDefaultChartSettings } from "./chartSettings";
 import ECharts from 'vue-echarts';
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
@@ -18,70 +19,8 @@ export default class TemperaturesChart extends Vue {
 
   get chartOptions() {
     if (!this.temperatures) return null;
-    let co = {
-      title: { text: 'Temperatures' },
-      tooltip: { trigger: 'axis' },
-      grid: { right: '5%', left: '15%' },
-      xAxis: {
-        type: 'time',
-        maxInterval: 3600 * 1000 * 24,
-        axisLabel: { color: 'rgba(67, 66, 93, 0.5)', interval: 0 },
-        splitLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' }, interval: 0 },
-        axisLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' }, interval: 0 },
-      },
-      yAxis: {
-        type: 'value',
-        axisLabel: { formatter: '{value} °C', color: 'rgba(67, 66, 93, 0.5)' },
-        splitLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' }, interval: 0 },
-        axisLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' } },
-      },
-      dataset: {
-        source: this.temperatures,
-        dimensions: ['time', 'avg', 'min', 'max'],
-      },
-      series: [{
-        name: 'average',
-        type: 'line',
-        smooth: true,
-        dimensions: ['time', 'avg'],
-        lineStyle: { color: '#E52CC0', type: 'solid' },
-        itemStyle: { color: '#E52CC0' },
-        tooltip: { position: 'inside' },
-        areaStyle: {
-          color: {
-            type: 'linear',
-            x: 0,
-            y: 0,
-            x2: 0,
-            y2: 1,
-            colorStops: [{
-              offset: 0, color: '#FF5498' // color at 0% position
-            }, {
-              offset: 1, color: '#FFFFFF00' // color at 100% position
-            }],
-            global: false // false by default
-          }
-        }
-      },
-      {
-        name: 'minimum',
-        type: 'line',
-        smooth: true,
-        dimensions: ['time', 'min'],
-        lineStyle: { color: '#e52cf9', type: 'dashed' },
-        itemStyle: { color: '#e52cf9' },
-        tooltip: { position: 'bottom' }
-      },
-      {
-        name: 'maximum',
-        type: 'line',
-        smooth: true,
-        dimensions: ['time', 'max'],
-        lineStyle: { color: '#ff2cc0', type: 'dashed' },
-        itemStyle: { color: '#ff2cc0' },
-        tooltip: { position: 'top' }
-      }]
-    };
+    let co = Object.assign({}, TemperatureDefaultChartSettings);
+    co.dataset.source = this.temperatures;
     console.debug("temperatures chart options", co)
     return co;
   }
