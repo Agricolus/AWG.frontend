@@ -66,6 +66,10 @@ export default class Home extends Vue {
     });
   }
 
+  goToStations() {
+    this.$router.push({ name: 'stations' });
+  }
+
 };
 
 
