@@ -10,7 +10,7 @@ import 'echarts/lib/component/grid';
     chart: ECharts
   }
 })
-export default class PrecipitationsChart extends Vue {
+export default class WindgaugeChart extends Vue {
 
   @Prop()
   precipitations: { time: Date, precipitation: number }[];
@@ -58,7 +58,7 @@ export default class PrecipitationsChart extends Vue {
         }
       }]
     };
-    console.debug("precipitations chart options", co)
+    console.debug("windgauge chart options", co)
     return co;
   }
 }

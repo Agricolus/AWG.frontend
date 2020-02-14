@@ -1,4 +1,4 @@
-export const enum PressureTendencyEnum {
+export enum PressureTendencyEnum {
   raising = "raising",
   falling = "falling",
   steady = "steady"

@@ -47,7 +47,40 @@ class MeasuresServicesMOCKED extends BaseRestService {
 
   async getLastDailyMeasures(stationId: string, from: Date | null = null, to: Date | null = null): Promise<dto.DailyMeasureDetail[]> {
     console.debug("dummy call to getLastDailyMeasure", `${this.measuresApiEndpoint}/daily?stationId=${stationId}&from=${from}&to=${to}`);
-    return __LAST_DAILY_MEASURES.filter(m => m.stationId == stationId);
+    // return __LAST_DAILY_MEASURES.filter(m => m.stationId == stationId);
+
+    let days = Math.ceil((to.getTime() - from.getTime()) / 1000 / 60 / 60 / 24);
+    let out = [];
+    for (let h = 0; h < days; h++) {
+      let d1 = dayjs().subtract(h, 'day');
+      let t = randomFromInterval(-10, 40);
+      let tmin = randomFromInterval(0, t - 1);
+      let tmax = randomFromInterval(t + 1, 40);
+      let hu = randomFromInterval(0, 100);
+      let humin = randomFromInterval(0, hu - 1);
+      let humax = randomFromInterval(hu + 1, 100);
+      let ws = randomFromInterval(0, 50);
+      let wsmin = randomFromInterval(0, ws - 1);
+      let wsmax = randomFromInterval(ws + 1, 100);
+      out.push({
+        stationId: stationId,
+        date: d1.toDate(),
+        precipitations: getRandomVal(),
+        solarRadiations: getRandomVal(),
+        avgSolarRadiations: getRandomVal(),
+        minWindSpeed: wsmin,
+        avgWindSpeed: ws,
+        maxWindSpeed: wsmax,
+        minTemperature: tmin,
+        avgTemperature: t,
+        maxTemperature: tmax,
+        minRelativeHumidity: humin,
+        avgRelativeHumidity: hu,
+        maxRelativeHumidity: humax,
+        windDirection: getRandomVal(),
+      });
+    }
+    return out;
   }
 
   async getLastWeeklyMeasures(stationId: string, from: Date | null = null, to: Date | null = null): Promise<dto.WeeklyMeasureDetail[]> {
@@ -140,65 +173,43 @@ class MeasuresServicesMOCKED extends BaseRestService {
 
   async getMeasuresList(stationId: string, from: Date | null = null, to: Date | null = null): Promise<dto.WeatherObserved[]> {
     console.debug("dummy call to getMeasureList", `${this.measuresApiEndpoint}/interval?stationId=${stationId}&from=${from}&to=${to}`)
-    return [{
-      id: "observation-id-1",
-      type: "observation-type",
-      dataProvider: "http://dataprovider??",
-      dateModified: new Date(),
-      dateCreated: new Date(),
-      name: "observation-name",
-      location: "any???",
-      address: "observation-address",
-      dateObserved: new Date(),
-      source: "observation-source",
-      refDevice: "observation-refdev",
-      refPointOfInterest: "observation-refpoi",
-      weatherType: WeatherTypeEnum.thunder,
-      dewPoint: 123,
-      visibility: WeatherMeasureVisibilityEnum.veryPoor,
-      temperature: 21,
-      relativeHumidity: 50,
-      precipitation: 5,
-      windDirection: 234,
-      windSpeed: 12,
-      atmosphericPressure: 1234,
-      pressureTendency: PressureTendencyEnum.raising,
-      solarRadiation: 2,
-      illuminance: 3,
-      streamGauge: 4,
-      snowHeight: 5,
-    },
-    {
-      id: "observation-id-2",
-      type: "observation-type",
-      dataProvider: "http://dataprovider??",
-      dateModified: new Date(),
-      dateCreated: new Date(),
-      name: "observation-name",
-      location: "any???",
-      address: "observation-address",
-      dateObserved: new Date(),
-      source: "observation-source",
-      refDevice: "observation-refdev",
-      refPointOfInterest: "observation-refpoi",
-      weatherType: WeatherTypeEnum.thunder,
-      dewPoint: 123,
-      visibility: WeatherMeasureVisibilityEnum.veryPoor,
-      temperature: 21,
-      relativeHumidity: 50,
-      precipitation: 5,
-      windDirection: 234,
-      windSpeed: 12,
-      atmosphericPressure: 1234,
-      pressureTendency: PressureTendencyEnum.raising,
-      solarRadiation: 2,
-      illuminance: 3,
-      streamGauge: 4,
-      snowHeight: 5,
-    }]; // as dto.WeatherObserved[];
+    let hours = Math.ceil((to.getTime() - from.getTime()) / 1000 / 60 / 60);
+    let out = [];
+    for (let h = 0; h < hours; h++) {
+      let d1 = dayjs().subtract(h, 'hour');
+      out.push({
+        id: "observation-id-" + h,
+        type: "observation-type",
+        dataProvider: "http://dataprovider??",
+        dateModified: d1.toDate(),
+        dateCreated: d1.toDate(),
+        name: "observation-name",
+        location: "any???",
+        address: "observation-address",
+        dateObserved: d1.toDate(),
+        source: "observation-source",
+        refDevice: stationId,
+        refPointOfInterest: "observation-refpoi",
+        weatherType: WeatherTypeEnum[randomIntFromInterval(0, 25)],
+        dewPoint: getRandomVal(),
+        visibility: WeatherMeasureVisibilityEnum[randomIntFromInterval(0, 5)],
+        temperature: getRandomVal(),
+        relativeHumidity: getRandomVal(),
+        precipitation: getRandomVal(),
+        windDirection: getRandomVal(),
+        windSpeed: getRandomVal(),
+        atmosphericPressure: getRandomVal(),
+        pressureTendency: PressureTendencyEnum[randomIntFromInterval(0, 2)],
+        solarRadiation: getRandomVal(),
+        illuminance: getRandomVal(),
+        streamGauge: getRandomVal(),
+        snowHeight: getRandomVal(),
+      });
+    }
+    return out;
   }
-
 }
+
 
 
 export default new MeasuresServicesMOCKED();
@@ -445,3 +456,17 @@ const __LAST_DAILY_MEASURES = [
     windDirection: parseFloat((13.7 * Math.random() * 10).toFixed(2)),
   }
 ];
+
+
+
+function getRandomVal(seed: number = 1) {
+  return parseFloat((seed * Math.random() * 10).toFixed(2));
+}
+
+function randomFromInterval(min, max) {
+  return parseFloat((Math.random() * (max - min + 1) + min).toFixed(2));
+}
+
+function randomIntFromInterval(min, max) {
+  return Math.floor(randomFromInterval(min, max));
+}

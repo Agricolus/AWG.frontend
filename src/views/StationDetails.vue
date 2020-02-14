@@ -116,7 +116,21 @@
 			</l-map>
 		</section>
 		<section class="daily-summary-section">
-			<h3>Last seven days</h3>
+			<div class="station-select">
+				<div>
+					<select v-model="timeSelectedIntedval">
+						<option
+							v-for="(interval, k) in timeIntervals"
+							:key="interval"
+							:value="interval"
+							selected
+						>{{ k }}</option>
+					</select>
+				</div>
+			</div>
+			<h3 v-if="timeSelectedIntedval == timeIntervals.daily">Last 24 hours</h3>
+			<h3 v-if="timeSelectedIntedval == timeIntervals.weekly">Last seven days</h3>
+			<h3 v-if="timeSelectedIntedval == timeIntervals.monthly">Last month</h3>
 			<template v-for="measure in dailyMeasures">
 				<card
 					class="card-daily-summary"
@@ -130,15 +144,19 @@
 			</template>
 		</section>
 		<section class="charts">
-			<div class="precipitation">
+			<div class="card precipitation">
 				<precipitations-chart :precipitations="precipitations"></precipitations-chart>
 			</div>
-			<div class="temperature">
+			<div class="card temperature">
 				<temperatures-chart :temperatures="temperatures"></temperatures-chart>
 			</div>
-			<div class="pressure"></div>
-			<div class="humidity"></div>
-			<div class="windspeed"></div>
+			<div class="card pressure">
+				<pressures-chart :pressures="pressures"></pressures-chart>
+			</div>
+			<div class="card humidity">
+				<humidity-chart :humidity="humidity"></humidity-chart>
+			</div>
+			<!-- <div class="card windspeed"></div> -->
 		</section>
 	</div>
 </template>

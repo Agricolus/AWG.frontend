@@ -9,11 +9,13 @@ import dayjs from 'dayjs';
 
 import TemperaturesChart from "./charts/temperature.vue";
 import PrecipitationsChart from "./charts/precipitations.vue";
+import PressuresChart from "./charts/pressures.vue";
+import HumidityChart from "./charts/humidity.vue";
 
 @Component({
   name: "stationDetails",
   components: {
-    Card, LMap, LTileLayer, LMarker, LPopup, TemperaturesChart, PrecipitationsChart
+    Card, LMap, LTileLayer, LMarker, LPopup, TemperaturesChart, PrecipitationsChart, PressuresChart, HumidityChart
   }
 })
 export default class StationDetails extends Vue {
@@ -24,6 +26,15 @@ export default class StationDetails extends Vue {
   lastMeasure: dto.WeatherObserved = null;
   dailyMeasure: dto.DailyMeasureDetail = null;
   dailyMeasures: dto.DailyMeasureDetail[] = null;
+  rawMeasures: dto.WeatherObserved[] = null;
+
+  timeIntervals = {
+    daily: 1,
+    weekly: 2,
+    monthly: 3
+  };
+
+  timeSelectedIntedval: number = 2;
 
   url: String = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
   zoom: number = 4;
@@ -46,6 +57,7 @@ export default class StationDetails extends Vue {
     popupAnchor: [0, 75]
   });
 
+
   get station() {
     if (!this.stations) return null;
     return this.stations.find(s => s.id == this.stationId);
@@ -57,17 +69,55 @@ export default class StationDetails extends Vue {
   }
 
   get temperatures() {
-    if (!this.dailyMeasures) return null;
-    return this.dailyMeasures.map(dm => {
-      return { time: dayjs(dm.date).startOf('day').toDate(), avg: dm.avgTemperature, min: dm.minTemperature, max: dm.maxTemperature }
+    if (this.timeSelectedIntedval != this.timeIntervals.daily) {
+      if (!this.dailyMeasures) return null;
+      return this.dailyMeasures.map(dm => {
+        return { time: dayjs(dm.date).startOf('day').toDate(), avg: dm.avgTemperature, min: dm.minTemperature, max: dm.maxTemperature }
+      });
+    }
+    if (!this.rawMeasures) return null;
+    return this.rawMeasures.map(dm => {
+      return { time: dm.dateObserved, avg: dm.temperature }
     })
   }
 
   get precipitations() {
-    if (!this.dailyMeasures) return null;
-    return this.dailyMeasures.map(dm => {
-      return { time: dayjs(dm.date).startOf('day').toDate(), precipitation: dm.precipitations }
+    if (this.timeSelectedIntedval != this.timeIntervals.daily) {
+      if (!this.dailyMeasures) return null;
+      return this.dailyMeasures.map(dm => {
+        return { time: dayjs(dm.date).startOf('day').toDate(), precipitation: dm.precipitations }
+      });
+    }
+    if (!this.rawMeasures) return null;
+    return this.rawMeasures.map(dm => {
+      return { time: dm.dateObserved, precipitation: dm.precipitation }
     })
+  }
+
+  get pressures() {
+    if (this.timeSelectedIntedval != this.timeIntervals.daily) {
+      if (!this.dailyMeasures) return null;
+      return this.dailyMeasures.map(dm => {
+        return { time: dayjs(dm.date).startOf('day').toDate(), avg: dm.avgTemperature, min: dm.minTemperature, max: dm.maxTemperature }
+      });
+    }
+    if (!this.rawMeasures) return null;
+    return this.rawMeasures.map(dm => {
+      return { time: dm.dateObserved, avg: dm.atmosphericPressure }
+    });
+  }
+
+  get humidity() {
+    if (this.timeSelectedIntedval != this.timeIntervals.daily) {
+      if (!this.dailyMeasures) return null;
+      return this.dailyMeasures.map(dm => {
+        return { time: dayjs(dm.date).startOf('day').toDate(), avg: dm.avgRelativeHumidity, min: dm.minRelativeHumidity, max: dm.maxRelativeHumidity }
+      });
+    }
+    if (!this.rawMeasures) return null;
+    return this.rawMeasures.map(dm => {
+      return { time: dm.dateObserved, avg: dm.relativeHumidity }
+    });
   }
 
 
@@ -79,27 +129,42 @@ export default class StationDetails extends Vue {
     this.$router.push({ name: "station-details", params: { stationId: (evt.target as any).value } })
   }
 
+  @Watch("timeSelectedIntedval")
+  timeSelectedIntedvalWatcher(n, o) {
+    if (n != o)
+      this.stationIdWatcher(this.stationId, null);
+  }
+
   @Watch("stationId", { immediate: true })
   async stationIdWatcher(n, o) {
     if (!n || n == o) return;
     this.lastMeasure = await measuresService.getLastMeasure(this.stationId);
 
-    let from = dayjs().subtract(7, 'day');
+    // this.rawMeasures = null;
+    // this.dailyMeasures = null;
+
+    //default weekly period
     let to = new Date();
+    let from = dayjs(to).subtract(7, 'day');
+
+    //horly details
+    if (this.timeSelectedIntedval == this.timeIntervals.daily) {
+      from = dayjs(to).subtract(24, 'hour');
+      this.rawMeasures = await measuresService.getMeasuresList(this.stationId, from.toDate(), to);
+    }
+    //month period
+    if (this.timeSelectedIntedval == this.timeIntervals.monthly) {
+      from = dayjs(to).subtract(1, 'month');
+    }
     this.dailyMeasures = await measuresService.getLastDailyMeasures(this.stationId, from.toDate(), to);
+
+
+    console.debug("rawMeasures", this.rawMeasures);
 
     this.dailyMeasure = this.dailyMeasures[0];
   }
 
   async mounted() {
-    // this.lastMeasure = await measuresService.getLastMeasure(this.stationId);
-
-    // let from = dayjs().subtract(7, 'day');
-    // let to = new Date();
-    // this.dailyMeasures = await measuresService.getLastDailyMeasures(this.stationId, from.toDate(), to);
-
-    // this.dailyMeasure = this.dailyMeasures[0];
-
     this.stations = await stationService.getAllActiveStations();
   }
 

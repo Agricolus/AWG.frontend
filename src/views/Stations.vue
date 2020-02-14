@@ -6,13 +6,13 @@
 				<input id="text" type="text" placeholder="Find a weather station" v-model="needle" />
 			</div>
 		</header>
-		<section class="first">
+		<section class="button-section">
 			<button class="btn btn-primary">
 				<i class="fas fa-plus left-icon"></i>
 				ADD A NEW STATIONS
 			</button>
 		</section>
-		<section class="second">
+		<section class="table-section">
 			<table class="table" v-if="stations">
 				<thead>
 					<tr>

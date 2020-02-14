@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import ECharts from 'vue-echarts';
+import 'echarts/lib/component/dataset';
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
 import 'echarts/lib/component/axis';
@@ -11,17 +12,17 @@ import 'echarts/lib/chart/line';
     chart: ECharts
   }
 })
-export default class TemperaturesChart extends Vue {
+export default class PressureChart extends Vue {
 
   @Prop()
-  temperatures: { time: Date, avg: number, min?: number, max?: number }[];
+  pressures: { time: Date, avg: number, min?: number, max?: number }[];
 
   get chartOptions() {
-    if (!this.temperatures) return null;
+    if (!this.pressures) return null;
     let co = {
-      title: { text: 'Temperatures' },
+      title: { text: 'Atmospheric Pressure' },
       tooltip: { trigger: 'axis' },
-      grid: { right: '5%', left: '15%' },
+      grid: { right: '5%' },
       xAxis: {
         type: 'time',
         maxInterval: 3600 * 1000 * 24,
@@ -31,12 +32,12 @@ export default class TemperaturesChart extends Vue {
       },
       yAxis: {
         type: 'value',
-        axisLabel: { formatter: '{value} °C', color: 'rgba(67, 66, 93, 0.5)' },
+        axisLabel: { formatter: '{value}', color: 'rgba(67, 66, 93, 0.5)' },
         splitLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' }, interval: 0 },
         axisLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' } },
       },
       dataset: {
-        source: this.temperatures,
+        source: this.pressures,
         dimensions: ['time', 'avg', 'min', 'max'],
       },
       series: [{
@@ -44,23 +45,9 @@ export default class TemperaturesChart extends Vue {
         type: 'line',
         smooth: true,
         dimensions: ['time', 'avg'],
-        lineStyle: { type: 'solid' },
-        tooltip: { position: 'inside' },
-        areaStyle: {
-          color: {
-            type: 'linear',
-            x: 0,
-            y: 0,
-            x2: 0,
-            y2: 1,
-            colorStops: [{
-              offset: 0, color: '#FF5498' // color at 0% position
-            }, {
-              offset: 1, color: '#FFFFFF00' // color at 100% position
-            }],
-            global: false // false by default
-          }
-        }
+        lineStyle: { type: 'solid', color: '#FFA265' },
+        itemStyle: { color: '#FFA265' },
+        tooltip: { position: 'inside' }
       },
       {
         name: 'minimum',
@@ -80,7 +67,7 @@ export default class TemperaturesChart extends Vue {
         tooltip: { position: 'top' }
       }]
     };
-    console.debug("temperatures chart options", co)
+    console.debug("pressures chart options", co)
     return co;
   }
 }
