@@ -30,7 +30,7 @@ export default class HumidityChart extends Vue {
       },
       yAxis: {
         type: 'value',
-        axisLabel: { formatter: '{value} °C', color: 'rgba(67, 66, 93, 0.5)' },
+        axisLabel: { formatter: '{value} %', color: 'rgba(67, 66, 93, 0.5)' },
         splitLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' }, interval: 0 },
         axisLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' } },
       },
@@ -44,6 +44,7 @@ export default class HumidityChart extends Vue {
         smooth: true,
         dimensions: ['time', 'avg'],
         lineStyle: { type: 'solid', color: '#5FE3A1' },
+        itemStyle: { color: '#5FE3A1' },
         tooltip: { position: 'inside' },
         areaStyle: {
           color: {

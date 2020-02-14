@@ -1,4 +1,4 @@
-export const enum WeatherTypeEnum {
+export enum WeatherTypeEnum {
   clearNightt = "clearNightt",
   sunnyDay = "sunnyDay",
   slightlyCloudy = "slightlyCloudy",

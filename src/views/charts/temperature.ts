@@ -45,7 +45,22 @@ export default class TemperaturesChart extends Vue {
         smooth: true,
         dimensions: ['time', 'avg'],
         lineStyle: { type: 'solid' },
-        tooltip: { position: 'inside' }
+        tooltip: { position: 'inside' },
+        areaStyle: {
+          color: {
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [{
+              offset: 0, color: '#FF5498' // color at 0% position
+            }, {
+              offset: 1, color: '#FFFFFF00' // color at 100% position
+            }],
+            global: false // false by default
+          }
+        }
       },
       {
         name: 'minimum',

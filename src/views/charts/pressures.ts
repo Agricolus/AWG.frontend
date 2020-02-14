@@ -32,7 +32,7 @@ export default class PressureChart extends Vue {
       },
       yAxis: {
         type: 'value',
-        axisLabel: { formatter: '{value} °C', color: 'rgba(67, 66, 93, 0.5)' },
+        axisLabel: { formatter: '{value}', color: 'rgba(67, 66, 93, 0.5)' },
         splitLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' }, interval: 0 },
         axisLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' } },
       },
@@ -45,7 +45,8 @@ export default class PressureChart extends Vue {
         type: 'line',
         smooth: true,
         dimensions: ['time', 'avg'],
-        lineStyle: { type: 'solid', colod: 'rgba(255, 162, 101, 1)' },
+        lineStyle: { type: 'solid', color: '#FFA265' },
+        itemStyle: { color: '#FFA265' },
         tooltip: { position: 'inside' }
       },
       {

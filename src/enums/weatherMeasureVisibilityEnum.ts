@@ -1,4 +1,4 @@
-export const enum WeatherMeasureVisibilityEnum {
+export enum WeatherMeasureVisibilityEnum {
   veryPoor = "veryPoor",
   poor = "poor",
   moderate = "moderate",
