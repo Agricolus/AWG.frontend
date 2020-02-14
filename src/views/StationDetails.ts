@@ -193,7 +193,8 @@ export default class StationDetails extends Vue {
   }
 
   async mounted() {
-    this.stations = await stationsService.getAllActiveStations();
+    let paginated = await stationsService.getAllActiveStations();
+    this.stations = paginated.items;
   }
 
 }
