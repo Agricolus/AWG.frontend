@@ -6,7 +6,6 @@
     "redirectUrl": "string"
   },
   "api": {
-    "apiServerUrl": "<apiServerUrl>"
-
+    "apiServerUrl": "http://localhost:5000"
   }
 }

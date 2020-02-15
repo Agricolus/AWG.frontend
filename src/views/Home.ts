@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
 // import * as api from "@/apis";
-import stationsService from "@/services/stations_mock";
+import { stationsService } from "@/services";
 
 @Component({
   name: "home",

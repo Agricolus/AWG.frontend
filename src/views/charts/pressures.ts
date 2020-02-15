@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
+import { PressureDefaultChartSettings } from "./chartSettings";
+
 import ECharts from 'vue-echarts';
-import 'echarts/lib/component/dataset';
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
 import 'echarts/lib/component/axis';
@@ -19,54 +20,8 @@ export default class PressureChart extends Vue {
 
   get chartOptions() {
     if (!this.pressures) return null;
-    let co = {
-      title: { text: 'Atmospheric Pressure' },
-      tooltip: { trigger: 'axis' },
-      grid: { right: '5%' },
-      xAxis: {
-        type: 'time',
-        maxInterval: 3600 * 1000 * 24,
-        axisLabel: { color: 'rgba(67, 66, 93, 0.5)', interval: 0 },
-        splitLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' }, interval: 0 },
-        axisLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' }, interval: 0 },
-      },
-      yAxis: {
-        type: 'value',
-        axisLabel: { formatter: '{value}', color: 'rgba(67, 66, 93, 0.5)' },
-        splitLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' }, interval: 0 },
-        axisLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.1)' } },
-      },
-      dataset: {
-        source: this.pressures,
-        dimensions: ['time', 'avg', 'min', 'max'],
-      },
-      series: [{
-        name: 'average',
-        type: 'line',
-        smooth: true,
-        dimensions: ['time', 'avg'],
-        lineStyle: { type: 'solid', color: '#FFA265' },
-        itemStyle: { color: '#FFA265' },
-        tooltip: { position: 'inside' }
-      },
-      {
-        name: 'minimum',
-        type: 'line',
-        smooth: true,
-        dimensions: ['time', 'min'],
-        lineStyle: { type: 'dashed' },
-        tooltip: { position: 'bottom' }
-      },
-      {
-        name: 'maximum',
-        type: 'line',
-        smooth: true,
-        dimensions: ['time', 'max'],
-        lineStyle: { color: '#ff0000', type: 'dashed' },
-        itemStyle: { color: '#ff0000' },
-        tooltip: { position: 'top' }
-      }]
-    };
+    let co = Object.assign({}, PressureDefaultChartSettings);
+    co.dataset.source = this.pressures;
     console.debug("pressures chart options", co)
     return co;
   }
