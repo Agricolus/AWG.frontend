@@ -5,7 +5,7 @@ import { Component, Prop, Watch } from "vue-property-decorator";
 
 import { stationsService, measuresService } from "@/services";
 
-import Card from "@/compontens/card.vue";
+import Card from "@/components/card.vue";
 import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
 import L from 'leaflet';
 import dayjs from 'dayjs';

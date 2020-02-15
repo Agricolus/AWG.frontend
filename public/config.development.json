@@ -7,6 +7,5 @@
   },
   "api": {
     "apiServerUrl": "http://localhost:5000"
-
   }
 }
