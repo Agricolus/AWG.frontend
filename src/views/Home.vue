@@ -41,7 +41,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<button class="btn btn-primary">
+			<button class="btn btn-primary" @click="goToStations()">
 				SHOW ALL DATA
 				<i class="fas fa-arrow-right right-icon"></i>
 			</button>

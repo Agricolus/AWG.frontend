@@ -1,4 +1,5 @@
 ////#region GENERAL
+const titleColor = '#4D4F5C';
 const axisLabelColor = 'rgba(67, 66, 93, 0.5)';
 const axisLineColor = 'rgba(0, 0, 0, 0.1)';
 const splitLineColor = 'rgba(0, 0, 0, 0.1)';
@@ -13,14 +14,14 @@ const fillTemperatureColorStart = '#FF5498';
 const fillTemperatureColorEnd = '#FFFFFF00';
 
 export const TemperatureDefaultChartSettings = {
-  title: { text: 'Temperatures' },
+  title: { text: 'Temperatures', textStyle: { color: titleColor } },
   tooltip: { trigger: 'axis' },
   grid: { right: '5%', left: '15%' },
   xAxis: {
     type: 'time',
     maxInterval: 3600 * 1000 * 24,
     axisLabel: { color: axisLabelColor, interval: 0 },
-    splitLine: { lineStyle: { color: axisLineColor }, interval: 0 },
+    splitLine: { show: false },
     axisLine: { lineStyle: { color: splitLineColor }, interval: 0 },
   },
   yAxis: {
@@ -87,14 +88,14 @@ const fillHumidityColorStart = '#5FE3A1';
 const fillHumidityColorEnd = '#5FE3A11C';
 
 export const HumidityDefaultChartSettings = {
-  title: { text: 'Humidity' },
+  title: { text: 'Humidity', textStyle: { color: titleColor } },
   tooltip: { trigger: 'axis' },
   grid: { right: '5%', left: '15%' },
   xAxis: {
     type: 'time',
     maxInterval: 3600 * 1000 * 24,
     axisLabel: { color: axisLabelColor, interval: 0 },
-    splitLine: { lineStyle: { color: axisLineColor }, interval: 0 },
+    splitLine: { show: false },
     axisLine: { lineStyle: { color: splitLineColor }, interval: 0 },
   },
   yAxis: {
@@ -161,14 +162,14 @@ const fillPressureColorStart = '#5FE3A1';
 const fillPressureColorEnd = '#5FE3A11C';
 
 export const PressureDefaultChartSettings = {
-  title: { text: 'Atmospheric Pressure' },
+  title: { text: 'Atmospheric Pressure', textStyle: { color: titleColor } },
   tooltip: { trigger: 'axis' },
   grid: { right: '5%' },
   xAxis: {
     type: 'time',
     maxInterval: 3600 * 1000 * 24,
     axisLabel: { color: axisLabelColor, interval: 0 },
-    splitLine: { lineStyle: { color: axisLineColor }, interval: 0 },
+    splitLine: { show: false },
     axisLine: { lineStyle: { color: splitLineColor }, interval: 0 },
   },
   yAxis: {
@@ -230,7 +231,7 @@ export const PressureDefaultChartSettings = {
 const fillPrecipitationColorStart = '#4C7CDE';
 const fillPrecipitationColorEnd = '#263E6F';
 export const PrecipitationsDefaultChartSettings = {
-  title: { text: 'Precipitations' },
+  title: { text: 'Precipitations', textStyle: { color: titleColor } },
   tooltip: { trigger: 'item' },
   grid: { show: true, borderColor: gridBorderColor },
   xAxis: {
@@ -242,7 +243,7 @@ export const PrecipitationsDefaultChartSettings = {
   },
   yAxis: {
     type: 'value',
-    axisLabel: { color: axisLineColor, interval: 0 },
+    axisLabel: { color: axisLabelColor, interval: 0 },
     splitLine: { lineStyle: { color: splitLineColor }, interval: 0 },
     axisLine: { lineStyle: { color: axisLineColor } },
   },

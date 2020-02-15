@@ -452,11 +452,11 @@ html {
 }
 .stationDetails section.charts .pressure {
   height: 350px;
-  flex: 2 1 100%;
+  flex: 1 1 40%;
 }
 .stationDetails section.charts .humidity {
   height: 350px;
-  flex: 1 1 100%;
+  flex: 1 1 40%;
 }
 .home {
   font-family: source-sans-pro;
