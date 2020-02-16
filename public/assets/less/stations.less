@@ -119,12 +119,13 @@
   }
 
   section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+
 
     &.daily-measure-section {
       margin-right: -30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
     }
 
 
@@ -134,16 +135,28 @@
     }
 
     &.daily-summary-section {
-      flex-wrap: no-wrap;
-      flex-direction: row;
-      margin-right: -30px;
 
-      h3 {
+      .station-select {
         width: 100%;
+        margin: 10px 0px;
       }
 
-      .card-daily-summary {
-        flex: 10%;
+      label {
+        font-size: 1.3rem;
+        color: @blu-gray-1;
+        font-weight: bold;
+      }
+
+      .daily-summary-cards {
+        flex-wrap: wrap;
+        display: flex;
+        margin-right: -30px;
+        padding-top: 10px;
+
+        .card {
+          flex: 10%;
+        }
+
       }
     }
 
