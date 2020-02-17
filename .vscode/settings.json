@@ -3,8 +3,6 @@
   "git.confirmSync": false,
   "git.autofetch": true,
   "explorer.confirmDragAndDrop": false,
-  "dart.openDevTools": "flutter",
-  "dart.lineLength": 160,
   "vetur.format.defaultFormatter.ts": "vscode-typescript",
   "vetur.format.options.useTabs": true,
   "editor.tabSize": 2,

@@ -1,0 +1,103 @@
+// out:false, main: ../site.less
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 8px 15px;
+  border: none;
+  font-family: source-sans-pro;
+  cursor: pointer;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    pointer-events: none;
+  }
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}
+
+
+.btn-primary {
+  color: @white-1;
+  background-color: @blu-gray-1;
+  border-color: @blu-gray-1;
+
+  &:hover {
+    background-color: @light-blu;
+    border-color: @light-blu;
+  }
+
+  &:focus {
+    background-color: @light-blu;
+    border-color: @light-blu;
+  }
+}
+
+.btn-outline {
+  color: #007bff;
+  background-color: transparent;
+  background-image: none;
+  border-color: #007bff;
+
+  &:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  }
+}
+
+
+
+.btn-lg,
+.btn-group-lg>.btn {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+
+.btn-sm,
+.btn-group-sm>.btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.btn-block+.btn-block {
+  margin-top: 0.5rem;
+}
+
+.left-icon {
+  padding-right: 15px;
+}
+
+.right-icon {
+  padding-left: 15px;
+}

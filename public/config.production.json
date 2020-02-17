@@ -1,0 +1,12 @@
+{
+  "env": "production",
+  "auth": {
+    "isAuthenticationNeeded": "boolean",
+    "authenticationServerUrl": "string",
+    "redirectUrl": "string"
+  },
+  "api": {
+    "apiServerUrl": "string"
+
+  }
+}
