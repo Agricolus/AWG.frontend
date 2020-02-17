@@ -24,7 +24,10 @@ export default class Stations extends Vue {
   async mounted() {
     let paginated = await stationsService.getAllActiveStations();
     this.stations = paginated.items;
-    console.debug("stations", this.stations);
+  }
+
+  goToEdit() {
+    this.$router.push({ name: 'station-editing' })
   }
 
   goToDetails(stationId: string) {

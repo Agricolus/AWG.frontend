@@ -469,6 +469,20 @@ html {
   flex: 1 1 40%;
   max-width: calc(50% - 30px);
 }
+.stationForm {
+  font-family: source-sans-pro;
+  padding: 35px 100px;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-flow: column nowrap;
+}
+.stationForm header .title {
+  font-size: 2rem;
+  color: #a5a4bf;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
 .home {
   font-family: source-sans-pro;
   padding: 35px 100px;
@@ -585,6 +599,40 @@ html {
 .card .body .info label {
   font-size: 1rem;
 }
+.form {
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 5px;
+  padding: 10px 30px;
+}
+.form-control {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.form-control label {
+  font-size: 1.1rem;
+  color: #43425d;
+}
+.form-control input[type="text"] {
+  background-color: transparent;
+  font-family: source-sans-pro;
+  background-color: #fafafa;
+  color: #a9a9a9;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  border: 1px solid #ced4da;
+}
+.form-control input[type="text"]:focus {
+  outline: none !important;
+}
+.form-control input[type="text"]::placeholder {
+  color: #a9a9a9;
+}
 select {
   min-height: 39px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -603,6 +651,80 @@ select:focus {
 select:after {
   color: red;
 }
+textarea {
+  background-color: transparent;
+  font-family: source-sans-pro;
+  background-color: #fafafa;
+  color: #a9a9a9;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  border: 1px solid #ced4da;
+}
+textarea:focus {
+  outline: none !important;
+}
+textarea::placeholder {
+  color: #a9a9a9;
+}
+.custom-tag {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(139, 139, 139, 0.3);
+  color: #adadad;
+  border-radius: 5px;
+  white-space: nowrap;
+  margin: 3px 0px;
+  transition: all 0.2s;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.custom-tag i {
+  width: 20px;
+}
+.custom-tag label {
+  cursor: pointer;
+}
+.custom-tag.selected {
+  background-color: #a5a4bf;
+  color: white;
+}
+.custom-tag.selected label {
+  color: white;
+}
+.vdp-datepicker div:first-child {
+  display: flex;
+  flex-flow: row-reverse;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+.vdp-datepicker .vdp-datepicker__calendar-button {
+  background-color: #fafafa;
+  color: #a9a9a9;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  margin-left: -2px;
+}
+.vdp-datepicker input[type="text"] {
+  background-color: transparent;
+  font-family: source-sans-pro;
+  background-color: #fafafa;
+  color: #a9a9a9;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  width: 100%;
+  border: none;
+}
+.vdp-datepicker input[type="text"]:focus {
+  outline: none !important;
+}
+.vdp-datepicker input[type="text"]::placeholder {
+  color: #a9a9a9;
+}
 @font-face {
   font-family: "source-sans-pro";
   src: url("font/source-sans-pro.regular.ttf") format("truetype");
@@ -612,7 +734,7 @@ body {
 }
 hr {
   width: 100%;
-  margin: 20px 0px;
+  margin: 8px 0px;
   border: 0;
   height: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
