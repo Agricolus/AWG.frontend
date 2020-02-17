@@ -6,6 +6,7 @@ import L from 'leaflet';
 
 // import * as api from "@/apis";
 import { stationsService } from "@/services";
+import { Watch } from 'vue-property-decorator';
 
 @Component({
   name: "home",
@@ -33,33 +34,46 @@ export default class Home extends Vue {
   stations: dto.Device[] | null = null;
 
   userPosition: Array<number> | null = null;
+  @Watch("userPosition")
+  async userPositionWatcher(n, o) {
+    console.debug("ASDASDASD", n, o)
+    let userLat = (this.userPosition as number[])[0];
+    let userLon = (this.userPosition as number[])[1];
+    let paginated = await stationsService.getNearestStations(userLon, userLat, 0, 10);
+    this.stations = paginated.items;
+  }
 
   get filteredStations(): dto.Device[] {
     if (!this.stations) return [];
-    //first 10 station by distance from user position, or by last reading date. but first we filter by the presence of the relevant attribute
-    if (!this.userPosition) //no user position: falling back to sort by last reading date
-      return this.stations.filter(station => station.dateLastValueReported).sort((stationA, stationB) => {
-        let stationAdate = stationA.dateLastValueReported?.getTime() as number;
-        let stationBdate = stationB.dateLastValueReported?.getTime() as number;
-        return stationBdate - stationAdate;
-      }).slice(0, 10);
-    if (this.userPosition) //user position: sort by distance
-      return this.stations.filter(station => station.location).sort((stationA, stationB) => {
-        let userLat = (this.userPosition as number[])[0];
-        let userLon = (this.userPosition as number[])[1];
-        let stationALat = stationA.location.coordinates[0];
-        let stationALon = stationA.location.coordinates[1];
-        let stationBLat = stationB.location.coordinates[0];
-        let stationBLon = stationB.location.coordinates[1];
-        let stationAdistance = distance(userLat, userLon, stationALat, stationALon);
-        let stationBdistance = distance(userLat, userLon, stationBLat, stationBLon);
-        return stationBdistance - stationAdistance;
-      }).slice(0, 10);
-    return [];
+    return this.stations.sort((stationA, stationB) => {
+      let stationAdate = stationA.dateLastValueReported?.getTime() as number;
+      let stationBdate = stationB.dateLastValueReported?.getTime() as number;
+      return stationBdate - stationAdate;
+    });
+    // //first 10 station by distance from user position, or by last reading date. but first we filter by the presence of the relevant attribute
+    // if (!this.userPosition) //no user position: falling back to sort by last reading date
+    //   return this.stations.filter(station => station.dateLastValueReported).sort((stationA, stationB) => {
+    //     let stationAdate = stationA.dateLastValueReported?.getTime() as number;
+    //     let stationBdate = stationB.dateLastValueReported?.getTime() as number;
+    //     return stationBdate - stationAdate;
+    //   }).slice(0, 10);
+    // if (this.userPosition) //user position: sort by distance
+    //   return this.stations.filter(station => station.location).sort((stationA, stationB) => {
+    //     let userLat = (this.userPosition as number[])[0];
+    //     let userLon = (this.userPosition as number[])[1];
+    //     let stationALat = stationA.location.coordinates[0];
+    //     let stationALon = stationA.location.coordinates[1];
+    //     let stationBLat = stationB.location.coordinates[0];
+    //     let stationBLon = stationB.location.coordinates[1];
+    //     let stationAdistance = distance(userLat, userLon, stationALat, stationALon);
+    //     let stationBdistance = distance(userLat, userLon, stationBLat, stationBLon);
+    //     return stationBdistance - stationAdistance;
+    //   }).slice(0, 10);
+    // return [];
   }
 
   async mounted() {
-    let paginated = await stationsService.getAllActiveStations();
+    let paginated = await stationsService.getAllActiveStations(0, 10);
     this.stations = paginated.items;
     navigator.geolocation.getCurrentPosition((position) => {
       this.userPosition = [position.coords.latitude, position.coords.longitude];

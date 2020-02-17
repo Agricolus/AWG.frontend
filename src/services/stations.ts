@@ -21,7 +21,7 @@ class StationsServices extends BaseRestService {
   }
 
   async getNearestStations(lon: number, lat: number, skip: number = 0, take: number = 20): Promise<dto.Paginated<dto.Device>> {
-    let endpoint = `${this.stationsApiEndpoint}/nearest?longitude=${lon}&latitude=${lat}skip=${skip}&take=${take}`;
+    let endpoint = `${this.stationsApiEndpoint}/nearest?longitude=${lon}&latitude=${lat}&skip=${skip}&take=${take}`;
     return (await this.restClient.get(endpoint)).data;
   }
 
