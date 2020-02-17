@@ -603,6 +603,19 @@ select:focus {
 select:after {
   color: red;
 }
+.paginator {
+  border: 1px solid red;
+}
+.paginator span.page {
+  display: inline-block;
+  margin: 0 4px;
+  cursor: pointer;
+  border: 1px solid gray;
+  padding: 0 4px;
+}
+.paginator span.page.current-page {
+  background-color: green;
+}
 @font-face {
   font-family: "source-sans-pro";
   src: url("font/source-sans-pro.regular.ttf") format("truetype");

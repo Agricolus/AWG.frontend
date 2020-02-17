@@ -26,7 +26,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="station in filteredStations" :key="station.id">
+					<tr v-for="(station, i) in filteredStations" :key="station.id.concat('-' + i)">
 						<td>{{ station.name }}</td>
 						<td>
 							<i class="fas fa-circle red-status"></i>
@@ -43,6 +43,13 @@
 					</tr>
 				</tbody>
 			</table>
+			<pagination
+				:total="pagination.totalCount"
+				:taken="pagination.take"
+				:skipped="pagination.skip"
+				@take="takeThose"
+				@skip="skipThat"
+			></pagination>
 		</section>
 	</div>
 </template>
