@@ -19,11 +19,11 @@ class StationsServices extends BaseRestService {
     let endpoint = `${this.stationsApiEndpoint}/${stationId}`;
     return this.restClient.get(endpoint);
   }
-  async createStation(organizationId: string, station: dto.CreateStation): Promise<dto.Device> {
-    let endpoint = `${this.stationsApiEndpoint}/station?organizationId=${organizationId}`;
+  async createStation(station: dto.Device): Promise<dto.Device> {
+    let endpoint = `${this.stationsApiEndpoint}/station`;
     return this.restClient.post(endpoint, station);
   }
-  async updateStation(stationId: string, station: dto.UpdateStation): Promise<dto.Device> {
+  async updateStation(stationId: string, station: dto.Device): Promise<dto.Device> {
     let endpoint = `${this.stationsApiEndpoint}/station/${stationId}`;
     return this.restClient.put(endpoint, station);
   }
