@@ -145,16 +145,16 @@
 			</template>
 		</section>
 		<section class="charts">
-			<div class="card precipitation">
+			<div class="card precipitation" v-if="precipitations">
 				<precipitations-chart :precipitations="precipitations"></precipitations-chart>
 			</div>
-			<div class="card temperature">
+			<div class="card temperature" v-if="temperatures">
 				<temperatures-chart :temperatures="temperatures"></temperatures-chart>
 			</div>
-			<div class="card pressure">
+			<div class="card pressure" v-if="pressures">
 				<pressures-chart :pressures="pressures"></pressures-chart>
 			</div>
-			<div class="card humidity">
+			<div class="card humidity" v-if="humidity">
 				<humidity-chart :humidity="humidity"></humidity-chart>
 			</div>
 			<!-- <div class="card windspeed"></div> -->
