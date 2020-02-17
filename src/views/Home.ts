@@ -59,7 +59,8 @@ export default class Home extends Vue {
   }
 
   async mounted() {
-    this.stations = await stationsService.getAllActiveStations();
+    let paginated = await stationsService.getAllActiveStations();
+    this.stations = paginated.items;
     navigator.geolocation.getCurrentPosition((position) => {
       this.userPosition = [position.coords.latitude, position.coords.longitude];
       this.center = this.userPosition;

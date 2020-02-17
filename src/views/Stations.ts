@@ -22,7 +22,8 @@ export default class Stations extends Vue {
   }
 
   async mounted() {
-    this.stations = await stationsService.getAllActiveStations();
+    let paginated = await stationsService.getAllActiveStations();
+    this.stations = paginated.items;
     console.debug("stations", this.stations);
   }
 
