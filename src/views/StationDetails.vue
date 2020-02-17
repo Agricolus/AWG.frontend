@@ -115,34 +115,31 @@
 				</l-marker>
 			</l-map>
 		</section>
+
+		<hr />
 		<section class="daily-summary-section">
-			<div class="station-select">
-				<div>
-					<select v-model="timeSelectedIntedval">
-						<option
-							v-for="(interval, k) in timeIntervals"
-							:key="interval"
-							:value="interval"
-							selected
-						>{{ k }}</option>
-					</select>
-				</div>
+			<label>Weather Details</label>
+			<select v-model="timeSelectedIntedval" class="station-select">
+				<option
+					v-for="(interval, k) in timeIntervals"
+					:key="interval"
+					:value="interval"
+					selected
+				>{{ k }}</option>
+			</select>
+			<div class="daily-summary-cards">
+				<template v-for="measure in cardValues">
+					<card
+						class="card-daily-summary"
+						:weatherIcon="measure.condition | weatherConditionIcon"
+						:key="measure.id"
+						:title="measure.date | dateformat(measure.dateformat)"
+						:min="measure.minTemperature"
+						:max="measure.maxTemperature"
+						unit="°C"
+					></card>
+				</template>
 			</div>
-			<h3 v-if="timeSelectedIntedval == timeIntervals.daily">Last 7 hours</h3>
-			<h3
-				v-if="timeSelectedIntedval == timeIntervals.weekly || timeSelectedIntedval == timeIntervals.monthly"
-			>Last seven days</h3>
-			<template v-for="measure in cardValues">
-				<card
-					class="card-daily-summary"
-					:weatherIcon="measure.condition | weatherConditionIcon"
-					:key="measure.id"
-					:title="measure.date | dateformat(measure.dateformat)"
-					:min="measure.minTemperature"
-					:max="measure.maxTemperature"
-					unit="°C"
-				></card>
-			</template>
 		</section>
 		<section class="charts">
 			<div class="card precipitation">

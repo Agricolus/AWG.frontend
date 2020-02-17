@@ -412,27 +412,32 @@ html {
   margin-right: 25px;
   margin-bottom: 25px;
 }
-.stationDetails section {
+.stationDetails section.daily-measure-section {
+  margin-right: -30px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-}
-.stationDetails section.daily-measure-section {
-  margin-right: -30px;
 }
 .stationDetails section.map-container {
   min-height: 45vh;
   border-radius: 5px;
 }
-.stationDetails section.daily-summary-section {
-  flex-wrap: no-wrap;
-  flex-direction: row;
-  margin-right: -30px;
-}
-.stationDetails section.daily-summary-section h3 {
+.stationDetails section.daily-summary-section .station-select {
   width: 100%;
+  margin: 10px 0px;
 }
-.stationDetails section.daily-summary-section .card-daily-summary {
+.stationDetails section.daily-summary-section label {
+  font-size: 1.3rem;
+  color: #43425d;
+  font-weight: bold;
+}
+.stationDetails section.daily-summary-section .daily-summary-cards {
+  flex-wrap: wrap;
+  display: flex;
+  margin-right: -30px;
+  padding-top: 10px;
+}
+.stationDetails section.daily-summary-section .daily-summary-cards .card {
   flex: 10%;
 }
 .stationDetails section.charts {
@@ -575,7 +580,7 @@ html {
   font-size: 1rem;
 }
 select {
-  height: 39px;
+  min-height: 39px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   opacity: 1;
@@ -598,4 +603,12 @@ select:after {
 }
 body {
   margin: 0;
+}
+hr {
+  width: 100%;
+  margin: 20px 0px;
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
