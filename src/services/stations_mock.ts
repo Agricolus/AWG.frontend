@@ -19,8 +19,8 @@ class StationsServicesMOCKED extends BaseRestService {
     console.debug("dummy call to getStation", `${this.stationsApiEndpoint}/${stationId}`);
     return (__MOKED_STATIONS_DATAS.find(d => d.id == stationId) || null) as dto.Device;
   }
-  async createStation(organizationId: string, station: dto.CreateStation): Promise<dto.Device> {
-    console.debug("dummy call to createStation", `${this.stationsApiEndpoint}/station?organizationId=${organizationId}`);
+  async createStation(station: dto.Device): Promise<dto.Device> {
+    console.debug("dummy call to createStation", `${this.stationsApiEndpoint}/station`);
     return {
       id: "station-XXX",
       type: "station-type",
@@ -59,11 +59,9 @@ class StationsServicesMOCKED extends BaseRestService {
       owner: [{ mine: "mine of mine", your: "not at all" }]
     };
   }
-  async updateStation(stationId: string, station: dto.UpdateStation): Promise<dto.Device> {
-    console.debug("dummy call to updateStation", `${this.stationsApiEndpoint}/station/${stationId}`);
-    let stationIdx = __MOKED_STATIONS_DATAS.findIndex(d => d.id == stationId);
-    __MOKED_STATIONS_DATAS[stationIdx] = Object.assign(__MOKED_STATIONS_DATAS[stationIdx], station);
-    return __MOKED_STATIONS_DATAS[stationIdx];
+  async updateStation(station: dto.Device): Promise<dto.Device> {
+    console.debug("dummy call to updateStation", `${this.stationsApiEndpoint}/station`);
+    return station;
   }
   async deleteStation(stationId: string): Promise<void> {
     console.debug("dummy call to deleteStation", `${this.stationsApiEndpoint}/station/${stationId}`);
