@@ -33,16 +33,19 @@ export default class BaseRestService {
     },
       (error) => {
         //check for 401 error code and in case redirect to login ???
-        console.debug("rest call error: ", error);
-        return { data: null };
+        // if (error.response.status == 401) {
+        //   //redirect to auth service
+        // }
+        //other server error response
+        console.error("REST CALL ERROR CODE: %O\nREST CALL ERROR MESSAGE: %O", error.response.status, error.response.data);
+        throw "api_error";
       });
     //custom deserialization
     this.restClient.defaults.transformResponse = (data, header) => {
-      if (header['content-type'].indexOf("application/json") < 0) {
-        console.error("wrong response type from server:\n%O", data);
-        return null;
+      if (header['content-type'] && header['content-type'].indexOf("application/json") >= 0) {
+        return JSON.parse(data || null, this.JSONDeserializer)
       }
-      return JSON.parse(data || null, this.JSONDeserializer)
+      return data;
     };
   }
 
