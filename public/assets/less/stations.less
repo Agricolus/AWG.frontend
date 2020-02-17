@@ -162,6 +162,8 @@
 
     &.charts {
       margin-right: -30px;
+      display: flex;
+      flex-wrap: wrap;
 
       .echarts {
         width: 100%;
@@ -171,21 +173,25 @@
       .temperature {
         height: 350px;
         flex: 1 1 40%;
+        max-width: calc(~'50% - 30px');
       }
 
       .precipitation {
         height: 350px;
         flex: 1 1 40%;
+        max-width: calc(~'50% - 30px');
       }
 
       .pressure {
         height: 350px;
         flex: 1 1 40%;
+        max-width: calc(~'50% - 30px');
       }
 
       .humidity {
         height: 350px;
         flex: 1 1 40%;
+        max-width: calc(~'50% - 30px');
       }
     }
   }

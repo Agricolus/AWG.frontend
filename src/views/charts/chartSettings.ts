@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 ////#region GENERAL
 const titleColor = '#4D4F5C';
 const axisLabelColor = 'rgba(67, 66, 93, 0.5)';
@@ -20,7 +22,9 @@ export const TemperatureDefaultChartSettings = {
   xAxis: {
     type: 'time',
     maxInterval: 3600 * 1000 * 24,
-    axisLabel: { color: axisLabelColor, interval: 0 },
+    axisLabel: {
+      formatter: (value) => dayjs(value).format('DD-MM'), color: axisLabelColor, interval: 0
+    },
     splitLine: { show: false },
     axisLine: { lineStyle: { color: splitLineColor }, interval: 0 },
   },
@@ -94,7 +98,7 @@ export const HumidityDefaultChartSettings = {
   xAxis: {
     type: 'time',
     maxInterval: 3600 * 1000 * 24,
-    axisLabel: { color: axisLabelColor, interval: 0 },
+    axisLabel: { formatter: (value) => dayjs(value).format('DD-MM'), color: axisLabelColor, interval: 0 },
     splitLine: { show: false },
     axisLine: { lineStyle: { color: splitLineColor }, interval: 0 },
   },
@@ -168,7 +172,7 @@ export const PressureDefaultChartSettings = {
   xAxis: {
     type: 'time',
     maxInterval: 3600 * 1000 * 24,
-    axisLabel: { color: axisLabelColor, interval: 0 },
+    axisLabel: { formatter: (value) => dayjs(value).format('DD-MM'), color: axisLabelColor, interval: 0 },
     splitLine: { show: false },
     axisLine: { lineStyle: { color: splitLineColor }, interval: 0 },
   },
@@ -237,7 +241,7 @@ export const PrecipitationsDefaultChartSettings = {
   xAxis: {
     type: 'time',
     maxInterval: 3600 * 1000 * 24,
-    axisLabel: { color: axisLabelColor, interval: 0 },
+    axisLabel: { formatter: (value) => dayjs(value).format('DD-MM'), color: axisLabelColor, interval: 0 },
     splitLine: { show: false },
     axisLine: { lineStyle: { color: axisLineColor }, interval: 0 },
   },

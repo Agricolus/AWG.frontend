@@ -119,14 +119,6 @@
 		<hr />
 		<section class="daily-summary-section">
 			<label>Weather Details</label>
-			<select v-model="timeSelectedIntedval" class="station-select">
-				<option
-					v-for="(interval, k) in timeIntervals"
-					:key="interval"
-					:value="interval"
-					selected
-				>{{ k }}</option>
-			</select>
 			<div class="daily-summary-cards">
 				<template v-for="measure in cardValues">
 					<card
@@ -140,6 +132,14 @@
 					></card>
 				</template>
 			</div>
+			<select v-model="timeSelectedIntedval" class="station-select">
+				<option
+					v-for="(interval, k) in timeIntervals"
+					:key="interval"
+					:value="interval"
+					selected
+				>{{ k }}</option>
+			</select>
 		</section>
 		<section class="charts">
 			<div class="card precipitation">
