@@ -442,6 +442,8 @@ html {
 }
 .stationDetails section.charts {
   margin-right: -30px;
+  display: flex;
+  flex-wrap: wrap;
 }
 .stationDetails section.charts .echarts {
   width: 100%;
@@ -450,18 +452,22 @@ html {
 .stationDetails section.charts .temperature {
   height: 350px;
   flex: 1 1 40%;
+  max-width: calc(50% - 30px);
 }
 .stationDetails section.charts .precipitation {
   height: 350px;
   flex: 1 1 40%;
+  max-width: calc(50% - 30px);
 }
 .stationDetails section.charts .pressure {
   height: 350px;
   flex: 1 1 40%;
+  max-width: calc(50% - 30px);
 }
 .stationDetails section.charts .humidity {
   height: 350px;
   flex: 1 1 40%;
+  max-width: calc(50% - 30px);
 }
 .home {
   font-family: source-sans-pro;
