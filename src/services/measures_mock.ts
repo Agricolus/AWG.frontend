@@ -66,8 +66,9 @@ class MeasuresServicesMOCKED extends BaseRestService {
         stationId: stationId,
         date: d1.toDate(),
         precipitations: getRandomVal(),
-        solarRadiations: getRandomVal(),
         avgSolarRadiations: getRandomVal(),
+        minSolarRadiations: getRandomVal(),
+        maxSolarRadiations: getRandomVal(),
         minWindSpeed: wsmin,
         avgWindSpeed: ws,
         maxWindSpeed: wsmax,
@@ -77,7 +78,24 @@ class MeasuresServicesMOCKED extends BaseRestService {
         minRelativeHumidity: humin,
         avgRelativeHumidity: hu,
         maxRelativeHumidity: humax,
-        windDirection: getRandomVal(),
+        avgWindDirection: getRandomVal(),
+        minWindDirection: getRandomVal(),
+        maxWindDirection: getRandomVal(),
+        avgAtmosphericPressure: getRandomVal(),
+        minAtmosphericPressure: getRandomVal(),
+        maxAtmosphericPressure: getRandomVal(),
+        avgDewPoint: getRandomVal(),
+        minDewPoint: getRandomVal(),
+        maxDewPoint: getRandomVal(),
+        avgIlluminance: getRandomVal(),
+        minIlluminance: getRandomVal(),
+        maxIlluminance: getRandomVal(),
+        avgStreamGauge: getRandomVal(),
+        minStreamGauge: getRandomVal(),
+        maxStreamGauge: getRandomVal(),
+        avgSnowHeight: getRandomVal(),
+        minSnowHeight: getRandomVal(),
+        maxSnowHeight: getRandomVal(),
       });
     }
     return out;
@@ -85,90 +103,108 @@ class MeasuresServicesMOCKED extends BaseRestService {
 
   async getLastWeeklyMeasures(stationId: string, from: Date | null = null, to: Date | null = null): Promise<dto.WeeklyMeasureDetail[]> {
     console.debug("dummy call to getLastWeeklyMeasure", `${this.measuresApiEndpoint}/weekly?stationId=${stationId}&from=${from}&to=${to}`)
-    return [
-      {
-        stationId: 'station-1',
-        date: new Date(),
-        precipitations: 1,
-        solarRadiations: 2,
-        avgSolarRadiations: 3,
-        minWindSpeed: 4,
-        avgWindSpeed: 5,
-        maxWindSpeed: 6,
-        minTemperature: 7,
-        avgTemperature: 8,
-        maxTemperature: 9,
-        minRelativeHumidity: 10,
-        avgRelativeHumidity: 11,
-        maxRelativeHumidity: 12,
-        windDirection: 13,
-        year: 2020,
-        week: 10,
-        dateLast: new Date(),
-      },
-      {
-        stationId: 'station-2',
-        date: new Date(),
-        precipitations: 1,
-        solarRadiations: 2,
-        avgSolarRadiations: 3,
-        minWindSpeed: 4,
-        avgWindSpeed: 5,
-        maxWindSpeed: 6,
-        minTemperature: 7,
-        avgTemperature: 8,
-        maxTemperature: 9,
-        minRelativeHumidity: 10,
-        avgRelativeHumidity: 11,
-        maxRelativeHumidity: 12,
-        windDirection: 13,
-        year: 2020,
-        week: 10,
-        dateLast: new Date(),
-      }
-    ]; // as dto.WeeklyMeasureDetail[];
+    let days = Math.ceil((to.getTime() - from.getTime()) / 1000 / 60 / 60 / 24 /);
+    let out = [];
+    for (let h = 0; h < days; h++) {
+      let d1 = dayjs().subtract(h, 'week');
+      let t = randomFromInterval(-10, 40);
+      let tmin = randomFromInterval(0, t - 1);
+      let tmax = randomFromInterval(t + 1, 40);
+      let hu = randomFromInterval(0, 100);
+      let humin = randomFromInterval(0, hu - 1);
+      let humax = randomFromInterval(hu + 1, 100);
+      let ws = randomFromInterval(0, 50);
+      let wsmin = randomFromInterval(0, ws - 1);
+      let wsmax = randomFromInterval(ws + 1, 100);
+      out.push({
+        stationId: stationId,
+        date: d1.toDate(),
+        precipitations: getRandomVal(),
+        avgSolarRadiations: getRandomVal(),
+        minSolarRadiations: getRandomVal(),
+        maxSolarRadiations: getRandomVal(),
+        minWindSpeed: wsmin,
+        avgWindSpeed: ws,
+        maxWindSpeed: wsmax,
+        minTemperature: tmin,
+        avgTemperature: t,
+        maxTemperature: tmax,
+        minRelativeHumidity: humin,
+        avgRelativeHumidity: hu,
+        maxRelativeHumidity: humax,
+        avgWindDirection: getRandomVal(),
+        minWindDirection: getRandomVal(),
+        maxWindDirection: getRandomVal(),
+        avgAtmosphericPressure: getRandomVal(),
+        minAtmosphericPressure: getRandomVal(),
+        maxAtmosphericPressure: getRandomVal(),
+        avgDewPoint: getRandomVal(),
+        minDewPoint: getRandomVal(),
+        maxDewPoint: getRandomVal(),
+        avgIlluminance: getRandomVal(),
+        minIlluminance: getRandomVal(),
+        maxIlluminance: getRandomVal(),
+        avgStreamGauge: getRandomVal(),
+        minStreamGauge: getRandomVal(),
+        maxStreamGauge: getRandomVal(),
+        avgSnowHeight: getRandomVal(),
+        minSnowHeight: getRandomVal(),
+        maxSnowHeight: getRandomVal(),
+      });
+    }
   }
 
   async getLastMonthlyMeasures(stationId: string, from: Date | null = null, to: Date | null = null): Promise<dto.MonthlyMeasureDetail[]> {
     console.debug("dummy call to getLastMonthlyMeasure", `${this.measuresApiEndpoint}/monthly?stationId=${stationId}&from=${from}&to=${to}`)
-    return [{
-      stationId: 'station-1',
-      date: new Date(),
-      precipitations: 1,
-      solarRadiations: 2,
-      avgSolarRadiations: 3,
-      minWindSpeed: 4,
-      avgWindSpeed: 5,
-      maxWindSpeed: 6,
-      minTemperature: 7,
-      avgTemperature: 8,
-      maxTemperature: 9,
-      minRelativeHumidity: 10,
-      avgRelativeHumidity: 11,
-      maxRelativeHumidity: 12,
-      windDirection: 13,
-      year: 2020,
-      month: 1
-    },
-    {
-      stationId: 'station-2',
-      date: new Date(),
-      precipitations: 1,
-      solarRadiations: 2,
-      avgSolarRadiations: 3,
-      minWindSpeed: 4,
-      avgWindSpeed: 5,
-      maxWindSpeed: 6,
-      minTemperature: 7,
-      avgTemperature: 8,
-      maxTemperature: 9,
-      minRelativeHumidity: 10,
-      avgRelativeHumidity: 11,
-      maxRelativeHumidity: 12,
-      windDirection: 13,
-      year: 2020,
-      month: 1
-    }];// as dto.MonthlyMeasureDetail[];
+    let days = Math.ceil((to.getTime() - from.getTime()) / 1000 / 60 / 60 / 24 / 30);
+    let out = [];
+    for (let h = 0; h < days; h++) {
+      let d1 = dayjs().subtract(h, 'month');
+      let t = randomFromInterval(-10, 40);
+      let tmin = randomFromInterval(0, t - 1);
+      let tmax = randomFromInterval(t + 1, 40);
+      let hu = randomFromInterval(0, 100);
+      let humin = randomFromInterval(0, hu - 1);
+      let humax = randomFromInterval(hu + 1, 100);
+      let ws = randomFromInterval(0, 50);
+      let wsmin = randomFromInterval(0, ws - 1);
+      let wsmax = randomFromInterval(ws + 1, 100);
+      out.push({
+        stationId: stationId,
+        date: d1.toDate(),
+        precipitations: getRandomVal(),
+        avgSolarRadiations: getRandomVal(),
+        minSolarRadiations: getRandomVal(),
+        maxSolarRadiations: getRandomVal(),
+        minWindSpeed: wsmin,
+        avgWindSpeed: ws,
+        maxWindSpeed: wsmax,
+        minTemperature: tmin,
+        avgTemperature: t,
+        maxTemperature: tmax,
+        minRelativeHumidity: humin,
+        avgRelativeHumidity: hu,
+        maxRelativeHumidity: humax,
+        avgWindDirection: getRandomVal(),
+        minWindDirection: getRandomVal(),
+        maxWindDirection: getRandomVal(),
+        avgAtmosphericPressure: getRandomVal(),
+        minAtmosphericPressure: getRandomVal(),
+        maxAtmosphericPressure: getRandomVal(),
+        avgDewPoint: getRandomVal(),
+        minDewPoint: getRandomVal(),
+        maxDewPoint: getRandomVal(),
+        avgIlluminance: getRandomVal(),
+        minIlluminance: getRandomVal(),
+        maxIlluminance: getRandomVal(),
+        avgStreamGauge: getRandomVal(),
+        minStreamGauge: getRandomVal(),
+        maxStreamGauge: getRandomVal(),
+        avgSnowHeight: getRandomVal(),
+        minSnowHeight: getRandomVal(),
+        maxSnowHeight: getRandomVal(),
+      });
+    }
   }
 
   async getMeasuresList(stationId: string, from: Date | null = null, to: Date | null = null): Promise<dto.WeatherObserved[]> {
