@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Stations from "../views/Stations.vue";
 import StationsDetails from "../views/StationDetails.vue"
-import StationForm from "../views/EditStation.vue"
+import StationForm from "../views/StationForm.vue"
 import FullLayout from '@/layout/fullLayout.vue'
 
 Vue.use(VueRouter)

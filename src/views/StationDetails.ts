@@ -153,6 +153,9 @@ export default class StationDetails extends Vue {
     event.openPopup();
   }
 
+  goToEdit() {
+    this.$router.push({ name: "station-editing", params: { stationId: this.stationId } })
+  }
   changeStation(evt: Event) {
     this.$router.push({ name: "station-details", params: { stationId: (evt.target as any).value } })
   }
@@ -192,6 +195,9 @@ export default class StationDetails extends Vue {
     this.dailyMeasure = this.dailyMeasures[0];
   }
 
+  async deleteStation() {
+    await stationsService.deleteStation(this.stationId);
+  }
   async mounted() {
     let paginated = await stationsService.getAllActiveStations();
     this.stations = paginated.items;

@@ -2,6 +2,18 @@ import Vue from 'vue'
 Vue.config.productionTip = false
 import { CONFIG_PROMISE } from "@/config";
 
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate);
+
+import VTooltip from "v-tooltip";
+Vue.use(VTooltip, {
+  defaultPlacement: 'top',
+  defaultTrigger: 'click'
+});
+
+
+import isvalid from "./mixins/isValid";
+Vue.mixin(isvalid);
 
 Vue.config.productionTip = false
 CONFIG_PROMISE.then(async (configuration) => {
