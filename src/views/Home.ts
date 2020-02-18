@@ -42,16 +42,6 @@ export default class Home extends Vue {
     this.stations = paginated.items;
   }
 
-  get filteredStations(): dto.Device[] {
-    if (!this.stations) return [];
-    //sorting stations by date of last value reported descending
-    return this.stations.sort((stationA, stationB) => {
-      let stationAdate = stationA.dateLastValueReported?.getTime() as number;
-      let stationBdate = stationB.dateLastValueReported?.getTime() as number;
-      return stationBdate - stationAdate;
-    });
-  }
-
   async mounted() {
     //retrieveing first 10 active stations in case user does not allow the location
     let paginated = await stationsService.getAllActiveStations(0, 10);

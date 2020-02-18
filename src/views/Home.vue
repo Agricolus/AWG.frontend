@@ -29,7 +29,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="station in filteredStations" :key="station.id">
+					<tr v-for="station in stations" :key="station.id">
 						<td>{{ station.name }}</td>
 						<td>
 							<i class="fas fa-circle red-status"></i>
