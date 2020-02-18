@@ -6,7 +6,7 @@
 		<section class="map-section">
 			<l-map class="map" :zoom="zoom" :min-zoom="minZoom" :max-zoom="maxZoom" :center="center">
 				<l-tile-layer :url="url"></l-tile-layer>
-				<template v-for="station in filteredStations">
+				<template v-for="station in stations">
 					<l-marker :key="station.id" :lat-lng="station.location.coordinates" :icon="icon">
 						<l-popup class="custom-popup">
 							<strong>{{ station.name }}</strong>
@@ -29,7 +29,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="station in filteredStations" :key="station.id">
+					<tr v-for="station in stations" :key="station.id">
 						<td>{{ station.name }}</td>
 						<td>
 							<i class="fas fa-circle red-status"></i>
