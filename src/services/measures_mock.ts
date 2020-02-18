@@ -103,7 +103,7 @@ class MeasuresServicesMOCKED extends BaseRestService {
 
   async getLastWeeklyMeasures(stationId: string, from: Date | null = null, to: Date | null = null): Promise<dto.WeeklyMeasureDetail[]> {
     console.debug("dummy call to getLastWeeklyMeasure", `${this.measuresApiEndpoint}/weekly?stationId=${stationId}&from=${from}&to=${to}`)
-    let days = Math.ceil((to.getTime() - from.getTime()) / 1000 / 60 / 60 / 24 /);
+    let days = Math.ceil((to.getTime() - from.getTime()) / 1000 / 60 / 60 / 24 / 7);
     let out = [];
     for (let h = 0; h < days; h++) {
       let d1 = dayjs().subtract(h, 'week');
@@ -157,7 +157,7 @@ class MeasuresServicesMOCKED extends BaseRestService {
 
   async getLastMonthlyMeasures(stationId: string, from: Date | null = null, to: Date | null = null): Promise<dto.MonthlyMeasureDetail[]> {
     console.debug("dummy call to getLastMonthlyMeasure", `${this.measuresApiEndpoint}/monthly?stationId=${stationId}&from=${from}&to=${to}`)
-    let days = Math.ceil((to.getTime() - from.getTime()) / 1000 / 60 / 60 / 24 / 30);
+    let days = Math.ceil((to.getTime() - from.getTime()) / 1000 / 60 / 60 / 24 / 7 / 30);
     let out = [];
     for (let h = 0; h < days; h++) {
       let d1 = dayjs().subtract(h, 'month');
