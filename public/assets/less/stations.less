@@ -100,6 +100,8 @@
   overflow: auto;
 
   header {
+    display: flex;
+    justify-content: space-between;
 
     .station-select {
       width: 40vw;
@@ -193,6 +195,26 @@
         flex: 1 1 40%;
         max-width: calc(~'50% - 30px');
       }
+    }
+  }
+}
+
+
+.stationForm {
+  font-family: source-sans-pro;
+  padding: 35px 100px;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  header {
+    .title {
+      font-size: 2rem;
+      color: @gray-purple;
+      font-weight: bold;
+      letter-spacing: 3px;
     }
   }
 }

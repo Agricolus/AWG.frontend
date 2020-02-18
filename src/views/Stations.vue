@@ -7,7 +7,7 @@
 			</div>
 		</header>
 		<section class="button-section">
-			<button class="btn btn-primary">
+			<button class="btn btn-primary" @click="goToEdit()">
 				<i class="fas fa-plus left-icon"></i>
 				ADD A NEW STATIONS
 			</button>

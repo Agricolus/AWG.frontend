@@ -21,6 +21,12 @@
 					>{{ s.name }}</option>
 				</select>
 			</div>
+			<div>
+				<button class="btn btn-primary" @click="goToEdit()">
+					<i class="fas fa-pencil-alt left-icon"></i>
+					Edit station
+				</button>
+			</div>
 		</header>
 		<section v-if="lastMeasure && station" class="daily-measure-section">
 			<card v-if="stationId" title="ID" :mainInformation="station.name"></card>

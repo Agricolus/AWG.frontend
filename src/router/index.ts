@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Stations from "../views/Stations.vue";
 import StationsDetails from "../views/StationDetails.vue"
+import StationForm from "../views/StationForm.vue"
 import FullLayout from '@/layout/fullLayout.vue'
 
 Vue.use(VueRouter)
@@ -15,7 +16,7 @@ const routes = [
     component: FullLayout,
     children: [
       {
-        path: 'home',
+        path: '/home',
         name: 'home',
         component: Home
       },
@@ -29,7 +30,14 @@ const routes = [
         name: 'station-details',
         component: StationsDetails,
         props: true
-      }
+      },
+      {
+        path: '/stations/edit/:stationId?',
+        name: 'station-editing',
+        component: StationForm,
+        props: true
+      },
+
     ]
   },
 ]

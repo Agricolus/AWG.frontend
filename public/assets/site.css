@@ -1,6 +1,7 @@
 @import "../libs/font-awesome/css/all.min.css";
 @import "../libs/weather-icons/css/weather-icons.min.css";
 @import "../libs/weather-icons/css/weather-icons-wind.min.css";
+@import "iziToast.min.css";
 * {
   box-sizing: border-box;
 }
@@ -15,11 +16,12 @@
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   letter-spacing: 0.5px;
-  text-transform: uppercase;
   padding: 8px 15px;
   border: none;
   font-family: source-sans-pro;
   cursor: pointer;
+  color: #43425d;
+  background: #dcdcdc;
 }
 .btn:focus {
   outline: 0;
@@ -32,6 +34,24 @@
   .btn {
     transition: none;
   }
+}
+.btn-danger {
+  color: #ffffff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+.btn-danger:hover {
+  color: #ffffff;
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+.btn-danger:focus {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+}
+.btn-danger:disabled {
+  color: #ffffff;
+  background-color: #dc3545;
+  border-color: #dc3545;
 }
 .btn-primary {
   color: #ffffff;
@@ -399,6 +419,10 @@ html {
   flex-flow: column nowrap;
   overflow: auto;
 }
+.stationDetails header {
+  display: flex;
+  justify-content: space-between;
+}
 .stationDetails header .station-select {
   width: 40vw;
   display: flex;
@@ -468,6 +492,21 @@ html {
   height: 350px;
   flex: 1 1 40%;
   max-width: calc(50% - 30px);
+}
+.stationForm {
+  font-family: source-sans-pro;
+  padding: 35px 100px;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+.stationForm header .title {
+  font-size: 2rem;
+  color: #a5a4bf;
+  font-weight: bold;
+  letter-spacing: 3px;
 }
 .home {
   font-family: source-sans-pro;
@@ -593,9 +632,141 @@ html {
 .card .body .info label {
   font-size: 1rem;
 }
+.form {
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 5px;
+  max-width: 800px;
+  padding: 15px;
+}
+.form .form-row {
+  display: flex;
+}
+.form .form-control {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.form .form-control .error {
+  color: #a3a0fb;
+}
+.form .form-control label {
+  font-size: 1.1rem;
+  color: #43425d;
+}
+.form .form-control input[type="text"] {
+  font-family: source-sans-pro;
+  background-color: #fafafa;
+  color: #43425d;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  border: 1px solid #dcdcdc;
+}
+.form .form-control input[type="text"]:focus {
+  outline: none !important;
+}
+.form .form-control input[type="text"]:read-only {
+  background: #dcdcdc !important;
+}
+.form .form-control input[type="text"]:disabled {
+  background: #dcdcdc !important;
+  color: #43425d;
+}
+.form .form-control input[type="text"]::placeholder {
+  color: #a9a9a9;
+}
+.form .form-control textarea {
+  background-color: transparent;
+  font-family: source-sans-pro;
+  background-color: #fafafa;
+  color: #a3a6b4;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  border: 1px solid #dcdcdc;
+}
+.form .form-control textarea:focus {
+  outline: none !important;
+}
+.form .form-control textarea::placeholder {
+  color: #a9a9a9;
+}
+.form .form-control .vdp-datepicker .vdp-datepicker__calendar {
+  z-index: 9999;
+}
+.form .form-control .vdp-datepicker div:first-child {
+  display: flex;
+  flex-flow: row-reverse;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+}
+.form .form-control .vdp-datepicker .vdp-datepicker__calendar-button {
+  background-color: #fafafa;
+  color: #43425d;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  margin-left: -2px;
+}
+.form .form-control .vdp-datepicker input[type="text"] {
+  background-color: transparent;
+  font-family: source-sans-pro;
+  background-color: #fafafa;
+  color: #43425d;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  width: 100%;
+  border: none;
+}
+.form .form-control .vdp-datepicker input[type="text"]:read-only {
+  background-color: #fafafa !important;
+  color: #43425d;
+}
+.form .form-control .vdp-datepicker input[type="text"]:focus {
+  outline: none !important;
+}
+.form .form-control .vdp-datepicker input[type="text"]::placeholder {
+  color: #a9a9a9;
+}
+.form .map-form {
+  height: 40vh;
+}
+.form .map-form .map {
+  border-radius: 5px;
+}
+.form .buttons {
+  display: flex;
+  margin-top: 20px;
+}
+.form .buttons :last-child {
+  margin-right: 0px;
+}
+.form .buttons button {
+  flex: 1;
+  margin-right: 10px;
+}
+.form .option-data {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #43425d;
+}
+.form .option-data label {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.form .option-data i {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
 select {
   min-height: 39px;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
+  background: #ffffff;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   opacity: 1;
   border: none;
@@ -608,8 +779,128 @@ select {
 select:focus {
   outline: none !important;
 }
-select:after {
-  color: red;
+.custom-tag {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(139, 139, 139, 0.3);
+  color: #43425d;
+  border-radius: 5px;
+  white-space: nowrap;
+  margin: 3px 0px;
+  transition: all 0.2s;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.custom-tag i {
+  width: 20px;
+}
+.custom-tag label {
+  cursor: pointer;
+}
+.custom-tag.selected {
+  background-color: #a5a4bf;
+  color: #ffffff;
+}
+.custom-tag.selected label {
+  color: #ffffff;
+}
+.tooltip {
+  display: block !important;
+  z-index: 10000;
+  font-family: source-sans-pro;
+}
+.tooltip .tooltip-inner {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px 4px;
+}
+.tooltip .tooltip-inner a {
+  color: white;
+  text-decoration: underline;
+}
+.tooltip .tooltip-arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  position: absolute;
+  margin: 5px;
+  border-color: rgba(0, 0, 0, 0.8);
+  z-index: 1;
+}
+.tooltip[x-placement^="top"] {
+  margin-bottom: 5px;
+}
+.tooltip[x-placement^="top"] .tooltip-arrow {
+  border-width: 5px 5px 0 5px;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  border-bottom-color: transparent !important;
+  bottom: -5px;
+  left: calc(50% - 5px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.tooltip[x-placement^="bottom"] {
+  margin-top: 5px;
+}
+.tooltip[x-placement^="bottom"] .tooltip-arrow {
+  border-width: 0 5px 5px 5px;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  border-top-color: transparent !important;
+  top: -5px;
+  left: calc(50% - 5px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.tooltip[x-placement^="right"] {
+  margin-left: 5px;
+}
+.tooltip[x-placement^="right"] .tooltip-arrow {
+  border-width: 5px 5px 5px 0;
+  border-left-color: transparent !important;
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
+  left: -5px;
+  top: calc(50% - 5px);
+  margin-left: 0;
+  margin-right: 0;
+}
+.tooltip[x-placement^="left"] {
+  margin-right: 5px;
+}
+.tooltip[x-placement^="left"] .tooltip-arrow {
+  border-width: 5px 0 5px 5px;
+  border-top-color: transparent !important;
+  border-right-color: transparent !important;
+  border-bottom-color: transparent !important;
+  right: -5px;
+  top: calc(50% - 5px);
+  margin-left: 0;
+  margin-right: 0;
+}
+.tooltip.popover .popover-inner {
+  background: #f9f9f9;
+  color: black;
+  padding: 24px;
+  border-radius: 5px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+}
+.tooltip.popover .popover-arrow {
+  border-color: #f9f9f9;
+}
+.tooltip[aria-hidden='true'] {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.15s, visibility 0.15s;
+}
+.tooltip[aria-hidden='false'] {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.15s;
 }
 .paginator {
   font-family: inherit;
@@ -675,9 +966,21 @@ body {
 }
 hr {
   width: 100%;
-  margin: 20px 0px;
+  margin: 5px 0px;
   border: 0;
   height: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+.divider-5 {
+  padding: 5px 0px;
+}
+.divider-10 {
+  padding: 10px 0px;
+}
+.divider-20 {
+  padding: 20px 0px;
+}
+.iziToast-wrapper-topRight {
+  right: 10px;
 }

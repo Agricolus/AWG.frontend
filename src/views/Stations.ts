@@ -30,6 +30,7 @@ export default class Stations extends Vue {
     })
   }
 
+
   // @Watch("pagination", { immediate: true })
   // async paginationWatcher(n, o) {
   //   console.debug("what's going on?", n, o);
@@ -37,6 +38,10 @@ export default class Stations extends Vue {
   //   this.stations = this.pagination.items;
   //   console.debug("stations", this.stations);
   // }
+
+  goToEdit() {
+    this.$router.push({ name: 'station-editing' })
+  }
 
   goToDetails(stationId: string) {
     this.$router.push({
@@ -61,6 +66,5 @@ export default class Stations extends Vue {
   async mounted() {
     this.pagination = await stationsService.getAllActiveStations();
     this.stations = this.pagination.items;
-    console.debug("stations", this.stations);
   }
 }

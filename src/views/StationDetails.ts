@@ -166,6 +166,9 @@ export default class StationDetails extends Vue {
     event.openPopup();
   }
 
+  goToEdit() {
+    this.$router.push({ name: "station-editing", params: { stationId: this.stationId } })
+  }
   changeStation(evt: Event) {
     this.$router.push({ name: "station-details", params: { stationId: (evt.target as any).value } })
   }
