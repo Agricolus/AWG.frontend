@@ -2,17 +2,17 @@
 	<div class="stationDetails">
 		<header>
 			<div class="station-select">
-				<div>
+				<!-- <div>
 					<select>
 						<option value="Italy" selected>Select country</option>
 					</select>
 					<select>
 						<option value="Umbria">Select region</option>
 					</select>
-				</div>
+				</div>-->
 
 				<select @change="changeStation">
-					<option value="Stazione">Select station</option>
+					<option disabled>Select station</option>
 					<option
 						v-for="s in stations"
 						:key="s.id"
@@ -22,12 +22,13 @@
 				</select>
 			</div>
 		</header>
-		<section v-if="lastMeasure && dailyMeasure && station" class="daily-measure-section">
-			<card v-if="stationId" title="ID" :mainInformation="stationId"></card>
+		<section v-if="lastMeasure && station" class="daily-measure-section">
+			<card v-if="stationId" title="ID" :mainInformation="station.name"></card>
 			<card
 				v-if="lastMeasure.dateCreated"
 				title="Last Update"
 				:mainInformation="lastMeasure.dateCreated | dateformat('hh:mm')"
+				:below="lastMeasure.dateCreated | dateformat('DD MMM YYYY')"
 			></card>
 			<card
 				v-if="lastMeasure.weatherType"
@@ -52,8 +53,6 @@
 				title="Temperature"
 				:mainInformation="lastMeasure.temperature"
 				unit="°C"
-				:min="dailyMeasure.minTemperature"
-				:max="dailyMeasure.maxTemperature"
 			></card>
 			<card
 				v-if="lastMeasure.precipitation"
@@ -67,16 +66,12 @@
 				:mainInformation="lastMeasure.relativeHumidity"
 				unit="%"
 				minRelativeHumidity
-				:min="dailyMeasure.minRelativeHumidity"
-				:max="dailyMeasure.maxRelativeHumidity"
 			></card>
 			<card
 				v-if="lastMeasure.windSpeed"
 				title="Wind Speed"
 				:mainInformation="lastMeasure.windSpeed"
 				unit="km/h"
-				:min="dailyMeasure.minWindSpeed"
-				:max="dailyMeasure.maxWindSpeed"
 			></card>
 			<card
 				v-if="lastMeasure.atmosphericPressure"
@@ -133,12 +128,7 @@
 				</template>
 			</div>
 			<select v-model="timeSelectedIntedval" class="station-select">
-				<option
-					v-for="(interval, k) in timeIntervals"
-					:key="interval"
-					:value="interval"
-					selected
-				>{{ k }}</option>
+				<option v-for="(v, k) in timeIntervals" :key="k" :value="v" selected>{{ v }}</option>
 			</select>
 		</section>
 		<section class="charts">

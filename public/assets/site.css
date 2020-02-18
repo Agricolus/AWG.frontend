@@ -563,6 +563,7 @@ html {
 .card .body .main-info {
   font-weight: bold;
   color: #4d4f5c;
+  text-align: center;
 }
 .card .body .main-info.weather i {
   font-size: 2.5rem;
@@ -576,6 +577,13 @@ html {
 .card .body .main-info small {
   margin-left: 2px;
   font-size: 1.5rem;
+}
+.card .body .main-info small.below {
+  display: block;
+  color: #43425d;
+  opacity: 0.5;
+  text-align: center;
+  font-size: 1rem;
 }
 .card .body .info {
   color: #43425D;
