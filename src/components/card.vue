@@ -2,9 +2,9 @@
 	<div class="card">
 		<div class="header">{{title}}</div>
 		<div class="body">
-			<div class="main-info" v-if="mainInformation">
+			<div class="main-info">
 				<i v-if="icon" class="left-icon" :class="icon" />
-				<label>{{ mainInformation }}</label>
+				<label>{{ mainInformation || 'N/A ' }}</label>
 				<small v-if="unit">{{ unit }}</small>
 				<small class="below">{{ below }}</small>
 			</div>

@@ -43,7 +43,7 @@ export default class StationDetails extends Vue {
   minZoom: number = 2;
 
   stations: dto.Device[] = null;
-
+  station: dto.Device = null;
   icon: L.Icon = L.icon({
     iconUrl: '/assets/img/pin.png',
     iconSize: [32, 37],
@@ -59,10 +59,10 @@ export default class StationDetails extends Vue {
   });
 
 
-  get station() {
-    if (!this.stations) return null;
-    return this.stations.find(s => s.id == this.stationId);
-  }
+  // get station() {
+  //   if (!this.stations) return null;
+  //   return this.stations.find(s => s.id == this.stationId);
+  // }
 
   get center() {
     if (!this.station) return null;
@@ -71,7 +71,7 @@ export default class StationDetails extends Vue {
 
   get temperatures() {
     if (this.timeSelectedIntedval != this.timeIntervals.daily) {
-      if (!this.dailyMeasures) return null;
+      if (!this.dailyMeasures) return [];
       return this.dailyMeasures.map(dm => {
         return {
           time: dayjs(dm.date).startOf('day').toDate(),
@@ -81,7 +81,7 @@ export default class StationDetails extends Vue {
         }
       });
     }
-    if (!this.rawMeasures) return null;
+    if (!this.rawMeasures) return [];
     return this.rawMeasures.map(dm => {
       return { time: dm.dateObserved, avg: round(dm.temperature) }
     })
@@ -89,12 +89,12 @@ export default class StationDetails extends Vue {
 
   get precipitations() {
     if (this.timeSelectedIntedval != this.timeIntervals.daily) {
-      if (!this.dailyMeasures) return null;
+      if (!this.dailyMeasures) return [];
       return this.dailyMeasures.map(dm => {
         return { time: dayjs(dm.date).startOf('day').toDate(), precipitation: round(dm.precipitations) }
       });
     }
-    if (!this.rawMeasures) return null;
+    if (!this.rawMeasures) return [];
     return this.rawMeasures.map(dm => {
       return { time: dm.dateObserved, precipitation: round(dm.precipitation) }
     })
@@ -102,7 +102,7 @@ export default class StationDetails extends Vue {
 
   get pressures() {
     if (this.timeSelectedIntedval != this.timeIntervals.daily) {
-      if (!this.dailyMeasures) return null;
+      if (!this.dailyMeasures) return [];
       return this.dailyMeasures.map(dm => {
         return {
           time: dayjs(dm.date).startOf('day').toDate(),
@@ -112,7 +112,7 @@ export default class StationDetails extends Vue {
         }
       });
     }
-    if (!this.rawMeasures) return null;
+    if (!this.rawMeasures) return [];
     return this.rawMeasures.map(dm => {
       return { time: dm.dateObserved, avg: round(dm.atmosphericPressure) }
     });
@@ -120,7 +120,7 @@ export default class StationDetails extends Vue {
 
   get humidity() {
     if (this.timeSelectedIntedval != this.timeIntervals.daily) {
-      if (!this.dailyMeasures) return null;
+      if (!this.dailyMeasures) return [];
       return this.dailyMeasures.map(dm => {
         return {
           time: dayjs(dm.date).startOf('day').toDate(),
@@ -130,7 +130,7 @@ export default class StationDetails extends Vue {
         }
       });
     }
-    if (!this.rawMeasures) return null;
+    if (!this.rawMeasures) return [];
     return this.rawMeasures.map(dm => {
       return { time: dm.dateObserved, avg: round(dm.relativeHumidity) }
     });
@@ -138,28 +138,34 @@ export default class StationDetails extends Vue {
 
   get cardValues() {
     if (this.timeSelectedIntedval != this.timeIntervals.daily) {
-      if (!this.dailyMeasures) return null;
+      if (!this.dailyMeasures) return [];
       return this.dailyMeasures.slice(-7).reverse().map(dm => {
         return {
           id: dm.date.getTime(),
           dateformat: 'ddd DD',
           date: dm.date,
+          avgTemperature: round(dm.avgTemperature),
           minTemperature: round(dm.minTemperature),
           maxTemperature: round(dm.maxTemperature),
           condition: 'sunnyDay'
         }
       });
     }
-    if (!this.rawMeasures) return null;
+    if (!this.rawMeasures) return [];
     return this.rawMeasures.slice(-7).reverse().map(dm => {
       return {
         id: dm.id,
         dateformat: 'ddd DD HH:MM',
         date: dm.dateObserved,
-        maxTemperature: round(dm.temperature),
+        avgTemperature: round(dm.temperature),
         condition: dm.weatherType
       }
     });
+  }
+
+  checkProperty(prop: string) {
+    if (!this.station || !this.station.controlledProperty) return false;
+    return this.station.controlledProperty.indexOf(prop) >= 0;
   }
 
   openPopup(event: any) {
@@ -196,7 +202,9 @@ export default class StationDetails extends Vue {
   @Watch("stationId", { immediate: true })
   async stationIdWatcher(n, o) {
     if (!n || n == o) return;
-    this.lastMeasure = await measuresService.getLastMeasure(this.stationId);
+    this.station = await stationsService.getStation(n);
+    console.debug("controlled property: ", this.station.controlledProperty);
+    this.lastMeasure = await measuresService.getLastMeasure(n);
     this.timeSelectedIntedvalWatcher(this.timeSelectedIntedval, null);
   }
 
