@@ -43,14 +43,14 @@
 					</tr>
 				</tbody>
 			</table>
-			<pagination
-				:total="pagination.totalCount"
-				:taken="pagination.take"
-				:skipped="pagination.skip"
-				@take="takeThose"
-				@skip="skipThat"
-			></pagination>
 		</section>
+		<pagination
+			:total="pagination.totalCount"
+			:taken="pagination.take"
+			:skipped="pagination.skip"
+			@take="takeThose"
+			@skip="skipThat"
+		></pagination>
 	</div>
 </template>
 <script src="./Stations.ts" lang="ts"/>
