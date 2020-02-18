@@ -7,7 +7,7 @@ function dateformat(value: Date, format: string = "DD MMMM YYYY"): string {
 
 function weatherConditionIcon(value: string): string {
   switch (value) {
-    case 'clearNightt': return 'wi wi-night-clear'
+    case 'clearNight': return 'wi wi-night-clear'
     case 'sunnyDay': return 'wi wi-day-sunny'
     case 'slightlyCloudy': return 'wi wi-day-cloudy'
     case 'partlyCloudy': return 'wi wi-cloud'

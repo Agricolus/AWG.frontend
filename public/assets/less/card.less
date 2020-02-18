@@ -30,6 +30,7 @@
     .main-info {
       font-weight: bold;
       color: @blu-gray-2;
+      text-align: center;
 
       &.weather {
         i {
@@ -49,7 +50,17 @@
       small {
         margin-left: 2px;
         font-size: 1.5rem;
+
+        &.below {
+          display: block;
+          color: @blu-gray-1;
+          opacity: 0.5;
+          text-align: center;
+          font-size: 1rem;
+        }
       }
+
+
     }
 
     .info {
