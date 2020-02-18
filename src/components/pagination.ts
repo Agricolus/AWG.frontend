@@ -14,9 +14,14 @@ export default class Paginator extends Vue {
   @Prop({ default: null })
   skipped: number;
 
-  perpage: number[] = [5, 10, 15, 20]
+  @Prop({ default: () => [5, 10, 15, 20] })
+  perpage: number[];
 
-  private daystoshow: number = 7
+  @Prop({ default: 7 })
+  totalPagesToShow: number; //total number of pages selector including the ones in the extremes
+
+  @Prop({ default: 1 })
+  extemesPagesToShow: number; //number o pages selector to show on the extremes (for each extreme)
 
   get pages() {
     if (!this.total || !this.taken) return null;
@@ -35,28 +40,31 @@ export default class Paginator extends Vue {
 
   get pagesHead() {
     if (!this.pages) return null;
-    if (this.pages.length <= this.daystoshow) return null;
-    if (this.currentPage <= (this.daystoshow - 2)) {
-      return this.pages.slice(0, this.daystoshow - 1);
+    if (this.pages.length <= this.totalPagesToShow) return null;
+    let breakpoint = this.totalPagesToShow - (this.extemesPagesToShow * 2);
+    if (this.currentPage <= breakpoint) {
+      return this.pages.slice(0, this.totalPagesToShow - this.extemesPagesToShow);
     }
-    return this.pages.slice(0, 1);
+    return this.pages.slice(0, this.extemesPagesToShow);
   }
 
   get pagesTail() {
     if (!this.pages) return null;
-    if (this.pages.length <= this.daystoshow) return null;
-    let halfcontour = Math.floor(this.daystoshow / 2);
-    if (this.currentPage >= (this.pages.length - halfcontour - 1)) {
-      return this.pages.slice(-1 * (this.daystoshow - 1));
+    if (this.pages.length <= this.totalPagesToShow) return null;
+    let breakpoint = this.pages.length - (this.totalPagesToShow - (this.extemesPagesToShow * 2));
+    if (this.currentPage > breakpoint) {
+      return this.pages.slice(-1 * (this.totalPagesToShow - this.extemesPagesToShow));
     }
-    return this.pages.slice(-1);
+    return this.pages.slice(-1 * this.extemesPagesToShow);
   }
 
   get pagesMid() {
     if (!this.pages) return null;
-    if (this.pages.length <= this.daystoshow) return this.pages;
-    let halfcontour = Math.floor(this.daystoshow / 2);
-    if (this.currentPage > (this.daystoshow - 2) && this.currentPage < (this.pages.length - halfcontour - 1)) {
+    if (this.pages.length <= this.totalPagesToShow) return this.pages;
+    let breakpointHigh = this.pages.length - (this.totalPagesToShow - (this.extemesPagesToShow * 2));
+    let breakpointLow = this.totalPagesToShow - (this.extemesPagesToShow * 2);
+    let halfcontour = Math.floor((this.totalPagesToShow - this.extemesPagesToShow) / 2);
+    if (this.currentPage > breakpointLow && this.currentPage <= breakpointHigh) {
       return this.pages.slice(this.currentPage - halfcontour, this.currentPage + halfcontour - 1);
     }
     return null;
@@ -70,6 +78,7 @@ export default class Paginator extends Vue {
     return (this.currentPage - 2) >= 0
 
   }
+
   goToPreviousPage() {
     let prevp = (this.currentPage - 2) * this.taken;
     this.$emit('skip', prevp);
