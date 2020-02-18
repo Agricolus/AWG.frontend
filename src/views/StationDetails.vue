@@ -28,61 +28,61 @@
 				</button>
 			</div>
 		</header>
-		<section v-if="lastMeasure && station" class="daily-measure-section">
-			<card v-if="stationId" title="ID" :mainInformation="station.name"></card>
+		<section v-if="station" class="daily-measure-section">
+			<card v-if="stationId" title="ID" :main-information="station.name"></card>
 			<card
 				v-if="lastMeasure.dateCreated"
 				title="Last Update"
-				:mainInformation="lastMeasure.dateCreated | dateformat('hh:mm')"
+				:main-information="lastMeasure.dateCreated | dateformat('hh:mm')"
 				:below="lastMeasure.dateCreated | dateformat('DD MMM YYYY')"
 			></card>
 			<card
-				v-if="lastMeasure.weatherType"
+				v-if="checkProperty('weatherType')"
 				title="Weather Condition"
-				:weatherIcon="lastMeasure.weatherType| weatherConditionIcon"
+				main-information=" "
+				:weatherIcon="lastMeasure.weatherType | weatherConditionIcon"
 			></card>
 			<card
-				v-if="lastMeasure.windDirection"
+				v-if="checkProperty('windDirection')"
 				title="Wind Direction"
-				:mainInformation="lastMeasure.windDirection"
+				:main-information="lastMeasure.windDirection"
 				icon="fab fa-telegram-plane"
 			></card>
 			<card
-				v-if="lastMeasure.solarRadiation"
+				v-if="checkProperty('solarRadiation')"
 				title="Solar Radiation"
-				:mainInformation="lastMeasure.solarRadiation"
+				:main-information="lastMeasure.solarRadiation"
 				unit="w/m2"
 			></card>
-
 			<card
-				v-if="lastMeasure.temperature"
+				v-if="checkProperty('temperature')"
 				title="Temperature"
-				:mainInformation="lastMeasure.temperature"
+				:main-information="lastMeasure.temperature"
 				unit="°C"
 			></card>
 			<card
-				v-if="lastMeasure.precipitation"
+				v-if="checkProperty('precipitation')"
 				title="Precipitation"
-				:mainInformation="lastMeasure.precipitation"
+				:main-information="lastMeasure.precipitation"
 				unit="mm"
 			></card>
 			<card
-				v-if="lastMeasure.relativeHumidity"
+				v-if="checkProperty('relativeHumidity')"
 				title="Relaty Humidity"
-				:mainInformation="lastMeasure.relativeHumidity"
+				:main-information="lastMeasure.relativeHumidity"
 				unit="%"
 				minRelativeHumidity
 			></card>
 			<card
-				v-if="lastMeasure.windSpeed"
+				v-if="checkProperty('windSpeed')"
 				title="Wind Speed"
-				:mainInformation="lastMeasure.windSpeed"
+				:main-information="lastMeasure.windSpeed"
 				unit="km/h"
 			></card>
 			<card
-				v-if="lastMeasure.atmosphericPressure"
+				v-if="checkProperty('atmosphericPressure')"
 				title="Atmoshperic Pressure"
-				:mainInformation="lastMeasure.atmosphericPressure"
+				:main-information="lastMeasure.atmosphericPressure"
 				unit="atm"
 			></card>
 		</section>
@@ -127,6 +127,7 @@
 						:weatherIcon="measure.condition | weatherConditionIcon"
 						:key="measure.id"
 						:title="measure.date | dateformat(measure.dateformat)"
+						:main-information="measure.avgTemperature"
 						:min="measure.minTemperature"
 						:max="measure.maxTemperature"
 						unit="°C"
@@ -134,20 +135,20 @@
 				</template>
 			</div>
 			<select v-model="timeSelectedIntedval" class="station-select">
-				<option v-for="(v, k) in timeIntervals" :key="k" :value="v" selected>{{ v }}</option>
+				<option v-for="(v, k) in timeIntervals" :key="k" :value="v">{{ v }}</option>
 			</select>
 		</section>
 		<section class="charts">
-			<div class="card precipitation" v-if="precipitations">
+			<div class="card precipitation" v-if="checkProperty('precipitation')">
 				<precipitations-chart :precipitations="precipitations"></precipitations-chart>
 			</div>
-			<div class="card temperature" v-if="temperatures">
+			<div class="card temperature" v-if="checkProperty('temperature')">
 				<temperatures-chart :temperatures="temperatures"></temperatures-chart>
 			</div>
-			<div class="card pressure" v-if="pressures">
+			<div class="card pressure" v-if="checkProperty('atmosphericPressure')">
 				<pressures-chart :pressures="pressures"></pressures-chart>
 			</div>
-			<div class="card humidity" v-if="humidity">
+			<div class="card humidity" v-if="checkProperty('relativeHumidity')">
 				<humidity-chart :humidity="humidity"></humidity-chart>
 			</div>
 			<!-- <div class="card windspeed"></div> -->
