@@ -153,6 +153,46 @@ export default class StationDetails extends Vue {
     });
   }
 
+  //getters for the lastMeasure values
+  get lastMeasureDateObserved() {
+    return this.lastMeasure ? this.lastMeasure.dateObserved : null;
+  }
+  get lastMeasureWeatherType() {
+    return this.lastMeasure ? this.lastMeasure.weatherType : null;
+  }
+
+  get lastMeasureWindDirection() {
+    return this.lastMeasure ? this.lastMeasure.windDirection : null;
+  }
+
+  get lastMeasureSolarRadiation() {
+    return this.lastMeasure ? this.lastMeasure.solarRadiation : null;
+  }
+
+  get lastMeasureTemperature() {
+    return this.lastMeasure ? this.lastMeasure.temperature : null;
+  }
+
+  get lastMeasurePrecipitation() {
+    return this.lastMeasure ? this.lastMeasure.precipitation : null;
+  }
+
+  get lastMeasureRelativeHumidity() {
+    return this.lastMeasure ? this.lastMeasure.relativeHumidity : null;
+  }
+
+  get lastMeasureWindSpeed() {
+    return this.lastMeasure ? this.lastMeasure.windSpeed : null;
+  }
+
+  get lastMeasureAtmosphericPressure() {
+    return this.lastMeasure ? this.lastMeasure.atmosphericPressure : null;
+  }
+
+
+
+
+
   checkProperty(prop: string) {
     if (!this.station || !this.station.controlledProperty) return false;
     return this.station.controlledProperty.indexOf(prop) >= 0;
