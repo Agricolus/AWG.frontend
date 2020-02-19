@@ -22,10 +22,10 @@ export default class StationForm extends Vue {
   stationId: string;
 
   stationForm = {
-    name: '', //mandatory
-    controlledProperty: [], //aggiungere getter //mandatory
-    location: null, //mandatory
-    dateInstalled: new Date(), //mandatory
+    name: '',
+    controlledProperty: [],
+    location: null,
+    dateInstalled: null,
     source: '',
     dataProvider: '',
     description: '',

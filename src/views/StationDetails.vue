@@ -89,31 +89,26 @@
 		<section class="map-container" v-if="station && stations">
 			<l-map
 				class="map"
-				:zoom="zoom"
-				:min-zoom="minZoom"
-				:max-zoom="maxZoom"
-				:center="station.location.coordinates"
+				:zoom="mapSettings.zoom"
+				:min-zoom="mapSettings.minZoom"
+				:max-zoom="mapSettings.maxZoom"
+				:center="[station.location.coordinates[1],station.location.coordinates[0]]"
 			>
-				<l-tile-layer :url="url"></l-tile-layer>
+				<l-tile-layer :url="mapSettings.url"></l-tile-layer>
+				<l-marker v-if="highlightMarker" :lat-lng="highlightMarker" :icon="highlighticon"></l-marker>
 				<template v-for="s in stations">
-					<l-marker :key="s.id" v-if="s.id != station.id" :lat-lng="s.location.coordinates" :icon="icon">
+					<l-marker
+						:key="s.id"
+						v-if="s.id != station.id"
+						:lat-lng="[s.location.coordinates[1],s.location.coordinates[0]]"
+						:icon="icon"
+					>
 						<l-popup class="custom-popup">
 							<strong>{{ s.name }}</strong>
 							<small>{{ s.description }}</small>
 						</l-popup>
 					</l-marker>
 				</template>
-				<l-marker
-					v-if="station.id"
-					:lat-lng="station.location.coordinates"
-					:icon="highlighticon"
-					@ready="openPopup"
-				>
-					<l-popup class="custom-popup">
-						<strong>{{ station.name }}</strong>
-						<small>{{ station.description }}</small>
-					</l-popup>
-				</l-marker>
 			</l-map>
 		</section>
 

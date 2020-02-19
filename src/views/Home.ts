@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
 import { stationsService } from "@/services";
+import { stationHighlightIcon, stationIcon, defaultMapSettings, MapSettings } from "../components/moduleMap";
 
 @Component({
   name: "home",
@@ -15,19 +16,14 @@ import { stationsService } from "@/services";
 )
 export default class Home extends Vue {
 
-  url: String = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-  zoom: number = 4;
-  maxZoom: number = 16;
-  minZoom: number = 2;
+  mapSettings: MapSettings = defaultMapSettings;
 
-  center: Array<number> = [47.413220, -1.219482];
-  markerLatLng: Array<number> = [47.313220, -1.319482]
-  icon: L.Icon = L.icon({
-    iconUrl: '/assets/img/pin.png',
-    iconSize: [32, 37],
-    iconAnchor: [16, 37],
-    popupAnchor: [0, 75]
-  })
+  mapCenter: Array<number> = [47.413220, -1.219482];
+
+
+  icon: L.Icon = stationIcon;
+  highlightMarker: Array<number> | null = null;
+  highlightIcon: L.Icon = stationHighlightIcon;
 
   stations: dto.Device[] | null = null;
 
@@ -49,12 +45,17 @@ export default class Home extends Vue {
     navigator.geolocation.getCurrentPosition((position) => {
       //user has allowed location
       this.userPosition = [position.coords.latitude, position.coords.longitude];
-      this.center = this.userPosition;
+      this.mapCenter = this.userPosition;
     });
   }
 
   goToStations() {
     this.$router.push({ name: 'stations' });
+  }
+
+  highlightStationIcon(station: dto.Device) {
+    this.highlightMarker = [station.location.coordinates[1], station.location.coordinates[0]];
+    this.mapCenter = [station.location.coordinates[1], station.location.coordinates[0]];
   }
 
 };

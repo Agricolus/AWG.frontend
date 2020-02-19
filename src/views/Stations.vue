@@ -29,7 +29,8 @@
 					<tr v-for="(station, i) in filteredStations" :key="station.id.concat('-' + i)">
 						<td>{{ station.name }}</td>
 						<td>
-							<i class="fas fa-circle red-status"></i>
+							{{ station.deviceStatus }}
+							<i class="wi wi-na fa-2x" v-if="!station.deviceStatus"></i>
 						</td>
 						<td>{{ station.location }}</td>
 						<td>{{ station.id }}</td>

@@ -4,13 +4,24 @@
 			<label class="title">Agri Weather Gateway</label>
 		</header>
 		<section class="map-section">
-			<l-map class="map" :zoom="zoom" :min-zoom="minZoom" :max-zoom="maxZoom" :center="center">
-				<l-tile-layer :url="url"></l-tile-layer>
+			<l-map
+				class="map"
+				:zoom="mapSettings.zoom"
+				:min-zoom="mapSettings.minZoom"
+				:max-zoom="mapSettings.maxZoom"
+				:center="mapCenter"
+			>
+				<l-tile-layer :url="mapSettings.url"></l-tile-layer>
+				<l-marker v-if="highlightMarker" :lat-lng="highlightMarker" :icon="highlightIcon"></l-marker>
 				<template v-for="station in stations">
-					<l-marker :key="station.id" :lat-lng="station.location.coordinates" :icon="icon">
+					<l-marker
+						:key="station.id"
+						:lat-lng="[station.location.coordinates[1],station.location.coordinates[0]]"
+						:icon="icon"
+					>
 						<l-popup class="custom-popup">
 							<strong>{{ station.name }}</strong>
-							<small>station.description</small>
+							<small>{{station.description}}</small>
 						</l-popup>
 					</l-marker>
 				</template>
@@ -29,10 +40,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="station in stations" :key="station.id">
+					<tr v-for="station in stations" :key="station.id" @mouseover="highlightStationIcon(station)">
 						<td>{{ station.name }}</td>
 						<td>
-							<i class="fas fa-circle red-status"></i>
+							{{ station.deviceState }}
+							<i class="wi wi-na fa-2x" v-if="!station.deviceState"></i>
 						</td>
 						<td>{{ station.location }}</td>
 						<td>{{ station.id }}</td>

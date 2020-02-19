@@ -17,7 +17,7 @@
       display: flex;
       align-items: center;
       position: relative;
-      border-radius: 5px;
+      border-radius: @radius;
       box-shadow: 0px 2px 6px @trasparency-2;
       background: @white-1 0% 0% no-repeat padding-box;
       font-size: 1.3rem;
@@ -71,7 +71,7 @@
     &.table-section {
       padding: 10px;
       background: @white-1;
-      border-radius: 5px;
+      border-radius: @radius;
       flex: 1;
       overflow-y: scroll;
       justify-content: flex-start;
@@ -133,7 +133,7 @@
 
     &.map-container {
       min-height: 45vh;
-      border-radius: 5px;
+      border-radius: @radius;
     }
 
     &.daily-summary-section {
