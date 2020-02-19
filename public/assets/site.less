@@ -51,10 +51,22 @@ hr {
 
 .iziToast-wrapper-topRight {
   right: 10px;
+  bottom: 10px;
 }
 
-.myDivIcon {
-  font-size: 52px;
-  color: yellow;
-  text-align: center;
+
+
+body &::-webkit-scrollbar {
+  width: 7px;
+  background-color: #F5F5F5;
+}
+
+body &::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: @gray-purple;
+  border: 1px solid #aaa;
+
+  &:hover {
+    background: @white-1;
+  }
 }

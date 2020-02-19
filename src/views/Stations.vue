@@ -9,7 +9,7 @@
 		<section class="button-section">
 			<button class="btn btn-primary" @click="goToEdit()">
 				<i class="fas fa-plus left-icon"></i>
-				ADD A NEW STATIONS
+				ADD A NEW STATION
 			</button>
 		</section>
 		<section class="table-section">
@@ -21,11 +21,14 @@
 						<th>Last Value Date</th>
 						<th>Installation Date</th>
 						<th>Serial Number</th>
-						<th class="btn-colum"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="(station, i) in filteredStations" :key="station.id.concat('-' + i)">
+					<tr
+						v-for="(station, i) in filteredStations"
+						:key="station.id.concat('-' + i)"
+						@click="goToDetails(station.id)"
+					>
 						<td>
 							{{ station.deviceState }}
 							<i class="wi wi-na fa-2x" v-if="!station.deviceState"></i>
@@ -33,24 +36,19 @@
 						<td>{{ station.name }}</td>
 						<td
 							v-if="station.dateLastValueReported"
-						>{{ station.dateLastValueReported | dateformat('DD MMM YYYY, hh:mm') }}</td>
+						>{{ station.dateLastValueReported | dateformat('DD MMM YYYY, HH:mm') }}</td>
 						<td v-else>
 							<i class="wi wi-na fa-2x"></i>
 						</td>
 						<td
 							v-if="station.dateInstalled"
-						>{{ station.dateInstalled | dateformat('DD MMM YYYY, hh:mm') }}</td>
+						>{{ station.dateInstalled | dateformat('DD MMM YYYY, HH:mm') }}</td>
 						<td v-else>
 							<i class="wi wi-na fa-2x"></i>
 						</td>
 						<td>
 							{{ station.serialNumber }}
 							<i class="wi wi-na fa-2x" v-if="!station.serialNumber"></i>
-						</td>
-						<td class="btn-colum">
-							<button class="btn btn-primary btn-sm" @click="goToDetails(station.id)">
-								<i class="fas fa-arrow-right"></i>
-							</button>
 						</td>
 					</tr>
 				</tbody>

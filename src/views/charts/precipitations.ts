@@ -7,11 +7,7 @@ import ECharts from 'vue-echarts';
 import { Component, Prop } from 'vue-property-decorator';
 import { PrecipitationsDefaultChartSettings, xAxisDateFormatterGenerator, tooltipFormatterGenerator } from "./chartSettings";
 
-@Component({
-  components: {
-    chart: ECharts
-  }
-})
+@Component({ components: { chart: ECharts } })
 export default class PrecipitationsChart extends Vue {
 
   @Prop()

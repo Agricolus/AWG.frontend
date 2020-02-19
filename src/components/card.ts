@@ -1,9 +1,7 @@
 import Vue from "vue"
 import { Component, Prop } from "vue-property-decorator";
 
-@Component({
-  name: "card"
-})
+@Component({ name: "card" })
 export default class Card extends Vue {
 
 

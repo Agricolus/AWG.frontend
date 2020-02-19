@@ -1,17 +1,15 @@
 <template>
 	<div class="stationDetails">
 		<header>
-			<div class="station-select">
-				<select @change="changeStation">
-					<option disabled>Select station</option>
-					<option
-						v-for="s in stations"
-						:key="s.id"
-						:value="s.id"
-						:selected="s.id == station.id"
-					>{{ s.name }}</option>
-				</select>
-			</div>
+			<select @change="changeStation">
+				<option disabled>Select station</option>
+				<option
+					v-for="s in stations"
+					:key="s.id"
+					:value="s.id"
+					:selected="s.id == station.id"
+				>{{ s.name }}</option>
+			</select>
 			<div class="header-buttons">
 				<button class="btn btn-primary" @click="downloadCSV()">
 					<i class="fas fa-download left-icon"></i>
@@ -27,8 +25,8 @@
 			<card title="Name" :main-information="station.name"></card>
 			<card
 				title="Last Update"
-				:main-information="lastMeasureDateObserved | dateformat('hh:mm')"
-				:below="lastMeasureDateObserved | dateformat('DD MMM YYYY')"
+				:main-information="lastMeasure.dateCreated | dateformat('HH:mm')"
+				:below="lastMeasure.dateCreated | dateformat('DD MMM YYYY')"
 			></card>
 			<card
 				v-if="checkProperty('weatherType')"

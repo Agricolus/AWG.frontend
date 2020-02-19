@@ -28,6 +28,7 @@
 			</l-map>
 		</section>
 		<section class="table-section">
+			<label>First 10 nearest stations</label>
 			<table class="table">
 				<thead>
 					<tr>
@@ -39,7 +40,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="station in stations" :key="station.id" @mouseover="highlightStationIcon(station)">
+					<tr
+						v-for="station in stations"
+						:key="station.id"
+						@mouseover="highlightStationIcon(station)"
+						@click="goToDetails(station.id)"
+					>
 						<td>
 							{{ station.deviceState }}
 							<i class="wi wi-na fa-2x" v-if="!station.deviceState"></i>
@@ -48,13 +54,13 @@
 
 						<td
 							v-if="station.dateLastValueReported"
-						>{{ station.dateLastValueReported | dateformat('DD MMM YYYY, hh:mm') }}</td>
+						>{{ station.dateLastValueReported | dateformat('DD MMM YYYY, HH:mm') }}</td>
 						<td v-else>
 							<i class="wi wi-na fa-2x"></i>
 						</td>
 						<td
 							v-if="station.dateInstalled"
-						>{{ station.dateInstalled | dateformat('DD MMM YYYY, hh:mm') }}</td>
+						>{{ station.dateInstalled | dateformat('DD MMM YYYY, HH:mm') }}</td>
 						<td v-else>
 							<i class="wi wi-na fa-2x"></i>
 						</td>

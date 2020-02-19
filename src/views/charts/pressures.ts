@@ -8,11 +8,7 @@ import { Component, Prop } from 'vue-property-decorator';
 import { PressureDefaultChartSettings, xAxisDateFormatterGenerator, tooltipFormatterGenerator } from "./chartSettings";
 
 
-@Component({
-  components: {
-    chart: ECharts
-  }
-})
+@Component({ components: { chart: ECharts } })
 export default class PressureChart extends Vue {
 
   @Prop()

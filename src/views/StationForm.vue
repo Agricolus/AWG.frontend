@@ -20,6 +20,7 @@
 
 			<div class="form-control">
 				<label>Select point on map</label>
+				<span class="error" v-if="!lat || !lng">You must select a point</span>
 				<div class="map-form">
 					<l-map
 						class="map"
@@ -37,43 +38,27 @@
 			<div class="form-row">
 				<div class="form-control">
 					<label>Latitude</label>
-					<input
-						name="latitude"
-						type="text"
-						placeholder="Insert latitutde"
-						v-model="lat"
-						v-validate.immediate="'required'"
-						readonly
-					/>
-					<span class="error">{{ errors.first('latitude') }}</span>
+					<input name="latitude" type="text" readonly :value="lat ? lat.toFixed(6) : null" />
 				</div>
 				<div class="form-control">
 					<label>Longitude</label>
-					<input
-						type="text"
-						name="longitude"
-						placeholder="Insert lng"
-						v-model="lng"
-						readonly
-						v-validate.immediate="'required'"
-					/>
-					<span class="error">{{ errors.first('longitude') }}</span>
+					<input type="text" name="longitude" :value="lng ? lng.toFixed(6) : null" readonly />
 				</div>
 			</div>
 
 			<div class="form-control">
-				<label>Add controlled properties</label>
+				<label>Add sensors</label>
 				<div>
 					<div
-						v-for="(p,index) in controlledProperties"
-						:key="index"
+						v-for="(p) in controlledProperties"
+						:key="p.id"
 						class="custom-tag"
-						@click="addControlledProperty(p)"
-						:class="{'selected': isSelected(p)}"
+						@click="addControlledProperty(p.id)"
+						:class="{'selected': isSelected(p.id)}"
 					>
-						<i class="fas fa-plus" v-if="!isSelected(p)"></i>
+						<i class="fas fa-plus" v-if="!isSelected(p.id)"></i>
 						<i class="fas fa-times" v-else></i>
-						<label>{{p}}</label>
+						<label>{{p.description}}</label>
 					</div>
 				</div>
 				<span
@@ -152,7 +137,7 @@
 				<button
 					class="btn btn-primary"
 					@click="save"
-					:disabled="!isValid || !stationForm.controlledProperty.length"
+					:disabled="!isValid || !stationForm.controlledProperty.length || !lat || !lng"
 				>
 					<i class="fas fa-save"></i>
 					Save

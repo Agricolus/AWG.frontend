@@ -18,7 +18,7 @@ export class AlertHelper {
         progressBarColor: '#fafafa',
         icon: "fas fa-check fa-2x",
         iconColor: "#43425d",
-        position: "topRight",
+        position: "bottomRight",
         progressBarEasing: 'linear',
         progressBar: true,
         closeOnEscape: false,
