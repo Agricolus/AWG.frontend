@@ -56,9 +56,23 @@ export default class StationForm extends Vue {
 
 
   get controlledProperties() {
-    return ['temperature', 'relativeHumidity', 'precipitation', 'windDirection', 'windSpeed',
-      'atmosphericPressure', 'pressureTendency', 'solarRadiation', 'illuminance', 'snowHeight',
-      'streamGauge', 'weatherType', 'visibility', 'dewPoint']
+
+    return [
+      { id: 'atmosphericPressure', description: 'Atmospheric pressure' },
+      { id: 'dewPoint', description: 'Dew point' },
+      { id: 'illuminance', description: 'Illuminance' },
+      { id: 'precipitation', description: 'Precipitation' },
+      { id: 'pressureTendency', description: 'Pressure tendency' },
+      { id: 'relativeHumidity', description: 'Relative humidity' },
+      { id: 'snowHeight', description: 'Snow height' },
+      { id: 'solarRadiation', description: 'Solar radiation' },
+      { id: 'streamGauge', description: 'Stream gauge' },
+      { id: 'temperature', description: 'Temperature' },
+      { id: 'visibility', description: 'Visibility' },
+      { id: 'weatherType', description: 'Weather type' },
+      { id: 'windDirection', description: 'Wind direction' },
+      { id: 'windSpeed', description: 'Wind speed' }
+    ]
   }
 
   addControlledProperty(p) {

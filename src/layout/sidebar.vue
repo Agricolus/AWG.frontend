@@ -4,10 +4,6 @@
 			<div class="title">AWG</div>
 		</header>
 		<section>
-			<div class="header">
-				<label>{{ now | dateformat('DD MMM YYYY') }}</label>
-				<label>{{ now | dateformat('HH:mm') }}</label>
-			</div>
 			<ul class="nav">
 				<li class="nav-item">
 					<router-link :to="{ name: 'home' }" class="nav-link">

@@ -171,6 +171,9 @@ html {
   opacity: 1;
   font-size: 1.7em;
 }
+.sidebar section {
+  margin-top: 40px;
+}
 .sidebar section .header {
   display: flex;
   align-items: center;
@@ -328,9 +331,8 @@ html {
 }
 .stations {
   font-family: source-sans-pro;
-  padding: 35px 80px;
+  padding: 2.1rem 7rem;
   height: 100%;
-  overflow: hidden;
   display: flex;
   flex-flow: column nowrap;
 }
@@ -384,10 +386,6 @@ html {
   padding: 10px;
   background: #ffffff;
   border-radius: 5px;
-  flex: 1;
-  overflow-y: scroll;
-  justify-content: flex-start;
-  flex-flow: column;
 }
 .green-status {
   color: #60f219;
@@ -397,6 +395,7 @@ html {
 }
 .stationDetails {
   font-family: source-sans-pro;
+  padding: 2.1rem 5.7rem;
   padding: 35px 80px;
   height: 100%;
   display: flex;
@@ -406,14 +405,8 @@ html {
 .stationDetails header {
   display: flex;
   justify-content: space-between;
-}
-.stationDetails header .station-select {
-  width: 40vw;
-  display: flex;
-  flex-flow: column;
-}
-.stationDetails header .station-select :first-child {
-  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
 }
 .stationDetails header select {
   flex: 1;
@@ -500,11 +493,11 @@ html {
 }
 .home {
   font-family: source-sans-pro;
-  padding: 35px 100px;
+  padding: 2.1rem 7rem;
   height: 100%;
-  overflow: hidden;
   display: flex;
   flex-flow: column nowrap;
+  overflow: auto;
 }
 .home header {
   display: flex;
@@ -523,20 +516,25 @@ html {
 .home section.map-section {
   padding: 10px;
   margin-top: 20px;
-  margin-bottom: 15px;
   min-height: 40vh;
   background: #ffffff;
   border-radius: 5px;
 }
 .home section.table-section {
-  overflow: auto;
   background: #ffffff;
   padding: 10px;
   border-radius: 5px;
   display: flex;
   flex-flow: column;
   align-items: center;
-  justify-content: flex-start;
+}
+.home section.table-section label {
+  font-size: 1.4rem;
+  text-align: left;
+  width: 100%;
+  margin-bottom: 10px;
+  color: #43425d;
+  font-weight: bold;
 }
 .map {
   height: 100%;
@@ -978,6 +976,7 @@ hr {
 }
 .iziToast-wrapper-topRight {
   right: 10px;
+  bottom: 10px;
 }
 body ::-webkit-scrollbar {
   width: 7px;

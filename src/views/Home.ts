@@ -52,6 +52,14 @@ export default class Home extends Vue {
     this.$router.push({ name: 'stations' });
   }
 
+  goToDetails(stationId: string) {
+    this.$router.push({
+      name: 'station-details', params: {
+        stationId: stationId
+      }
+    })
+  }
+
   highlightStationIcon(station: dto.Device) {
     this.highlightMarker = [station.location.coordinates[1], station.location.coordinates[0]];
     this.mapCenter = [station.location.coordinates[1], station.location.coordinates[0]];
