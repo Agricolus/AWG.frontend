@@ -6,6 +6,7 @@ import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
 import 'echarts/lib/component/axis';
 import 'echarts/lib/chart/line';
+import { UnitsMeasure } from '@/@types/dto/fiware/unitMeasures';
 
 @Component({ components: { chart: ECharts } })
 export default class TemperaturesChart extends Vue {
@@ -18,7 +19,7 @@ export default class TemperaturesChart extends Vue {
     let co = Object.assign({}, TemperatureDefaultChartSettings);
     co.dataset.source = this.temperatures;
     co.xAxis.axisLabel.formatter = xAxisDateFormatterGenerator(this.temperatures);
-    co.tooltip.formatter = tooltipFormatterGenerator(this.temperatures);
+    co.tooltip.formatter = tooltipFormatterGenerator(this.temperatures, UnitsMeasure['temperature']);
     return co;
   }
 }

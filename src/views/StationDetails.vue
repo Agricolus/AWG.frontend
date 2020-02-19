@@ -31,51 +31,50 @@
 			<card
 				v-if="checkProperty('weatherType')"
 				title="Weather Condition"
-				:main-information="false"
-				:weatherIcon="lastMeasureWeatherType | weatherConditionIcon"
+				:main-information="lastMeasureWeatherType | weatherConditionIcon"
+				:icon="true"
 			></card>
 			<card
 				v-if="checkProperty('windDirection')"
 				title="Wind Direction"
-				:main-information="lastMeasureWindDirection"
-				icon="fab fa-telegram-plane"
+				:main-information="lastMeasureWindDirection ? 'wi wi-wind from-' + lastMeasureWindDirection + '-deg' : null"
+				:icon="true"
 			></card>
 			<card
 				v-if="checkProperty('solarRadiation')"
 				title="Solar Radiation"
 				:main-information="lastMeasureSolarRadiation"
-				unit="w/m2"
+				:unit="unitsMeasure['solarRadiation']"
 			></card>
 			<card
 				v-if="checkProperty('temperature')"
 				title="Temperature"
 				:main-information="lastMeasureTemperature"
-				unit="°C"
+				:unit="unitsMeasure['temperature']"
 			></card>
 			<card
 				v-if="checkProperty('precipitation')"
 				title="Precipitation"
 				:main-information="lastMeasurePrecipitation"
-				unit="mm"
+				:unit="unitsMeasure['precipitation']"
 			></card>
 			<card
 				v-if="checkProperty('relativeHumidity')"
 				title="Relaty Humidity"
 				:main-information="lastMeasureRelativeHumidity"
-				unit="%"
-				minRelativeHumidity
+				:unit="unitsMeasure['relativeHumidity']"
 			></card>
 			<card
 				v-if="checkProperty('windSpeed')"
 				title="Wind Speed"
 				:main-information="lastMeasureWindSpeed"
-				unit="km/h"
+				:unit="unitsMeasure['windSpeed']"
 			></card>
 			<card
 				v-if="checkProperty('atmosphericPressure')"
 				title="Atmoshperic Pressure"
 				:main-information="lastMeasureAtmosphericPressure"
-				unit="atm"
+				:unit="unitsMeasure['atmosphericPressure']"
 			></card>
 		</section>
 		<section class="map-container" v-if="station && stations">

@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { UnitsMeasure } from '@/@types/dto/fiware/unitMeasures';
 
 ////#region GENERAL
 const titleColor = '#4D4F5C';
@@ -35,7 +36,7 @@ export const xAxisDateFormatterGenerator = (serie: any[]) => {
   }
 }
 
-export const tooltipFormatterGenerator = (serie: any[]) => {
+export const tooltipFormatterGenerator = (serie: any[], unitMeasure: string) => {
   let serielength = serie.length;
   if (!serielength) return null;
   let startime = dayjs(serie[0].time);
@@ -60,6 +61,8 @@ export const tooltipFormatterGenerator = (serie: any[]) => {
           .concat(v.seriesName)
           .concat(": ")
           .concat(v.data[dname])
+          .concat(' ')
+          .concat(unitMeasure)
       }
     }
     return labeltxt;
@@ -79,7 +82,7 @@ const fillTemperatureColorEnd = '#FFFFFF00';
 export const TemperatureDefaultChartSettings = {
   title: { text: 'Temperatures', textStyle: { color: titleColor } },
   tooltip: { trigger: 'axis', formatter: null },
-  grid: { right: '5%', left: '15%' },
+  // grid: { right: '5%', left: '15%' },
   xAxis: {
     type: 'time',
     // maxInterval: 3600 * 1000 * 24,
@@ -95,56 +98,59 @@ export const TemperatureDefaultChartSettings = {
   },
   yAxis: {
     type: 'value',
-    axisLabel: { formatter: '{value} °C', color: axisLabelColor },
+    name: UnitsMeasure['temperature'],
+    nameTextStyle: { color: axisLabelColor, align: 'center' },
+    axisLabel: { color: axisLabelColor },
     splitLine: { lineStyle: { color: axisLineColor }, interval: 0 },
-    axisLine: { lineStyle: { color: splitLineColor } },
+    axisLine: { lineStyle: { color: splitLineColor }, symbol: ['none', 'arrow'], symbolOffset: [0, 15] },
   },
   dataset: {
     source: [],
     dimensions: ['time', 'avg', 'min', 'max'],
   },
-  series: [{
-    name: 'average',
-    type: 'line',
-    smooth: true,
-    dimensions: ['time', 'avg'],
-    lineStyle: { color: avgTemperatureColor, type: 'solid' },
-    itemStyle: { color: avgTemperatureColor },
-    tooltip: { position: 'inside' },
-    areaStyle: {
-      color: {
-        type: 'linear',
-        x: 0,
-        y: 0,
-        x2: 0,
-        y2: 1,
-        colorStops: [{
-          offset: 0, color: fillTemperatureColorStart // color at 0% position
-        }, {
-          offset: 1, color: fillTemperatureColorEnd // color at 100% position
-        }],
-        global: false // false by default
+  series: [
+    {
+      name: 'maximum',
+      type: 'line',
+      smooth: true,
+      dimensions: ['time', 'max'],
+      lineStyle: { color: maxTemperatureColor, type: 'dashed' },
+      itemStyle: { color: maxTemperatureColor },
+      tooltip: { position: 'top' }
+    }, {
+      name: 'average',
+      type: 'line',
+      smooth: true,
+      dimensions: ['time', 'avg'],
+      lineStyle: { color: avgTemperatureColor, type: 'solid' },
+      itemStyle: { color: avgTemperatureColor },
+      tooltip: { position: 'inside' },
+      areaStyle: {
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [{
+            offset: 0, color: fillTemperatureColorStart // color at 0% position
+          }, {
+            offset: 1, color: fillTemperatureColorEnd // color at 100% position
+          }],
+          global: false // false by default
+        }
       }
+    },
+    {
+      name: 'minimum',
+      type: 'line',
+      smooth: true,
+      dimensions: ['time', 'min'],
+      lineStyle: { color: minTemperatureColor, type: 'dashed' },
+      itemStyle: { color: minTemperatureColor },
+      tooltip: { position: 'bottom' }
     }
-  },
-  {
-    name: 'minimum',
-    type: 'line',
-    smooth: true,
-    dimensions: ['time', 'min'],
-    lineStyle: { color: minTemperatureColor, type: 'dashed' },
-    itemStyle: { color: minTemperatureColor },
-    tooltip: { position: 'bottom' }
-  },
-  {
-    name: 'maximum',
-    type: 'line',
-    smooth: true,
-    dimensions: ['time', 'max'],
-    lineStyle: { color: maxTemperatureColor, type: 'dashed' },
-    itemStyle: { color: maxTemperatureColor },
-    tooltip: { position: 'top' }
-  }]
+  ]
 };
 ////#endregion TEMPERATURE CONFIGS
 
@@ -159,7 +165,7 @@ const fillHumidityColorEnd = '#5FE3A11C';
 export const HumidityDefaultChartSettings = {
   title: { text: 'Humidity', textStyle: { color: titleColor } },
   tooltip: { trigger: 'axis', formatter: null },
-  grid: { right: '5%', left: '15%' },
+  // grid: { right: '5%', left: '15%' },
   xAxis: {
     type: 'time',
     // maxInterval: 3600 * 1000 * 24,
@@ -175,56 +181,60 @@ export const HumidityDefaultChartSettings = {
   },
   yAxis: {
     type: 'value',
-    axisLabel: { formatter: '{value} %', color: axisLabelColor },
+    name: UnitsMeasure['relativeHumidity'],
+    nameTextStyle: { color: axisLabelColor, align: 'center' },
+    axisLabel: { color: axisLabelColor },
     splitLine: { lineStyle: { color: axisLineColor }, interval: 0 },
-    axisLine: { lineStyle: { color: splitLineColor } },
+    axisLine: { lineStyle: { color: splitLineColor }, symbol: ['none', 'arrow'], symbolOffset: [0, 15] },
   },
   dataset: {
     source: [],
     dimensions: ['time', 'avg', 'min', 'max'],
   },
-  series: [{
-    name: 'average',
-    type: 'line',
-    smooth: true,
-    dimensions: ['time', 'avg'],
-    lineStyle: { color: avgHumidityColor, type: 'solid' },
-    itemStyle: { color: avgHumidityColor },
-    tooltip: { position: 'inside' },
-    areaStyle: {
-      color: {
-        type: 'linear',
-        x: 0,
-        y: 0,
-        x2: 0,
-        y2: 1,
-        colorStops: [{
-          offset: 0, color: fillHumidityColorStart // color at 0% position
-        }, {
-          offset: 1, color: fillHumidityColorEnd // color at 100% position
-        }],
-        global: false // false by default
+  series: [
+    {
+      name: 'maximum',
+      type: 'line',
+      smooth: true,
+      dimensions: ['time', 'max'],
+      lineStyle: { color: maxHumidityColor, type: 'dashed' },
+      itemStyle: { color: maxHumidityColor },
+      tooltip: { position: 'top' }
+    },
+    {
+      name: 'average',
+      type: 'line',
+      smooth: true,
+      dimensions: ['time', 'avg'],
+      lineStyle: { color: avgHumidityColor, type: 'solid' },
+      itemStyle: { color: avgHumidityColor },
+      tooltip: { position: 'inside' },
+      areaStyle: {
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [{
+            offset: 0, color: fillHumidityColorStart // color at 0% position
+          }, {
+            offset: 1, color: fillHumidityColorEnd // color at 100% position
+          }],
+          global: false // false by default
+        }
       }
+    },
+    {
+      name: 'minimum',
+      type: 'line',
+      smooth: true,
+      dimensions: ['time', 'min'],
+      lineStyle: { color: minHumidityColor, type: 'dashed' },
+      itemStyle: { color: minHumidityColor },
+      tooltip: { position: 'bottom' }
     }
-  },
-  {
-    name: 'minimum',
-    type: 'line',
-    smooth: true,
-    dimensions: ['time', 'min'],
-    lineStyle: { color: minHumidityColor, type: 'dashed' },
-    itemStyle: { color: minHumidityColor },
-    tooltip: { position: 'bottom' }
-  },
-  {
-    name: 'maximum',
-    type: 'line',
-    smooth: true,
-    dimensions: ['time', 'max'],
-    lineStyle: { color: maxHumidityColor, type: 'dashed' },
-    itemStyle: { color: maxHumidityColor },
-    tooltip: { position: 'top' }
-  }]
+  ]
 };
 ////#endregion HUMIDITY CONFIGS
 
@@ -239,7 +249,7 @@ const fillPressureColorEnd = '#5FE3A11C';
 export const PressureDefaultChartSettings = {
   title: { text: 'Atmospheric Pressure', textStyle: { color: titleColor } },
   tooltip: { trigger: 'axis', formatter: null },
-  grid: { right: '5%' },
+  // grid: { right: '5%' },
   xAxis: {
     type: 'time',
     // maxInterval: 3600 * 1000 * 24,
@@ -255,56 +265,60 @@ export const PressureDefaultChartSettings = {
   },
   yAxis: {
     type: 'value',
-    axisLabel: { formatter: '{value} %', color: axisLabelColor },
+    name: UnitsMeasure['atmosphericPressure'],
+    nameTextStyle: { color: axisLabelColor, align: 'center' },
+    axisLabel: { color: axisLabelColor },
     splitLine: { lineStyle: { color: axisLineColor }, interval: 0 },
-    axisLine: { lineStyle: { color: splitLineColor } },
+    axisLine: { lineStyle: { color: splitLineColor }, symbol: ['none', 'arrow'], symbolOffset: [0, 15] },
   },
   dataset: {
     source: [],
     dimensions: ['time', 'avg', 'min', 'max'],
   },
-  series: [{
-    name: 'average',
-    type: 'line',
-    smooth: true,
-    dimensions: ['time', 'avg'],
-    lineStyle: { color: avgPressureColor, type: 'solid' },
-    itemStyle: { color: avgPressureColor },
-    tooltip: { position: 'inside' },
-    // areaStyle: {
-    //   color: {
-    //     type: 'linear',
-    //     x: 0,
-    //     y: 0,
-    //     x2: 0,
-    //     y2: 1,
-    //     colorStops: [{
-    //       offset: 0, color: fillPressureColorStart // color at 0% position
-    //     }, {
-    //       offset: 1, color: fillPressureColorEnd // color at 100% position
-    //     }],
-    //     global: false // false by default
-    //   }
-    // }
-  },
-  {
-    name: 'minimum',
-    type: 'line',
-    smooth: true,
-    dimensions: ['time', 'min'],
-    lineStyle: { color: minPressureColor, type: 'dashed' },
-    itemStyle: { color: minPressureColor },
-    tooltip: { position: 'bottom' }
-  },
-  {
-    name: 'maximum',
-    type: 'line',
-    smooth: true,
-    dimensions: ['time', 'max'],
-    lineStyle: { color: maxPressureColor, type: 'dashed' },
-    itemStyle: { color: maxPressureColor },
-    tooltip: { position: 'top' }
-  }]
+  series: [
+    {
+      name: 'maximum',
+      type: 'line',
+      smooth: true,
+      dimensions: ['time', 'max'],
+      lineStyle: { color: maxPressureColor, type: 'dashed' },
+      itemStyle: { color: maxPressureColor },
+      tooltip: { position: 'top' }
+    },
+    {
+      name: 'average',
+      type: 'line',
+      smooth: true,
+      dimensions: ['time', 'avg'],
+      lineStyle: { color: avgPressureColor, type: 'solid' },
+      itemStyle: { color: avgPressureColor },
+      tooltip: { position: 'inside' },
+      // areaStyle: {
+      //   color: {
+      //     type: 'linear',
+      //     x: 0,
+      //     y: 0,
+      //     x2: 0,
+      //     y2: 1,
+      //     colorStops: [{
+      //       offset: 0, color: fillPressureColorStart // color at 0% position
+      //     }, {
+      //       offset: 1, color: fillPressureColorEnd // color at 100% position
+      //     }],
+      //     global: false // false by default
+      //   }
+      // }
+    },
+    {
+      name: 'minimum',
+      type: 'line',
+      smooth: true,
+      dimensions: ['time', 'min'],
+      lineStyle: { color: minPressureColor, type: 'dashed' },
+      itemStyle: { color: minPressureColor },
+      tooltip: { position: 'bottom' }
+    }
+  ]
 };
 ////#endregion
 
@@ -334,9 +348,11 @@ export const PrecipitationsDefaultChartSettings = {
   },
   yAxis: {
     type: 'value',
+    name: UnitsMeasure['precipitation'],
+    nameTextStyle: { color: axisLabelColor, align: 'center' },
     axisLabel: { color: axisLabelColor },
     splitLine: { lineStyle: { color: splitLineColor }, interval: 0 },
-    axisLine: { lineStyle: { color: axisLineColor } },
+    axisLine: { lineStyle: { color: axisLineColor }, symbol: ['none', 'arrow'], symbolOffset: [0, 15] },
   },
   dataset: {
     source: [],

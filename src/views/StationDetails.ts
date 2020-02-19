@@ -11,6 +11,7 @@ import PressuresChart from "./charts/pressures.vue";
 import HumidityChart from "./charts/humidity.vue";
 import { CSVHelper } from '@/helpers/CSVHelper';
 import { defaultMapSettings, MapSettings, stationIcon, stationHighlightIcon } from '@/components/moduleMap';
+import { UnitsMeasure } from '@/@types/dto/fiware/unitMeasures';
 
 @Component({
   name: "stationDetails",
@@ -177,6 +178,9 @@ export default class StationDetails extends Vue {
     return this.lastMeasure ? this.lastMeasure.atmosphericPressure : null;
   }
 
+  get unitsMeasure() {
+    return UnitsMeasure;
+  }
 
 
 

@@ -596,11 +596,8 @@ html {
   color: #4d4f5c;
   text-align: center;
 }
-.card .body .main-info.weather i {
-  font-size: 2.5rem;
-}
 .card .body .main-info i {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
 }
 .card .body .main-info label {
   font-size: 2rem;
