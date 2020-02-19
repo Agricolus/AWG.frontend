@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
-import { TemperatureDefaultChartSettings } from "./chartSettings";
+import { TemperatureDefaultChartSettings, xAxisDateFormatterGenerator } from "./chartSettings";
 import ECharts from 'vue-echarts';
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
@@ -21,7 +21,7 @@ export default class TemperaturesChart extends Vue {
     if (!this.temperatures) return null;
     let co = Object.assign({}, TemperatureDefaultChartSettings);
     co.dataset.source = this.temperatures;
-    console.debug("temperatures chart options", co)
+    co.xAxis.axisLabel.formatter = xAxisDateFormatterGenerator(this.temperatures);
     return co;
   }
 }

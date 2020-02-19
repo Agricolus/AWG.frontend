@@ -31,25 +31,37 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>Name</th>
 						<th>Status</th>
-						<th>Location</th>
-						<th>id</th>
-						<th>Data Created</th>
-						<th>Type</th>
+						<th>Name</th>
+						<th>Last Value Date</th>
+						<th>Installation Date</th>
+						<th>Serial Number</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr v-for="station in stations" :key="station.id" @mouseover="highlightStationIcon(station)">
-						<td>{{ station.name }}</td>
 						<td>
 							{{ station.deviceState }}
 							<i class="wi wi-na fa-2x" v-if="!station.deviceState"></i>
 						</td>
-						<td>{{ station.location }}</td>
-						<td>{{ station.id }}</td>
-						<td>{{ station.dateCreated | dateformat }}</td>
-						<td>{{ station.type }}</td>
+						<td>{{ station.name }}</td>
+
+						<td
+							v-if="station.dateLastValueReported"
+						>{{ station.dateLastValueReported | dateformat('DD MMM YYYY, hh:mm') }}</td>
+						<td v-else>
+							<i class="wi wi-na fa-2x"></i>
+						</td>
+						<td
+							v-if="station.dateInstalled"
+						>{{ station.dateInstalled | dateformat('DD MMM YYYY, hh:mm') }}</td>
+						<td v-else>
+							<i class="wi wi-na fa-2x"></i>
+						</td>
+						<td>
+							{{ station.serialNumber }}
+							<i class="wi wi-na fa-2x" v-if="!station.serialNumber"></i>
+						</td>
 					</tr>
 				</tbody>
 			</table>

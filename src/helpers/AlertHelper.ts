@@ -26,9 +26,7 @@ export class AlertHelper {
         buttons: buttons,
         onClosed: onClosed,
       } as any);
-    } catch (err) {
-      console.debug("show info error: ", err);
-    }
+    } catch (err) { }
   }
 
   private static operation: number = 0;
@@ -88,9 +86,7 @@ export class AlertHelper {
         close: close,
         drag: false,
       } as any);
-    } catch (err) {
-      console.debug("show error", err);
-    }
+    } catch (err) { }
   }
 
   public static hideInfo(id: string) {

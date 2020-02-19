@@ -1,11 +1,11 @@
-import Vue from 'vue';
-import { Component, Prop } from 'vue-property-decorator';
-import { HumidityDefaultChartSettings } from "./chartSettings";
-import ECharts from 'vue-echarts';
-import 'echarts/lib/component/tooltip';
-import 'echarts/lib/component/title';
-import 'echarts/lib/component/axis';
 import 'echarts/lib/chart/line';
+import 'echarts/lib/component/axis';
+import 'echarts/lib/component/title';
+import 'echarts/lib/component/tooltip';
+import Vue from 'vue';
+import ECharts from 'vue-echarts';
+import { Component, Prop } from 'vue-property-decorator';
+import { HumidityDefaultChartSettings, xAxisDateFormatterGenerator } from "./chartSettings";
 
 @Component({
   components: {
@@ -21,7 +21,7 @@ export default class HumidityChart extends Vue {
     if (!this.humidity) return null;
     let co = Object.assign({}, HumidityDefaultChartSettings);
     co.dataset.source = this.humidity;
-    console.debug("humidity chart options", co)
+    co.xAxis.axisLabel.formatter = xAxisDateFormatterGenerator(this.humidity);
     return co;
   }
 }
