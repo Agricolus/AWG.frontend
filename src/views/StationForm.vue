@@ -7,17 +7,6 @@
 			</header>
 			<hr />
 			<div class="form-control">
-				<label>Installation date</label>
-				<datepicker
-					:v-model="stationForm.dateInstalled"
-					calendar-button
-					calendar-button-icon="fas fa-calendar"
-					v-model="stationForm.dateInstalled"
-					v-validate.immediate="'required'"
-				></datepicker>
-			</div>
-
-			<div class="form-control">
 				<label>Name</label>
 				<input
 					name="name"
@@ -108,6 +97,15 @@
 			</div>
 			<hr />
 			<div v-if="showOptionData">
+				<div class="form-control">
+					<label>Installation date</label>
+					<datepicker
+						:v-model="stationForm.dateInstalled"
+						calendar-button
+						calendar-button-icon="fas fa-calendar"
+						v-model="stationForm.dateInstalled"
+					></datepicker>
+				</div>
 				<div class="form-control">
 					<label>Source</label>
 					<input type="text" placeholder="Insert source" v-model="stationForm.source" />

@@ -149,7 +149,7 @@ html {
   flex-flow: column;
   box-shadow: -2px 2px 3px 1px rgba(60, 60, 60, 0.4) inset;
   scrollbar-width: thin;
-  background: #43425d 0% 0% no-repeat padding-box;
+  background: #43425d 0% 0%;
   color: #ffffff;
 }
 .sidebar header {
@@ -159,7 +159,7 @@ html {
   width: 260px;
   height: 70px;
   /* UI Properties */
-  background: rgba(0, 0, 0, 0.1) 0% 0% no-repeat padding-box;
+  background: rgba(0, 0, 0, 0.1) 0% 0%;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.05);
   opacity: 1;
 }
@@ -214,7 +214,7 @@ html {
   font-size: 1.2rem;
 }
 .sidebar section .nav .nav-item .nav-link.router-link-active {
-  background: rgba(0, 0, 0, 0.1) 0% 0% no-repeat padding-box;
+  background: rgba(0, 0, 0, 0.1) 0% 0%;
   border-left: 3px solid #a3a0fb;
   color: #a3a0fb;
 }
@@ -240,16 +240,15 @@ html {
   cursor: pointer;
 }
 .table thead {
-  background: #f5f6fa 0% 0% no-repeat padding-box;
+  background: #f5f6fa 0% 0%;
 }
 .table thead th {
-  vertical-align: bottom;
   color: #a3a6b4;
   text-transform: uppercase;
   font-size: 1rem;
   font-weight: bold;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 1rem;
+  letter-spacing: 1px;
 }
 .table thead .btn-colum {
   background: #ffffff !important;
@@ -258,10 +257,10 @@ html {
   height: 48px;
 }
 .table tbody tr:hover {
-  background: rgba(0, 74, 225, 0.16) 0% 0% no-repeat padding-box;
+  background: rgba(0, 74, 225, 0.16) 0% 0%;
 }
 .table tbody tr:hover .btn-colum {
-  background: #ffffff 0% 0% no-repeat padding-box;
+  background: #ffffff;
 }
 .table tbody tr:hover .btn-colum button {
   display: block;
@@ -278,6 +277,7 @@ html {
   min-width: 50px;
 }
 .table tbody .btn-colum button {
+  margin: 0 auto;
   display: none;
 }
 .table-hover .table-active:hover > td,
@@ -361,7 +361,7 @@ html {
   position: relative;
   border-radius: 5px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
-  background: #ffffff 0% 0% no-repeat padding-box;
+  background: #ffffff 0% 0%;
   font-size: 1.3rem;
   padding: 5px 10px 5px 20px;
 }
@@ -537,9 +537,12 @@ html {
   display: flex;
 }
 .home section.map-section {
-  padding-top: 30px;
-  padding-bottom: 15px;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 15px;
   min-height: 55vh;
+  background: #ffffff;
+  border-radius: 5px;
 }
 .home section.table-section {
   background: #ffffff;
@@ -581,7 +584,7 @@ html {
   height: 0;
 }
 .card {
-  background: #ffffff 0% 0% no-repeat padding-box;
+  background: #ffffff 0% 0%;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   opacity: 1;
   display: flex;
@@ -640,7 +643,7 @@ html {
 }
 .form {
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
-  background: #ffffff 0% 0% no-repeat padding-box;
+  background: #ffffff 0% 0%;
   border-radius: 5px;
   max-width: 800px;
   padding: 15px;
@@ -922,7 +925,7 @@ select:focus {
 }
 .paginator .per-page-selector select {
   min-height: 26px;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
+  background: #FFFFFF 0% 0%;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   opacity: 1;
   border: none;
@@ -930,10 +933,11 @@ select:focus {
   font-family: inherit;
   font-size: 1rem;
   padding: 2px 5px;
-  border-radius: 2px;
+  border-radius: 5px;
 }
 .paginator .pages {
   margin: 0 auto;
+  margin-top: 5px;
 }
 .paginator .pages .page {
   display: inline-block;
@@ -941,8 +945,8 @@ select:focus {
   cursor: pointer;
   border: 1px solid #b1abab;
   border-radius: 2px;
-  padding: 0 4px;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
+  padding: 5px 10px;
+  background: #FFFFFF 0% 0%;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 .paginator .pages .page.current-page {
@@ -989,4 +993,9 @@ hr {
 }
 .iziToast-wrapper-topRight {
   right: 10px;
+}
+.myDivIcon {
+  font-size: 52px;
+  color: yellow;
+  text-align: center;
 }
