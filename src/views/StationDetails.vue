@@ -34,7 +34,7 @@
 			<card
 				v-if="checkProperty('weatherType')"
 				title="Weather Condition"
-				main-information=" "
+				:main-information="false"
 				:weatherIcon="lastMeasure.weatherType | weatherConditionIcon"
 			></card>
 			<card
@@ -122,7 +122,7 @@
 						:weatherIcon="measure.condition | weatherConditionIcon"
 						:key="measure.id"
 						:title="measure.date | dateformat(measure.dateformat)"
-						:main-information="measure.avgTemperature"
+						:main-information="false"
 						:min="measure.minTemperature"
 						:max="measure.maxTemperature"
 						unit="°C"
