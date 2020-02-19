@@ -8,8 +8,4 @@ export default class App extends Vue {
   get appconfig(): IConfiguration {
     return CONFIGURATION;
   }
-  created(): void {
-    if (CONFIGURATION.env == 'development')
-      console.debug("global configuration:", CONFIGURATION);
-  }
 }

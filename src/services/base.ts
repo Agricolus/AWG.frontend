@@ -10,15 +10,10 @@ export default class BaseRestService {
   constructor() {
     //check authentication setting
     if (CONFIGURATION.auth?.isAuthenticationNeeded) {
-      console.debug("application need authentication");
 
       if (!BaseRestService.accessToken) {
-        //no authentication token, redirect to login
-        console.debug("no token provided... redirecting user to login");
-      }
-      else {
+      } else {
         //token ok
-        console.debug("token available: ", BaseRestService.accessToken);
         //register a transformer for the authentication header
         this.restClient.defaults.transformRequest = (data, headers) => {
           headers['Authorization'] = `Basic ${BaseRestService.accessToken}`;
@@ -37,7 +32,6 @@ export default class BaseRestService {
         //   //redirect to auth service
         // }
         //other server error response
-        console.error("REST CALL ERROR CODE: %O\nREST CALL ERROR MESSAGE: %O", error.response.status, error.response.data);
         throw "api_error";
       });
     //custom deserialization

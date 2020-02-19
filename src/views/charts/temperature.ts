@@ -21,7 +21,6 @@ export default class TemperaturesChart extends Vue {
     if (!this.temperatures) return null;
     let co = Object.assign({}, TemperatureDefaultChartSettings);
     co.dataset.source = this.temperatures;
-    console.debug("temperatures chart options", co)
     return co;
   }
 }

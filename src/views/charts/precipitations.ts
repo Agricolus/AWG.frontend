@@ -21,7 +21,6 @@ export default class PrecipitationsChart extends Vue {
     if (!this.precipitations) return null;
     let co = Object.assign({}, PrecipitationsDefaultChartSettings);
     co.dataset.source = this.precipitations;
-    console.debug("precipitations chart options", co)
     return co;
   }
 }
