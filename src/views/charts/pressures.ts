@@ -6,6 +6,7 @@ import Vue from 'vue';
 import ECharts from 'vue-echarts';
 import { Component, Prop } from 'vue-property-decorator';
 import { PressureDefaultChartSettings, xAxisDateFormatterGenerator, tooltipFormatterGenerator } from "./chartSettings";
+import { UnitsMeasure } from '@/@types/dto/fiware/unitMeasures';
 
 
 @Component({ components: { chart: ECharts } })
@@ -19,7 +20,7 @@ export default class PressureChart extends Vue {
     let co = Object.assign({}, PressureDefaultChartSettings);
     co.dataset.source = this.pressures;
     co.xAxis.axisLabel.formatter = xAxisDateFormatterGenerator(this.pressures);
-    co.tooltip.formatter = tooltipFormatterGenerator(this.pressures);
+    co.tooltip.formatter = tooltipFormatterGenerator(this.pressures, UnitsMeasure['atmosphericPressure']);
     return co;
   }
 }

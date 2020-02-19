@@ -6,6 +6,7 @@ import Vue from 'vue';
 import ECharts from 'vue-echarts';
 import { Component, Prop } from 'vue-property-decorator';
 import { HumidityDefaultChartSettings, xAxisDateFormatterGenerator, tooltipFormatterGenerator } from "./chartSettings";
+import { UnitsMeasure } from '@/@types/dto/fiware/unitMeasures';
 
 @Component({ components: { chart: ECharts } })
 export default class HumidityChart extends Vue {
@@ -18,7 +19,7 @@ export default class HumidityChart extends Vue {
     let co = Object.assign({}, HumidityDefaultChartSettings);
     co.dataset.source = this.humidity;
     co.xAxis.axisLabel.formatter = xAxisDateFormatterGenerator(this.humidity);
-    co.tooltip.formatter = tooltipFormatterGenerator(this.humidity);
+    co.tooltip.formatter = tooltipFormatterGenerator(this.humidity, UnitsMeasure['relativeHumidity']);
     return co;
   }
 }
