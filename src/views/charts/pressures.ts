@@ -22,7 +22,6 @@ export default class PressureChart extends Vue {
     if (!this.pressures) return null;
     let co = Object.assign({}, PressureDefaultChartSettings);
     co.dataset.source = this.pressures;
-    console.debug("pressures chart options", co)
     return co;
   }
 }

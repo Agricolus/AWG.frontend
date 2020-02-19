@@ -21,7 +21,6 @@ export default class HumidityChart extends Vue {
     if (!this.humidity) return null;
     let co = Object.assign({}, HumidityDefaultChartSettings);
     co.dataset.source = this.humidity;
-    console.debug("humidity chart options", co)
     return co;
   }
 }

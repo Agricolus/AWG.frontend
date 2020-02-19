@@ -2,15 +2,6 @@
 	<div class="stationDetails">
 		<header>
 			<div class="station-select">
-				<!-- <div>
-					<select>
-						<option value="Italy" selected>Select country</option>
-					</select>
-					<select>
-						<option value="Umbria">Select region</option>
-					</select>
-				</div>-->
-
 				<select @change="changeStation">
 					<option disabled>Select station</option>
 					<option
@@ -21,7 +12,11 @@
 					>{{ s.name }}</option>
 				</select>
 			</div>
-			<div>
+			<div class="header-buttons">
+				<button class="btn btn-primary" @click="downloadCSV()">
+					<i class="fas fa-download left-icon"></i>
+					Download CSV
+				</button>
 				<button class="btn btn-primary" @click="goToEdit()">
 					<i class="fas fa-pencil-alt left-icon"></i>
 					Edit station
@@ -29,7 +24,7 @@
 			</div>
 		</header>
 		<section v-if="station" class="daily-measure-section">
-			<card v-if="stationId" title="ID" :main-information="station.name"></card>
+			<card v-if="stationId" title="Name" :main-information="station.name"></card>
 			<card
 				v-if="lastMeasure.dateCreated"
 				title="Last Update"
@@ -134,7 +129,7 @@
 					></card>
 				</template>
 			</div>
-			<select v-model="timeSelectedIntedval" class="station-select">
+			<select v-model="timeSelectedInterval" class="station-select">
 				<option v-for="(v, k) in timeIntervals" :key="k" :value="v">{{ v }}</option>
 			</select>
 		</section>
@@ -151,7 +146,6 @@
 			<div class="card humidity" v-if="checkProperty('relativeHumidity')">
 				<humidity-chart :humidity="humidity"></humidity-chart>
 			</div>
-			<!-- <div class="card windspeed"></div> -->
 		</section>
 	</div>
 </template>
