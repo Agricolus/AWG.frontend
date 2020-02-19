@@ -35,6 +35,38 @@ export const xAxisDateFormatterGenerator = (serie: any[]) => {
   }
 }
 
+export const tooltipFormatterGenerator = (serie: any[]) => {
+  let serielength = serie.length;
+  if (!serielength) return null;
+  let startime = dayjs(serie[0].time);
+  let endtime = dayjs(serie[serielength - 1].time);
+  let hourly = (endtime.endOf('hour').diff(startime.startOf('hour'), 'hour') / serielength) <= 1;
+  return (tooltipobjs) => {
+    let value = tooltipobjs[0];
+    let labeltxt = "";
+    if (hourly) {
+      labeltxt = dayjs(value.data.time).format('HH:MM DD MMM');
+    }
+    else {
+      labeltxt = dayjs(value.data.time).format('DD MMM YYYY');
+    }
+    for (let v of tooltipobjs) {
+      let dname = v.dimensionNames[1];
+      if (v.data[dname] !== undefined && v.data[dname] !== null) {
+        let color = v.color.colorStops ? v.color.colorStops[0].color : v.color;
+        let marker = `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:${color};"></span>`;
+        labeltxt = labeltxt.concat("<br/>")
+          .concat(marker)
+          .concat(v.seriesName)
+          .concat(": ")
+          .concat(v.data[dname])
+      }
+    }
+    return labeltxt;
+  }
+}
+
+
 ////#endregion
 
 //#region TEMPERATURE CONFIGS
@@ -46,7 +78,7 @@ const fillTemperatureColorEnd = '#FFFFFF00';
 
 export const TemperatureDefaultChartSettings = {
   title: { text: 'Temperatures', textStyle: { color: titleColor } },
-  tooltip: { trigger: 'axis' },
+  tooltip: { trigger: 'axis', formatter: null },
   grid: { right: '5%', left: '15%' },
   xAxis: {
     type: 'time',
@@ -126,7 +158,7 @@ const fillHumidityColorEnd = '#5FE3A11C';
 
 export const HumidityDefaultChartSettings = {
   title: { text: 'Humidity', textStyle: { color: titleColor } },
-  tooltip: { trigger: 'axis' },
+  tooltip: { trigger: 'axis', formatter: null },
   grid: { right: '5%', left: '15%' },
   xAxis: {
     type: 'time',
@@ -206,7 +238,7 @@ const fillPressureColorEnd = '#5FE3A11C';
 
 export const PressureDefaultChartSettings = {
   title: { text: 'Atmospheric Pressure', textStyle: { color: titleColor } },
-  tooltip: { trigger: 'axis' },
+  tooltip: { trigger: 'axis', formatter: null },
   grid: { right: '5%' },
   xAxis: {
     type: 'time',
@@ -281,15 +313,19 @@ const fillPrecipitationColorStart = '#4C7CDE';
 const fillPrecipitationColorEnd = '#263E6F';
 export const PrecipitationsDefaultChartSettings = {
   title: { text: 'Precipitations', textStyle: { color: titleColor } },
-  tooltip: { trigger: 'axis' },
+  tooltip: {
+    trigger: 'axis',
+    position: 'inside',
+    formatter: null
+  },
   grid: { show: true, borderColor: gridBorderColor },
   xAxis: {
-    type: 'time',
+    type: 'category',
     // maxInterval: 3600 * 1000 * 24,
     axisLabel: {
       formatter: null,
       color: axisLabelColor,
-      interval: 0,
+      // interval: 0,
       showMinLabel: true,
       showMaxLabel: true
     },
@@ -310,20 +346,21 @@ export const PrecipitationsDefaultChartSettings = {
     name: 'precipitations',
     type: 'bar',
     dimensions: ['time', 'precipitation'],
-    tooltip: { position: 'inside' },
-    color: {
-      type: 'linear',
-      x: 0,
-      y: 0,
-      x2: 0,
-      y2: 1,
-      colorStops: [{
-        offset: 0, color: fillPrecipitationColorStart
-      }, {
-        offset: 1, color: fillPrecipitationColorEnd
-      }],
-      global: false // false by default
-    }
+    itemStyle: {
+      color: {
+        type: 'linear',
+        x: 0,
+        y: 0,
+        x2: 0,
+        y2: 1,
+        colorStops: [{
+          offset: 0, color: fillPrecipitationColorStart
+        }, {
+          offset: 1, color: fillPrecipitationColorEnd
+        }],
+        global: false // false by default
+      }
+    },
   }]
 };
 ////#endregion PRECIPITATION CONFIGS

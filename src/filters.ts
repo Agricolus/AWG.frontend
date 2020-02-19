@@ -2,7 +2,8 @@
 import dayjs from "dayjs";
 
 function dateformat(value: Date, format: string = "DD MMMM YYYY"): string {
-  return dayjs(value).format(format);
+  let valuedayjs = dayjs(value);
+  return valuedayjs.isValid() ? valuedayjs.format(format) : null;
 }
 
 function weatherConditionIcon(value: string): string {
