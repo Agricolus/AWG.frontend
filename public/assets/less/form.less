@@ -1,7 +1,7 @@
 // out:false, main: ../site.less
 .form {
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
-  background: @white-1 0% 0% no-repeat padding-box;
+  background: @white-1 0% 0% ;
   border-radius: @radius;
   max-width: 800px;
   padding: 15px;
@@ -33,7 +33,7 @@
       font-family: source-sans-pro;
       background-color: @white-3;
       color: @blu-gray-1;
-      border-radius: 5px;
+      border-radius: @radius;
       font-size: 1.1rem;
       padding: 5px 10px;
       border: 1px solid @light-gray;
@@ -63,7 +63,7 @@
       font-family: source-sans-pro;
       background-color: @white-3;
       color: @purple-2;
-      border-radius: 5px;
+      border-radius: @radius;
       font-size: 1.1rem;
       padding: 5px 10px;
       border: 1px solid @light-gray;
@@ -90,13 +90,13 @@
         display: flex;
         flex-flow: row-reverse;
         border: 1px solid @light-gray;
-        border-radius: 5px;
+        border-radius: @radius;
       }
 
       .vdp-datepicker__calendar-button {
         background-color: @white-3;
         color: @blu-gray-1;
-        border-radius: 5px;
+        border-radius: @radius;
         font-size: 1.1rem;
         padding: 5px 10px;
         margin-left: -2px;
@@ -107,7 +107,7 @@
         font-family: source-sans-pro;
         background-color: @white-3;
         color: @blu-gray-1;
-        border-radius: 5px;
+        border-radius: @radius;
         font-size: 1.1rem;
         padding: 5px 10px;
         width: 100%;
@@ -135,7 +135,7 @@
     height: 40vh;
 
     .map {
-      border-radius: 5px;
+      border-radius: @radius;
     }
   }
 
@@ -185,7 +185,7 @@ select {
   font-family: inherit;
   font-size: 1.3rem;
   padding: 5px 10px;
-  border-radius: 5px;
+  border-radius: @radius;
 
   &:focus {
     outline: none !important;
@@ -198,7 +198,7 @@ select {
   background-color: rgba(255, 255, 255, 0.9);
   border: 2px solid rgba(139, 139, 139, 0.3);
   color: @blu-gray-1;
-  border-radius: 5px;
+  border-radius: @radius;
   white-space: nowrap;
   margin: 3px 0px;
   transition: all 0.2s;

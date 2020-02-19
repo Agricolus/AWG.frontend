@@ -10,6 +10,7 @@ import PrecipitationsChart from "./charts/precipitations.vue";
 import PressuresChart from "./charts/pressures.vue";
 import HumidityChart from "./charts/humidity.vue";
 import { CSVHelper } from '@/helpers/CSVHelper';
+import { defaultMapSettings, MapSettings, stationIcon, stationHighlightIcon } from '@/components/moduleMap';
 
 @Component({
   name: "stationDetails",
@@ -33,26 +34,13 @@ export default class StationDetails extends Vue {
 
   timeSelectedInterval: string = "Last week";
 
-  url: String = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-  zoom: number = 4;
-  maxZoom: number = 16;
-  minZoom: number = 2;
-
+  mapSettings: MapSettings = defaultMapSettings;
+  icon: L.Icon = stationIcon;
+  highlighticon: L.Icon = stationHighlightIcon;
   stations: dto.Device[] = null;
   station: dto.Device = null;
-  icon: L.Icon = L.icon({
-    iconUrl: '/assets/img/pin.png',
-    iconSize: [32, 37],
-    iconAnchor: [16, 37],
-    popupAnchor: [0, 75]
-  });
+  highlightMarker: Array<number> | null = null;
 
-  highlighticon: L.Icon = L.icon({
-    iconUrl: '/assets/img/pin.png',
-    iconSize: [32, 37],
-    iconAnchor: [16, 37],
-    popupAnchor: [0, 75]
-  });
 
   get center() {
     if (!this.station) return null;
@@ -190,12 +178,18 @@ export default class StationDetails extends Vue {
     }
   }
 
+  highlightStationIcon(station: dto.Device) {
+    this.highlightMarker = [station.location.coordinates[1], station.location.coordinates[0]];
+  }
+
   @Watch("stationId", { immediate: true })
   async stationIdWatcher(n, o) {
     if (!n || n == o) return;
     this.station = await stationsService.getStation(n);
     this.lastMeasure = await measuresService.getLastMeasure(n);
     this.timeSelectedIntervalWatcher(this.timeSelectedInterval, null);
+    this.highlightStationIcon(this.station);
+
   }
 
   async mounted() {
