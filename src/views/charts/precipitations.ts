@@ -5,7 +5,7 @@ import 'echarts/lib/component/tooltip';
 import Vue from 'vue';
 import ECharts from 'vue-echarts';
 import { Component, Prop } from 'vue-property-decorator';
-import { PrecipitationsDefaultChartSettings, xAxisDateFormatterGenerator } from "./chartSettings";
+import { PrecipitationsDefaultChartSettings, xAxisDateFormatterGenerator, tooltipFormatterGenerator } from "./chartSettings";
 
 @Component({
   components: {
@@ -22,6 +22,7 @@ export default class PrecipitationsChart extends Vue {
     let co = Object.assign({}, PrecipitationsDefaultChartSettings);
     co.dataset.source = this.precipitations;
     co.xAxis.axisLabel.formatter = xAxisDateFormatterGenerator(this.precipitations);
+    co.tooltip.formatter = tooltipFormatterGenerator(this.precipitations);
     return co;
   }
 }

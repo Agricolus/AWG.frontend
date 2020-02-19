@@ -5,7 +5,7 @@ import 'echarts/lib/component/tooltip';
 import Vue from 'vue';
 import ECharts from 'vue-echarts';
 import { Component, Prop } from 'vue-property-decorator';
-import { PressureDefaultChartSettings, xAxisDateFormatterGenerator } from "./chartSettings";
+import { PressureDefaultChartSettings, xAxisDateFormatterGenerator, tooltipFormatterGenerator } from "./chartSettings";
 
 
 @Component({
@@ -23,6 +23,7 @@ export default class PressureChart extends Vue {
     let co = Object.assign({}, PressureDefaultChartSettings);
     co.dataset.source = this.pressures;
     co.xAxis.axisLabel.formatter = xAxisDateFormatterGenerator(this.pressures);
+    co.tooltip.formatter = tooltipFormatterGenerator(this.pressures);
     return co;
   }
 }

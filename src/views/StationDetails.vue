@@ -24,60 +24,59 @@
 			</div>
 		</header>
 		<section v-if="station" class="daily-measure-section">
-			<card v-if="stationId" title="Name" :main-information="station.name"></card>
+			<card title="Name" :main-information="station.name"></card>
 			<card
-				v-if="lastMeasure.dateCreated"
 				title="Last Update"
-				:main-information="lastMeasure.dateCreated | dateformat('hh:mm')"
-				:below="lastMeasure.dateCreated | dateformat('DD MMM YYYY')"
+				:main-information="lastMeasureDateObserved | dateformat('hh:mm')"
+				:below="lastMeasureDateObserved | dateformat('DD MMM YYYY')"
 			></card>
 			<card
 				v-if="checkProperty('weatherType')"
 				title="Weather Condition"
 				:main-information="false"
-				:weatherIcon="lastMeasure.weatherType | weatherConditionIcon"
+				:weatherIcon="lastMeasureWeatherType | weatherConditionIcon"
 			></card>
 			<card
 				v-if="checkProperty('windDirection')"
 				title="Wind Direction"
-				:main-information="lastMeasure.windDirection"
+				:main-information="lastMeasureWindDirection"
 				icon="fab fa-telegram-plane"
 			></card>
 			<card
 				v-if="checkProperty('solarRadiation')"
 				title="Solar Radiation"
-				:main-information="lastMeasure.solarRadiation"
+				:main-information="lastMeasureSolarRadiation"
 				unit="w/m2"
 			></card>
 			<card
 				v-if="checkProperty('temperature')"
 				title="Temperature"
-				:main-information="lastMeasure.temperature"
+				:main-information="lastMeasureTemperature"
 				unit="°C"
 			></card>
 			<card
 				v-if="checkProperty('precipitation')"
 				title="Precipitation"
-				:main-information="lastMeasure.precipitation"
+				:main-information="lastMeasurePrecipitation"
 				unit="mm"
 			></card>
 			<card
 				v-if="checkProperty('relativeHumidity')"
 				title="Relaty Humidity"
-				:main-information="lastMeasure.relativeHumidity"
+				:main-information="lastMeasureRelativeHumidity"
 				unit="%"
 				minRelativeHumidity
 			></card>
 			<card
 				v-if="checkProperty('windSpeed')"
 				title="Wind Speed"
-				:main-information="lastMeasure.windSpeed"
+				:main-information="lastMeasureWindSpeed"
 				unit="km/h"
 			></card>
 			<card
 				v-if="checkProperty('atmosphericPressure')"
 				title="Atmoshperic Pressure"
-				:main-information="lastMeasure.atmosphericPressure"
+				:main-information="lastMeasureAtmosphericPressure"
 				unit="atm"
 			></card>
 		</section>
@@ -108,7 +107,7 @@
 		</section>
 
 		<hr />
-		<section class="daily-summary-section">
+		<section class="daily-summary-section" v-if="timeSelectedInterval == timeIntervals.daily">
 			<label>Weather Details</label>
 			<div class="daily-summary-cards">
 				<template v-for="measure in cardValues">
@@ -124,6 +123,8 @@
 					></card>
 				</template>
 			</div>
+		</section>
+		<section class="daily-summary-section">
 			<select v-model="timeSelectedInterval" class="station-select">
 				<option v-for="(v, k) in timeIntervals" :key="k" :value="v">{{ v }}</option>
 			</select>
