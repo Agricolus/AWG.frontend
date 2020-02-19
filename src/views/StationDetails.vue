@@ -25,8 +25,8 @@
 			<card title="Name" :main-information="station.name"></card>
 			<card
 				title="Last Update"
-				:main-information="lastMeasure.dateCreated | dateformat('HH:mm')"
-				:below="lastMeasure.dateCreated | dateformat('DD MMM YYYY')"
+				:main-information="lastMeasureDateObserved | dateformat('HH:mm')"
+				:below="lastMeasureDateObserved | dateformat('DD MMM YYYY')"
 			></card>
 			<card
 				v-if="checkProperty('weatherType')"
