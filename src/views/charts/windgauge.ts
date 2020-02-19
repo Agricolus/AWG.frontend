@@ -58,7 +58,7 @@ export default class WindgaugeChart extends Vue {
         }
       }]
     };
-    console.debug("windgauge chart options", co)
+
     return co;
   }
 }

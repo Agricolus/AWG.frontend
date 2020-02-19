@@ -102,10 +102,10 @@
   margin-top: 0.5rem;
 }
 .left-icon {
-  padding-right: 15px;
+  padding-right: 10px;
 }
 .right-icon {
-  padding-left: 15px;
+  padding-left: 10px;
 }
 body,
 html {
@@ -435,6 +435,12 @@ html {
   flex: 1;
   margin-right: 25px;
   margin-bottom: 25px;
+}
+.stationDetails header .header-buttons button {
+  margin-right: 10px;
+}
+.stationDetails header .header-buttons :last-child {
+  margin-right: 0px;
 }
 .stationDetails section.daily-measure-section {
   margin-right: -30px;

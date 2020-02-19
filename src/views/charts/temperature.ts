@@ -22,7 +22,6 @@ export default class TemperaturesChart extends Vue {
     let co = Object.assign({}, TemperatureDefaultChartSettings);
     co.dataset.source = this.temperatures;
     co.xAxis.axisLabel.formatter = xAxisDateFormatterGenerator(this.temperatures);
-    console.debug("temperatures chart options", co)
     return co;
   }
 }

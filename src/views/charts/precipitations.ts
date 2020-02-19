@@ -22,7 +22,6 @@ export default class PrecipitationsChart extends Vue {
     let co = Object.assign({}, PrecipitationsDefaultChartSettings);
     co.dataset.source = this.precipitations;
     co.xAxis.axisLabel.formatter = xAxisDateFormatterGenerator(this.precipitations);
-    console.debug("precipitations chart options", co)
     return co;
   }
 }

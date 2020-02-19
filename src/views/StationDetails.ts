@@ -1,17 +1,15 @@
 import Vue from "vue"
 import { Component, Prop, Watch } from "vue-property-decorator";
-
 import { stationsService, measuresService } from "@/services";
-
 import Card from "@/components/card.vue";
 import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
 import L from 'leaflet';
 import dayjs from 'dayjs';
-
 import TemperaturesChart from "./charts/temperature.vue";
 import PrecipitationsChart from "./charts/precipitations.vue";
 import PressuresChart from "./charts/pressures.vue";
 import HumidityChart from "./charts/humidity.vue";
+import { CSVHelper } from '@/helpers/CSVHelper';
 
 @Component({
   name: "stationDetails",
@@ -20,12 +18,10 @@ import HumidityChart from "./charts/humidity.vue";
   }
 })
 export default class StationDetails extends Vue {
-
   @Prop()
   stationId: string;
 
   lastMeasure: dto.WeatherObserved = null;
-  // dailyMeasure: dto.DailyMeasureDetail = null;
   dailyMeasures: dto.DailyMeasureDetail[] = null;
   rawMeasures: dto.WeatherObserved[] = null;
 
@@ -35,7 +31,7 @@ export default class StationDetails extends Vue {
     monthly: "Last month"
   };
 
-  timeSelectedIntedval: string = "Last week";
+  timeSelectedInterval: string = "Last week";
 
   url: String = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
   zoom: number = 4;
@@ -58,19 +54,13 @@ export default class StationDetails extends Vue {
     popupAnchor: [0, 75]
   });
 
-
-  // get station() {
-  //   if (!this.stations) return null;
-  //   return this.stations.find(s => s.id == this.stationId);
-  // }
-
   get center() {
     if (!this.station) return null;
     return this.station.location.coordinates;
   }
 
   get temperatures() {
-    if (this.timeSelectedIntedval != this.timeIntervals.daily) {
+    if (this.timeSelectedInterval != this.timeIntervals.daily) {
       if (!this.dailyMeasures) return [];
       return this.dailyMeasures.map(dm => {
         return {
@@ -88,7 +78,7 @@ export default class StationDetails extends Vue {
   }
 
   get precipitations() {
-    if (this.timeSelectedIntedval != this.timeIntervals.daily) {
+    if (this.timeSelectedInterval != this.timeIntervals.daily) {
       if (!this.dailyMeasures) return [];
       return this.dailyMeasures.map(dm => {
         return { time: dayjs(dm.date).startOf('day').toDate(), precipitation: round(dm.precipitations) }
@@ -101,7 +91,7 @@ export default class StationDetails extends Vue {
   }
 
   get pressures() {
-    if (this.timeSelectedIntedval != this.timeIntervals.daily) {
+    if (this.timeSelectedInterval != this.timeIntervals.daily) {
       if (!this.dailyMeasures) return [];
       return this.dailyMeasures.map(dm => {
         return {
@@ -119,7 +109,7 @@ export default class StationDetails extends Vue {
   }
 
   get humidity() {
-    if (this.timeSelectedIntedval != this.timeIntervals.daily) {
+    if (this.timeSelectedInterval != this.timeIntervals.daily) {
       if (!this.dailyMeasures) return [];
       return this.dailyMeasures.map(dm => {
         return {
@@ -137,7 +127,7 @@ export default class StationDetails extends Vue {
   }
 
   get cardValues() {
-    if (this.timeSelectedIntedval != this.timeIntervals.daily) {
+    if (this.timeSelectedInterval != this.timeIntervals.daily) {
       if (!this.dailyMeasures) return [];
       return this.dailyMeasures.slice(-7).reverse().map(dm => {
         return {
@@ -179,8 +169,8 @@ export default class StationDetails extends Vue {
     this.$router.push({ name: "station-details", params: { stationId: (evt.target as any).value } })
   }
 
-  @Watch("timeSelectedIntedval")
-  async timeSelectedIntedvalWatcher(n, o) {
+  @Watch("timeSelectedInterval")
+  async timeSelectedIntervalWatcher(n, o) {
     if (n != o) {
       //default weekly period
       let to = new Date();
@@ -204,9 +194,8 @@ export default class StationDetails extends Vue {
   async stationIdWatcher(n, o) {
     if (!n || n == o) return;
     this.station = await stationsService.getStation(n);
-    console.debug("controlled property: ", this.station.controlledProperty);
     this.lastMeasure = await measuresService.getLastMeasure(n);
-    this.timeSelectedIntedvalWatcher(this.timeSelectedIntedval, null);
+    this.timeSelectedIntervalWatcher(this.timeSelectedInterval, null);
   }
 
   async mounted() {
@@ -218,8 +207,51 @@ export default class StationDetails extends Vue {
     });
   }
 
+  downloadCSV() {
+    let fieldsToExport = {
+      date: "date",
+      precipitations: "precipitations",
+      avgRelativeHumidity: "avgRelativeHumidity",
+      minRelativeHumidity: "minRelativeHumidity",
+      maxRelativeHumidity: "maxRelativeHumidity",
+      avgSolarRadiations: "avgSolarRadiations",
+      minSolarRadiations: "minSolarRadiations",
+      maxSolarRadiations: "maxSolarRadiations",
+      avgTemperature: "avgTemperature",
+      minTemperature: "minTemperature",
+      maxTemperature: "maxTemperature",
+      avgWindSpeed: "avgWindSpeed",
+      minWindSpeed: "minWindSpeed",
+      maxWindSpeed: "maxWindSpeed",
+      avgWindDirection: "avgWindDirection",
+      minWindDirection: "minWindDirection",
+      maxWindDirection: "maxWindDirection",
+      avgAtmosphericPressure: "avgAtmosphericPressure",
+      minAtmosphericPressure: "minAtmosphericPressure",
+      maxAtmosphericPressure: "maxAtmosphericPressure",
+      avgDewPoint: "avgDewPoint",
+      minDewPoint: "minDewPoint",
+      maxDewPoint: "maxDewPoint",
+      avgIlluminance: "avgIlluminance",
+      minIlluminance: "minIlluminance",
+      maxIlluminance: "maxIlluminance",
+      avgStreamGauge: "avgStreamGauge",
+      minStreamGauge: "minStreamGauge",
+      maxStreamGauge: "maxStreamGauge",
+      avgSnowHeight: "avgSnowHeight",
+      minSnowHeight: "minSnowHeight",
+      maxSnowHeight: "maxSnowHeight",
+    };
 
+    let filename = this.station.name + " - " + this.timeSelectedInterval + ".csv";
 
+    CSVHelper.exportToCsv2(fieldsToExport, this.dailyMeasures, (fieldName, fieldValue, eventElement) => {
+      if (fieldName == "date") {
+        fieldValue = fieldValue ? dayjs(eventElement.date).format("DD MMM YYYY, hh:mm") : null
+      }
+      return fieldValue;
+    }, filename);
+  }
 }
 
 //utility functions

@@ -16,25 +16,52 @@
 			<table class="table" v-if="stations">
 				<thead>
 					<tr>
-						<th>Name</th>
 						<th>Status</th>
-						<th>Location</th>
-						<th>id</th>
-						<th>Date Created</th>
-						<th>Type</th>
+						<th>Name</th>
+						<th>Last Value Date</th>
+						<th>Installation Date</th>
+						<th>Source</th>
+						<th>Data Provider</th>
+						<th>Serial Number</th>
+						<th>Model</th>
 						<th class="btn-colum"></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr v-for="(station, i) in filteredStations" :key="station.id.concat('-' + i)">
-						<td>{{ station.name }}</td>
 						<td>
-							<i class="fas fa-circle red-status"></i>
+							{{ station.deviceState }}
+							<i class="wi wi-na fa-2x" v-if="!station.deviceState"></i>
 						</td>
-						<td>{{ station.location }}</td>
-						<td>{{ station.id }}</td>
-						<td>{{ station.dateCreated | dateformat }}</td>
-						<td>{{ station.type }}</td>
+						<td>{{ station.name }}</td>
+						<td
+							v-if="station.dateLastValueReported"
+						>{{ station.dateLastValueReported | dateformat('DD MMM YYYY, hh:mm') }}</td>
+						<td v-else>
+							<i class="wi wi-na fa-2x"></i>
+						</td>
+						<td
+							v-if="station.dateInstalled"
+						>{{ station.dateInstalled | dateformat('DD MMM YYYY, hh:mm') }}</td>
+						<td v-else>
+							<i class="wi wi-na fa-2x"></i>
+						</td>
+						<td>
+							{{ station.source }}
+							<i class="wi wi-na fa-2x" v-if="!station.source"></i>
+						</td>
+						<td>
+							{{ station.dataProvider }}
+							<i class="wi wi-na fa-2x" v-if="!station.dataProvider"></i>
+						</td>
+						<td>
+							{{ station.serialNumber }}
+							<i class="wi wi-na fa-2x" v-if="!station.serialNumber"></i>
+						</td>
+						<td>
+							{{ station.refDeviceModel }}
+							<i class="wi wi-na fa-2x" v-if="!station.refDeviceModel"></i>
+						</td>
 						<td class="btn-colum">
 							<button class="btn btn-primary btn-sm" @click="goToDetails(station.id)">
 								<i class="fas fa-arrow-right"></i>

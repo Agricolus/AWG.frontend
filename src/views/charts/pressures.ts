@@ -23,7 +23,6 @@ export default class PressureChart extends Vue {
     let co = Object.assign({}, PressureDefaultChartSettings);
     co.dataset.source = this.pressures;
     co.xAxis.axisLabel.formatter = xAxisDateFormatterGenerator(this.pressures);
-    console.debug("pressures chart options", co)
     return co;
   }
 }

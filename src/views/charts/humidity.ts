@@ -22,7 +22,6 @@ export default class HumidityChart extends Vue {
     let co = Object.assign({}, HumidityDefaultChartSettings);
     co.dataset.source = this.humidity;
     co.xAxis.axisLabel.formatter = xAxisDateFormatterGenerator(this.humidity);
-    console.debug("humidity chart options", co)
     return co;
   }
 }
