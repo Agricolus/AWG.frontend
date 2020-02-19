@@ -6,6 +6,35 @@ const axisLabelColor = 'rgba(67, 66, 93, 0.5)';
 const axisLineColor = 'rgba(0, 0, 0, 0.1)';
 const splitLineColor = 'rgba(0, 0, 0, 0.1)';
 const gridBorderColor = 'rgba(0, 0, 0, 0.1)';
+export const xAxisDateFormatterGenerator = (serie: any[]) => {
+  let serielength = serie.length;
+  if (!serielength) return null;
+  let startime = dayjs(serie[0].time);
+  let startimevalue = startime.valueOf();
+  let endtime = dayjs(serie[serielength - 1].time);
+  let endtimevalue = endtime.valueOf();
+  let hourly = (endtime.endOf('hour').diff(startime.startOf('hour'), 'hour') / serielength) <= 1;
+  return (value) => {
+    let labeltxt = "";
+    if (hourly) {
+
+      labeltxt = dayjs(value).format('HH:MM')
+        .concat("\n")
+        .concat(dayjs(value).format('DD'));
+      if (value <= startimevalue || value >= endtimevalue)
+        labeltxt = labeltxt.concat(" ").concat(dayjs(value).format('MMM'));
+    }
+    else {
+      labeltxt = dayjs(value).format('DD')
+        .concat("\n")
+        .concat(dayjs(value).format('MMM'));
+      if (value <= startimevalue || value >= endtimevalue)
+        labeltxt = labeltxt.concat("\n").concat(dayjs(value).format('YYYY'));
+    }
+    return labeltxt;
+  }
+}
+
 ////#endregion
 
 //#region TEMPERATURE CONFIGS
@@ -21,9 +50,13 @@ export const TemperatureDefaultChartSettings = {
   grid: { right: '5%', left: '15%' },
   xAxis: {
     type: 'time',
-    maxInterval: 3600 * 1000 * 24,
+    // maxInterval: 3600 * 1000 * 24,
     axisLabel: {
-      formatter: (value) => dayjs(value).format('DD-MM'), color: axisLabelColor, interval: 0
+      formatter: null,
+      color: axisLabelColor,
+      interval: 0,
+      showMinLabel: true,
+      showMaxLabel: true
     },
     splitLine: { show: false },
     axisLine: { lineStyle: { color: splitLineColor }, interval: 0 },
@@ -97,8 +130,14 @@ export const HumidityDefaultChartSettings = {
   grid: { right: '5%', left: '15%' },
   xAxis: {
     type: 'time',
-    maxInterval: 3600 * 1000 * 24,
-    axisLabel: { formatter: (value) => dayjs(value).format('DD-MM'), color: axisLabelColor, interval: 0 },
+    // maxInterval: 3600 * 1000 * 24,
+    axisLabel: {
+      formatter: null,
+      color: axisLabelColor,
+      interval: 0,
+      showMinLabel: true,
+      showMaxLabel: true
+    },
     splitLine: { show: false },
     axisLine: { lineStyle: { color: splitLineColor }, interval: 0 },
   },
@@ -171,8 +210,14 @@ export const PressureDefaultChartSettings = {
   grid: { right: '5%' },
   xAxis: {
     type: 'time',
-    maxInterval: 3600 * 1000 * 24,
-    axisLabel: { formatter: (value) => dayjs(value).format('DD-MM'), color: axisLabelColor, interval: 0 },
+    // maxInterval: 3600 * 1000 * 24,
+    axisLabel: {
+      formatter: null,
+      color: axisLabelColor,
+      interval: 0,
+      showMinLabel: true,
+      showMaxLabel: true
+    },
     splitLine: { show: false },
     axisLine: { lineStyle: { color: splitLineColor }, interval: 0 },
   },
@@ -236,18 +281,24 @@ const fillPrecipitationColorStart = '#4C7CDE';
 const fillPrecipitationColorEnd = '#263E6F';
 export const PrecipitationsDefaultChartSettings = {
   title: { text: 'Precipitations', textStyle: { color: titleColor } },
-  tooltip: { trigger: 'item' },
+  tooltip: { trigger: 'axis' },
   grid: { show: true, borderColor: gridBorderColor },
   xAxis: {
     type: 'time',
-    maxInterval: 3600 * 1000 * 24,
-    axisLabel: { formatter: (value) => dayjs(value).format('DD-MM'), color: axisLabelColor, interval: 0 },
+    // maxInterval: 3600 * 1000 * 24,
+    axisLabel: {
+      formatter: null,
+      color: axisLabelColor,
+      interval: 0,
+      showMinLabel: true,
+      showMaxLabel: true
+    },
     splitLine: { show: false },
     axisLine: { lineStyle: { color: axisLineColor }, interval: 0 },
   },
   yAxis: {
     type: 'value',
-    axisLabel: { color: axisLabelColor, interval: 0 },
+    axisLabel: { color: axisLabelColor },
     splitLine: { lineStyle: { color: splitLineColor }, interval: 0 },
     axisLine: { lineStyle: { color: axisLineColor } },
   },

@@ -182,10 +182,8 @@ export default class StationDetails extends Vue {
   @Watch("timeSelectedIntedval")
   async timeSelectedIntedvalWatcher(n, o) {
     if (n != o) {
-      // this.stationIdWatcher(this.stationId, null);
       //default weekly period
       let to = new Date();
-      // let to = this.lastMeasure.dateObserved;
       let from = dayjs(to).subtract(7, 'day');
 
       //hourly details

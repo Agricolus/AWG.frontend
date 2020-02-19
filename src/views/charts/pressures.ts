@@ -1,12 +1,12 @@
-import Vue from 'vue';
-import { Component, Prop } from 'vue-property-decorator';
-import { PressureDefaultChartSettings } from "./chartSettings";
-
-import ECharts from 'vue-echarts';
-import 'echarts/lib/component/tooltip';
-import 'echarts/lib/component/title';
-import 'echarts/lib/component/axis';
 import 'echarts/lib/chart/line';
+import 'echarts/lib/component/axis';
+import 'echarts/lib/component/title';
+import 'echarts/lib/component/tooltip';
+import Vue from 'vue';
+import ECharts from 'vue-echarts';
+import { Component, Prop } from 'vue-property-decorator';
+import { PressureDefaultChartSettings, xAxisDateFormatterGenerator } from "./chartSettings";
+
 
 @Component({
   components: {
@@ -22,6 +22,7 @@ export default class PressureChart extends Vue {
     if (!this.pressures) return null;
     let co = Object.assign({}, PressureDefaultChartSettings);
     co.dataset.source = this.pressures;
+    co.xAxis.axisLabel.formatter = xAxisDateFormatterGenerator(this.pressures);
     console.debug("pressures chart options", co)
     return co;
   }
