@@ -28,7 +28,7 @@
 			<card
 				v-if="lastMeasure.dateCreated"
 				title="Last Update"
-				:main-information="lastMeasure.dateCreated | dateformat('hh:mm')"
+				:main-information="lastMeasure.dateCreated | dateformat('HH:mm')"
 				:below="lastMeasure.dateCreated | dateformat('DD MMM YYYY')"
 			></card>
 			<card

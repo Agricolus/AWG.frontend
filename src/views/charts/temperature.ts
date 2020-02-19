@@ -7,11 +7,7 @@ import 'echarts/lib/component/title';
 import 'echarts/lib/component/axis';
 import 'echarts/lib/chart/line';
 
-@Component({
-  components: {
-    chart: ECharts
-  }
-})
+@Component({ components: { chart: ECharts } })
 export default class TemperaturesChart extends Vue {
 
   @Prop()

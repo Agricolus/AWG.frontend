@@ -241,7 +241,7 @@ export default class StationDetails extends Vue {
 
     CSVHelper.exportToCsv2(fieldsToExport, this.dailyMeasures, (fieldName, fieldValue, eventElement) => {
       if (fieldName == "date") {
-        fieldValue = fieldValue ? dayjs(eventElement.date).format("DD MMM YYYY, hh:mm") : null
+        fieldValue = fieldValue ? dayjs(eventElement.date).format("DD MMM YYYY, HH:mm") : null
       }
       return fieldValue;
     }, filename);

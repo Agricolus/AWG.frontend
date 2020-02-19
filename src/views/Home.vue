@@ -48,13 +48,13 @@
 
 						<td
 							v-if="station.dateLastValueReported"
-						>{{ station.dateLastValueReported | dateformat('DD MMM YYYY, hh:mm') }}</td>
+						>{{ station.dateLastValueReported | dateformat('DD MMM YYYY, HH:mm') }}</td>
 						<td v-else>
 							<i class="wi wi-na fa-2x"></i>
 						</td>
 						<td
 							v-if="station.dateInstalled"
-						>{{ station.dateInstalled | dateformat('DD MMM YYYY, hh:mm') }}</td>
+						>{{ station.dateInstalled | dateformat('DD MMM YYYY, HH:mm') }}</td>
 						<td v-else>
 							<i class="wi wi-na fa-2x"></i>
 						</td>
