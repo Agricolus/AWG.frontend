@@ -11,27 +11,27 @@ class MeasuresServices extends BaseRestService {
 
   async getLastMeasure(stationId: string): Promise<dto.WeatherObserved> {
     let endpoint = `${this.measuresApiEndpoint}/last?stationId=${stationId}`;
-    return this.restClient.get(endpoint);
+    return (await this.restClient.get(endpoint)).data;
   }
 
   async getLastDailyMeasures(stationId: string, from: Date | null = null, to: Date | null = null): Promise<dto.DailyMeasureDetail[]> {
-    let endpoint = `${this.measuresApiEndpoint}/daily?stationId=${stationId}&from=${from}&to=${to}`;
-    return this.restClient.get(endpoint);
+    let endpoint = `${this.measuresApiEndpoint}/daily?stationId=${stationId}&fromDate=${from.toISOString()}&toDate=${to.toISOString()}`;
+    return (await this.restClient.get(endpoint)).data;
   }
 
   async  getLastWeeklyMeasures(stationId: string, from: Date | null = null, to: Date | null = null): Promise<dto.WeeklyMeasureDetail[]> {
-    let endpoint = `${this.measuresApiEndpoint}/weekly?stationId=${stationId}&from=${from}&to=${to}`;
-    return this.restClient.get(endpoint);
+    let endpoint = `${this.measuresApiEndpoint}/weekly?stationId=${stationId}&fromDate=${from.toISOString()}&toDate=${to.toISOString()}`;
+    return (await this.restClient.get(endpoint)).data;
   }
 
   async getLastMonthlyMeasures(stationId: string, from: Date | null = null, to: Date | null = null): Promise<dto.MonthlyMeasureDetail[]> {
-    let endpoint = `${this.measuresApiEndpoint}/monthly?stationId=${stationId}&from=${from}&to=${to}`;
-    return this.restClient.get(endpoint);
+    let endpoint = `${this.measuresApiEndpoint}/monthly?stationId=${stationId}&fromDate=${from.toISOString()}&toDate=${to.toISOString()}`;
+    return (await this.restClient.get(endpoint)).data;
   }
 
   async getMeasuresList(stationId: string, from: Date | null = null, to: Date | null = null): Promise<dto.WeatherObserved[]> {
-    let endpoint = `${this.measuresApiEndpoint}/interval?stationId=${stationId}&from=${from}&to=${to}`;
-    return this.restClient.get(endpoint);
+    let endpoint = `${this.measuresApiEndpoint}/interval?stationId=${stationId}&fromDate=${from.toISOString()}&toDate=${to.toISOString()}`;
+    return (await this.restClient.get(endpoint)).data;
   }
 
 }

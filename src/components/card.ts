@@ -1,32 +1,31 @@
 import Vue from "vue"
 import { Component, Prop } from "vue-property-decorator";
 
-@Component({
-  name: "card"
-})
+@Component({ name: "card" })
 export default class Card extends Vue {
 
 
-  @Prop()
+  @Prop({ default: null })
   title: string;
 
-
-  @Prop()
+  @Prop({ default: null })
   weatherIcon: string;
 
-  @Prop()
+  @Prop({ default: null })
   mainInformation: string;
 
-  @Prop()
+  @Prop({ default: null })
   unit: string;
 
-  @Prop()
+  @Prop({ default: null })
   icon: string
 
-  @Prop()
+  @Prop({ default: null })
   min: string;
 
-  @Prop()
+  @Prop({ default: null })
   max: string;
 
+  @Prop({ default: null })
+  below: string;
 }

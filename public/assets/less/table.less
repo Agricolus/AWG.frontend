@@ -7,21 +7,16 @@
   cursor: pointer;
 
   thead {
-    background: @white-2 0% 0% no-repeat padding-box;
+    background: @white-2 0% 0%;
 
 
     th {
-      vertical-align: bottom;
       color: @purple-2;
       text-transform: uppercase;
       font-size: 1rem;
       font-weight: bold;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-    }
-
-    .btn-colum {
-      background: @white-1  !important;
+      padding: 1rem;
+      letter-spacing: 1px;
     }
   }
 
@@ -30,16 +25,7 @@
       height: 48px;
 
       &:hover {
-        background: @blu-opacity 0% 0% no-repeat padding-box;
-
-        .btn-colum {
-          background: @white-1 0% 0% no-repeat padding-box;
-
-          button {
-            display: block;
-          }
-
-        }
+        background: @blu-opacity 0% 0%;
       }
     }
 
@@ -50,38 +36,15 @@
       font-weight: normal;
       font-size: 1rem;
       color: @blu-gray-1;
-    }
 
-    .btn-colum {
-
-      min-width: 50px;
-
-      button {
-        display: none;
-      }
     }
   }
 }
-
-
-
-
-
-
-
-
-
 
 .table-hover .table-active:hover>td,
 .table-hover .table-active:hover>th {
   background-color: rgba(0, 0, 0, 0.075);
 }
-
-
-
-
-
-
 
 @media (max-width: 575.98px) {
   .table-responsive-sm {

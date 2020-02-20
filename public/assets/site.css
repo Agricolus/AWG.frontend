@@ -1,6 +1,7 @@
 @import "../libs/font-awesome/css/all.min.css";
 @import "../libs/weather-icons/css/weather-icons.min.css";
 @import "../libs/weather-icons/css/weather-icons-wind.min.css";
+@import "iziToast.min.css";
 * {
   box-sizing: border-box;
 }
@@ -15,11 +16,12 @@
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   letter-spacing: 0.5px;
-  text-transform: uppercase;
   padding: 8px 15px;
   border: none;
   font-family: source-sans-pro;
   cursor: pointer;
+  color: #43425d;
+  background: #dcdcdc;
 }
 .btn:focus {
   outline: 0;
@@ -32,6 +34,24 @@
   .btn {
     transition: none;
   }
+}
+.btn-danger {
+  color: #ffffff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+.btn-danger:hover {
+  color: #ffffff;
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+.btn-danger:focus {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+}
+.btn-danger:disabled {
+  color: #ffffff;
+  background-color: #dc3545;
+  border-color: #dc3545;
 }
 .btn-primary {
   color: #ffffff;
@@ -82,10 +102,10 @@
   margin-top: 0.5rem;
 }
 .left-icon {
-  padding-right: 15px;
+  padding-right: 10px;
 }
 .right-icon {
-  padding-left: 15px;
+  padding-left: 10px;
 }
 body,
 html {
@@ -129,7 +149,7 @@ html {
   flex-flow: column;
   box-shadow: -2px 2px 3px 1px rgba(60, 60, 60, 0.4) inset;
   scrollbar-width: thin;
-  background: #43425d 0% 0% no-repeat padding-box;
+  background: #43425d 0% 0%;
   color: #ffffff;
 }
 .sidebar header {
@@ -139,7 +159,7 @@ html {
   width: 260px;
   height: 70px;
   /* UI Properties */
-  background: rgba(0, 0, 0, 0.1) 0% 0% no-repeat padding-box;
+  background: rgba(0, 0, 0, 0.1) 0% 0%;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.05);
   opacity: 1;
 }
@@ -150,6 +170,9 @@ html {
   color: #ffffff;
   opacity: 1;
   font-size: 1.7em;
+}
+.sidebar section {
+  margin-top: 40px;
 }
 .sidebar section .header {
   display: flex;
@@ -194,7 +217,7 @@ html {
   font-size: 1.2rem;
 }
 .sidebar section .nav .nav-item .nav-link.router-link-active {
-  background: rgba(0, 0, 0, 0.1) 0% 0% no-repeat padding-box;
+  background: rgba(0, 0, 0, 0.1) 0% 0%;
   border-left: 3px solid #a3a0fb;
   color: #a3a0fb;
 }
@@ -220,31 +243,21 @@ html {
   cursor: pointer;
 }
 .table thead {
-  background: #f5f6fa 0% 0% no-repeat padding-box;
+  background: #f5f6fa 0% 0%;
 }
 .table thead th {
-  vertical-align: bottom;
   color: #a3a6b4;
   text-transform: uppercase;
   font-size: 1rem;
   font-weight: bold;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-.table thead .btn-colum {
-  background: #ffffff !important;
+  padding: 1rem;
+  letter-spacing: 1px;
 }
 .table tbody tr {
   height: 48px;
 }
 .table tbody tr:hover {
-  background: rgba(0, 74, 225, 0.16) 0% 0% no-repeat padding-box;
-}
-.table tbody tr:hover .btn-colum {
-  background: #ffffff 0% 0% no-repeat padding-box;
-}
-.table tbody tr:hover .btn-colum button {
-  display: block;
+  background: rgba(0, 74, 225, 0.16) 0% 0%;
 }
 .table tbody td {
   padding: 0.85rem;
@@ -253,12 +266,6 @@ html {
   font-weight: normal;
   font-size: 1rem;
   color: #43425d;
-}
-.table tbody .btn-colum {
-  min-width: 50px;
-}
-.table tbody .btn-colum button {
-  display: none;
 }
 .table-hover .table-active:hover > td,
 .table-hover .table-active:hover > th {
@@ -324,9 +331,8 @@ html {
 }
 .stations {
   font-family: source-sans-pro;
-  padding: 35px 80px;
+  padding: 2.1rem 7rem;
   height: 100%;
-  overflow: hidden;
   display: flex;
   flex-flow: column nowrap;
 }
@@ -341,7 +347,7 @@ html {
   position: relative;
   border-radius: 5px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
-  background: #ffffff 0% 0% no-repeat padding-box;
+  background: #ffffff 0% 0%;
   font-size: 1.3rem;
   padding: 5px 10px 5px 20px;
 }
@@ -380,10 +386,6 @@ html {
   padding: 10px;
   background: #ffffff;
   border-radius: 5px;
-  flex: 1;
-  overflow-y: scroll;
-  justify-content: flex-start;
-  flex-flow: column;
 }
 .green-status {
   color: #60f219;
@@ -393,50 +395,62 @@ html {
 }
 .stationDetails {
   font-family: source-sans-pro;
+  padding: 2.1rem 5.7rem;
   padding: 35px 80px;
   height: 100%;
   display: flex;
   flex-flow: column nowrap;
   overflow: auto;
 }
-.stationDetails header .station-select {
-  width: 40vw;
+.stationDetails header {
   display: flex;
-  flex-flow: column;
-}
-.stationDetails header .station-select :first-child {
-  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
 }
 .stationDetails header select {
   flex: 1;
   margin-right: 25px;
   margin-bottom: 25px;
 }
-.stationDetails section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+.stationDetails header .header-buttons button {
+  margin-right: 10px;
+}
+.stationDetails header .header-buttons :last-child {
+  margin-right: 0px;
 }
 .stationDetails section.daily-measure-section {
   margin-right: -30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 .stationDetails section.map-container {
   min-height: 45vh;
   border-radius: 5px;
 }
-.stationDetails section.daily-summary-section {
-  flex-wrap: no-wrap;
-  flex-direction: row;
-  margin-right: -30px;
-}
-.stationDetails section.daily-summary-section h3 {
+.stationDetails section.daily-summary-section .station-select {
   width: 100%;
+  margin: 10px 0px;
 }
-.stationDetails section.daily-summary-section .card-daily-summary {
+.stationDetails section.daily-summary-section label {
+  font-size: 1.3rem;
+  color: #43425d;
+  font-weight: bold;
+}
+.stationDetails section.daily-summary-section .daily-summary-cards {
+  flex-wrap: wrap;
+  display: flex;
+  margin-right: -30px;
+  padding-top: 10px;
+}
+.stationDetails section.daily-summary-section .daily-summary-cards .card {
   flex: 10%;
 }
 .stationDetails section.charts {
   margin-right: -30px;
+  display: flex;
+  flex-wrap: wrap;
 }
 .stationDetails section.charts .echarts {
   width: 100%;
@@ -445,26 +459,45 @@ html {
 .stationDetails section.charts .temperature {
   height: 350px;
   flex: 1 1 40%;
+  max-width: calc(50% - 30px);
 }
 .stationDetails section.charts .precipitation {
   height: 350px;
   flex: 1 1 40%;
+  max-width: calc(50% - 30px);
 }
 .stationDetails section.charts .pressure {
   height: 350px;
   flex: 1 1 40%;
+  max-width: calc(50% - 30px);
 }
 .stationDetails section.charts .humidity {
   height: 350px;
   flex: 1 1 40%;
+  max-width: calc(50% - 30px);
 }
-.home {
+.stationForm {
   font-family: source-sans-pro;
   padding: 35px 100px;
   height: 100%;
   overflow: auto;
   display: flex;
   flex-flow: column nowrap;
+  align-items: center;
+}
+.stationForm header .title {
+  font-size: 2rem;
+  color: #a5a4bf;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+.home {
+  font-family: source-sans-pro;
+  padding: 2.1rem 7rem;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: auto;
 }
 .home header {
   display: flex;
@@ -481,9 +514,11 @@ html {
   display: flex;
 }
 .home section.map-section {
-  padding-top: 30px;
-  padding-bottom: 15px;
-  min-height: 55vh;
+  padding: 10px;
+  margin-top: 20px;
+  min-height: 40vh;
+  background: #ffffff;
+  border-radius: 5px;
 }
 .home section.table-section {
   background: #ffffff;
@@ -492,7 +527,14 @@ html {
   display: flex;
   flex-flow: column;
   align-items: center;
-  justify-content: space-around;
+}
+.home section.table-section label {
+  font-size: 1.4rem;
+  text-align: left;
+  width: 100%;
+  margin-bottom: 10px;
+  color: #43425d;
+  font-weight: bold;
 }
 .map {
   height: 100%;
@@ -525,7 +567,7 @@ html {
   height: 0;
 }
 .card {
-  background: #ffffff 0% 0% no-repeat padding-box;
+  background: #ffffff 0% 0%;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   opacity: 1;
   display: flex;
@@ -552,12 +594,10 @@ html {
 .card .body .main-info {
   font-weight: bold;
   color: #4d4f5c;
-}
-.card .body .main-info.weather i {
-  font-size: 2.5rem;
+  text-align: center;
 }
 .card .body .main-info i {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
 }
 .card .body .main-info label {
   font-size: 2rem;
@@ -565,6 +605,13 @@ html {
 .card .body .main-info small {
   margin-left: 2px;
   font-size: 1.5rem;
+}
+.card .body .main-info small.below {
+  display: block;
+  color: #43425d;
+  opacity: 0.5;
+  text-align: center;
+  font-size: 1rem;
 }
 .card .body .info {
   color: #43425D;
@@ -574,9 +621,141 @@ html {
 .card .body .info label {
   font-size: 1rem;
 }
+.form {
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+  background: #ffffff 0% 0%;
+  border-radius: 5px;
+  max-width: 800px;
+  padding: 15px;
+}
+.form .form-row {
+  display: flex;
+}
+.form .form-control {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.form .form-control .error {
+  color: #a3a0fb;
+}
+.form .form-control label {
+  font-size: 1.1rem;
+  color: #43425d;
+}
+.form .form-control input[type="text"] {
+  font-family: source-sans-pro;
+  background-color: #fafafa;
+  color: #43425d;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  border: 1px solid #dcdcdc;
+}
+.form .form-control input[type="text"]:focus {
+  outline: none !important;
+}
+.form .form-control input[type="text"]:read-only {
+  background: #dcdcdc !important;
+}
+.form .form-control input[type="text"]:disabled {
+  background: #dcdcdc !important;
+  color: #43425d;
+}
+.form .form-control input[type="text"]::placeholder {
+  color: #a9a9a9;
+}
+.form .form-control textarea {
+  background-color: transparent;
+  font-family: source-sans-pro;
+  background-color: #fafafa;
+  color: #a3a6b4;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  border: 1px solid #dcdcdc;
+}
+.form .form-control textarea:focus {
+  outline: none !important;
+}
+.form .form-control textarea::placeholder {
+  color: #a9a9a9;
+}
+.form .form-control .vdp-datepicker .vdp-datepicker__calendar {
+  z-index: 9999;
+}
+.form .form-control .vdp-datepicker div:first-child {
+  display: flex;
+  flex-flow: row-reverse;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+}
+.form .form-control .vdp-datepicker .vdp-datepicker__calendar-button {
+  background-color: #fafafa;
+  color: #43425d;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  margin-left: -2px;
+}
+.form .form-control .vdp-datepicker input[type="text"] {
+  background-color: transparent;
+  font-family: source-sans-pro;
+  background-color: #fafafa;
+  color: #43425d;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  width: 100%;
+  border: none;
+}
+.form .form-control .vdp-datepicker input[type="text"]:read-only {
+  background-color: #fafafa !important;
+  color: #43425d;
+}
+.form .form-control .vdp-datepicker input[type="text"]:focus {
+  outline: none !important;
+}
+.form .form-control .vdp-datepicker input[type="text"]::placeholder {
+  color: #a9a9a9;
+}
+.form .map-form {
+  height: 40vh;
+}
+.form .map-form .map {
+  border-radius: 5px;
+}
+.form .buttons {
+  display: flex;
+  margin-top: 20px;
+}
+.form .buttons :last-child {
+  margin-right: 0px;
+}
+.form .buttons button {
+  flex: 1;
+  margin-right: 10px;
+}
+.form .option-data {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #43425d;
+}
+.form .option-data label {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.form .option-data i {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
 select {
-  height: 39px;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
+  min-height: 39px;
+  background: #ffffff;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   opacity: 1;
   border: none;
@@ -589,8 +768,184 @@ select {
 select:focus {
   outline: none !important;
 }
-select:after {
-  color: red;
+.custom-tag {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(139, 139, 139, 0.3);
+  color: #43425d;
+  border-radius: 5px;
+  white-space: nowrap;
+  margin: 3px 0px;
+  transition: all 0.2s;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.custom-tag i {
+  width: 20px;
+}
+.custom-tag label {
+  cursor: pointer;
+}
+.custom-tag.selected {
+  background-color: #a5a4bf;
+  color: #ffffff;
+}
+.custom-tag.selected label {
+  color: #ffffff;
+}
+.tooltip {
+  display: block !important;
+  z-index: 10000;
+  font-family: source-sans-pro;
+}
+.tooltip .tooltip-inner {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px 4px;
+}
+.tooltip .tooltip-inner a {
+  color: white;
+  text-decoration: underline;
+}
+.tooltip .tooltip-arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  position: absolute;
+  margin: 5px;
+  border-color: rgba(0, 0, 0, 0.8);
+  z-index: 1;
+}
+.tooltip[x-placement^="top"] {
+  margin-bottom: 5px;
+}
+.tooltip[x-placement^="top"] .tooltip-arrow {
+  border-width: 5px 5px 0 5px;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  border-bottom-color: transparent !important;
+  bottom: -5px;
+  left: calc(50% - 5px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.tooltip[x-placement^="bottom"] {
+  margin-top: 5px;
+}
+.tooltip[x-placement^="bottom"] .tooltip-arrow {
+  border-width: 0 5px 5px 5px;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  border-top-color: transparent !important;
+  top: -5px;
+  left: calc(50% - 5px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.tooltip[x-placement^="right"] {
+  margin-left: 5px;
+}
+.tooltip[x-placement^="right"] .tooltip-arrow {
+  border-width: 5px 5px 5px 0;
+  border-left-color: transparent !important;
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
+  left: -5px;
+  top: calc(50% - 5px);
+  margin-left: 0;
+  margin-right: 0;
+}
+.tooltip[x-placement^="left"] {
+  margin-right: 5px;
+}
+.tooltip[x-placement^="left"] .tooltip-arrow {
+  border-width: 5px 0 5px 5px;
+  border-top-color: transparent !important;
+  border-right-color: transparent !important;
+  border-bottom-color: transparent !important;
+  right: -5px;
+  top: calc(50% - 5px);
+  margin-left: 0;
+  margin-right: 0;
+}
+.tooltip.popover .popover-inner {
+  background: #f9f9f9;
+  color: black;
+  padding: 24px;
+  border-radius: 5px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+}
+.tooltip.popover .popover-arrow {
+  border-color: #f9f9f9;
+}
+.tooltip[aria-hidden='true'] {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.15s, visibility 0.15s;
+}
+.tooltip[aria-hidden='false'] {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.15s;
+}
+.paginator {
+  font-family: inherit;
+  font-size: 1rem;
+  color: #b1abab;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+}
+.paginator .per-page-selector {
+  text-align: center;
+  margin-bottom: 0.3rem;
+}
+.paginator .per-page-selector select {
+  min-height: 26px;
+  background: #FFFFFF 0% 0%;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+  border: none;
+  color: #b1abab;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+.paginator .pages {
+  margin: 0 auto;
+  margin-top: 5px;
+}
+.paginator .pages .page {
+  display: inline-block;
+  margin: 0 4px;
+  cursor: pointer;
+  border: 1px solid #b1abab;
+  border-radius: 2px;
+  padding: 5px 10px;
+  background: #FFFFFF 0% 0%;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+.paginator .pages .page.current-page {
+  background-color: #b1abab;
+  color: #fff;
+}
+.paginator .prev-page,
+.paginator .next-page {
+  cursor: pointer;
+}
+.paginator .prev-page.disabled,
+.paginator .next-page.disabled {
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.4;
+}
+.paginator .prev-page > i,
+.paginator .next-page > i {
+  vertical-align: middle;
 }
 @font-face {
   font-family: "source-sans-pro";
@@ -598,4 +953,37 @@ select:after {
 }
 body {
   margin: 0;
+}
+hr {
+  width: 100%;
+  margin: 5px 0px;
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+.divider-5 {
+  padding: 5px 0px;
+}
+.divider-10 {
+  padding: 10px 0px;
+}
+.divider-20 {
+  padding: 20px 0px;
+}
+.iziToast-wrapper-topRight {
+  right: 10px;
+  bottom: 10px;
+}
+body ::-webkit-scrollbar {
+  width: 7px;
+  background-color: #F5F5F5;
+}
+body ::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #a5a4bf;
+  border: 1px solid #aaa;
+}
+body ::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
 }

@@ -5,11 +5,7 @@ import 'echarts/lib/chart/bar';
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/grid';
 
-@Component({
-  components: {
-    chart: ECharts
-  }
-})
+@Component({ components: { chart: ECharts } })
 export default class WindgaugeChart extends Vue {
 
   @Prop()
@@ -58,7 +54,7 @@ export default class WindgaugeChart extends Vue {
         }
       }]
     };
-    console.debug("windgauge chart options", co)
+
     return co;
   }
 }

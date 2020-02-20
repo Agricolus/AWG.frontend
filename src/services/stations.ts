@@ -10,26 +10,32 @@ class StationsServices extends BaseRestService {
   }
 
 
-  async getAllActiveStations(): Promise<dto.Device[]> {
-    let endpoint = this.stationsApiEndpoint;
-    return this.restClient.get(endpoint);
+  async getAllActiveStations(skip: number = 0, take: number = 20): Promise<dto.Paginated<dto.Device>> {
+    let endpoint = `${this.stationsApiEndpoint}?skip=${skip}&take=${take}`;
+    return (await this.restClient.get(endpoint)).data;
   }
 
   async getStation(stationId: string): Promise<dto.Device> {
     let endpoint = `${this.stationsApiEndpoint}/${stationId}`;
-    return this.restClient.get(endpoint);
+    return (await this.restClient.get(endpoint)).data;
   }
-  async createStation(organizationId: string, station: dto.CreateStation): Promise<dto.Device> {
-    let endpoint = `${this.stationsApiEndpoint}/station?organizationId=${organizationId}`;
-    return this.restClient.post(endpoint, station);
+
+  async getNearestStations(lon: number, lat: number, skip: number = 0, take: number = 20): Promise<dto.Paginated<dto.Device>> {
+    let endpoint = `${this.stationsApiEndpoint}/nearest?longitude=${lon}&latitude=${lat}&skip=${skip}&take=${take}`;
+    return (await this.restClient.get(endpoint)).data;
   }
-  async updateStation(stationId: string, station: dto.UpdateStation): Promise<dto.Device> {
-    let endpoint = `${this.stationsApiEndpoint}/station/${stationId}`;
-    return this.restClient.put(endpoint, station);
+
+  async createStation(station: dto.Device): Promise<dto.Device> {
+    let endpoint = `${this.stationsApiEndpoint}`;
+    return (await this.restClient.post(endpoint, station)).data;
+  }
+  async updateStation(station: dto.Device): Promise<dto.Device> {
+    let endpoint = `${this.stationsApiEndpoint}`;
+    return (await this.restClient.put(endpoint, station)).data;
   }
   async deleteStation(stationId: string): Promise<void> {
-    let endpoint = `${this.stationsApiEndpoint}/station/${stationId}`;
-    return this.restClient.delete(endpoint);
+    let endpoint = `${this.stationsApiEndpoint}/${stationId}`;
+    return (await this.restClient.delete(endpoint)).data;
   }
 
 

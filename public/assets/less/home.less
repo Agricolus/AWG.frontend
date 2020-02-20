@@ -1,11 +1,11 @@
 // out:false, main: ../site.less
 .home {
   font-family: source-sans-pro;
-  padding: 35px 100px;
+  padding: 2.1rem 7rem;
   height: 100%;
-  overflow: auto;
   display: flex;
   flex-flow: column nowrap;
+  overflow: auto;
 
   header {
     display: flex;
@@ -25,19 +25,30 @@
     display: flex;
 
     &.map-section {
-      padding-top: 30px;
-      padding-bottom: 15px;
-      min-height: 55vh;
+      padding: 10px;
+      margin-top: 20px;
+      min-height: 40vh;
+      background: @white-1;
+      border-radius: @radius;
+
     }
 
     &.table-section {
       background: @white-1;
       padding: 10px;
-      border-radius: 5px;
+      border-radius: @radius;
       display: flex;
       flex-flow: column;
       align-items: center;
-      justify-content: space-around;
+
+      label {
+        font-size: 1.4rem;
+        text-align: left;
+        width: 100%;
+        margin-bottom: 10px;
+        color: @blu-gray-1;
+        font-weight: bold;
+      }
     }
 
   }
