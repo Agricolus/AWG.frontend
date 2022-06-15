@@ -1,6 +1,9 @@
+import "@fortawesome/fontawesome-free/css/all.css";
+import 'weather-icons/css/weather-icons.css';
+
+import { securityService } from '@/services/security';
 import Vue from 'vue'
 Vue.config.productionTip = false
-import { CONFIG_PROMISE } from "@/config";
 
 import VeeValidate from 'vee-validate';
 Vue.use(VeeValidate);
@@ -11,28 +14,27 @@ Vue.use(VTooltip, {
   defaultTrigger: 'click'
 });
 
+import { InitializeApp } from './startup';
 
 import isvalid from "./mixins/isValid";
 Vue.mixin(isvalid);
 
-Vue.config.productionTip = false
-CONFIG_PROMISE.then(async (configuration) => {
-  //dynamic import of main vue component and routes definistions in order to ensure that all other component
-  //that import the apis.ts statically will receive them already configured
-  const App = (await import("@/App.vue")).default;
-  const router = (await import("@/router")).default;
+Vue.config.productionTip = false;
 
-  //importing and registering filter vue definition
-  const filters = (await import("@/filters")).default;
-  for (let filterName in filters) {
-    Vue.filter(filterName, filters[filterName]);
-  }
+import App from "@/App.vue";
+import router from "@/router";
 
+import filters from "@/filters";
+for (let name in filters) {
+  Vue.filter(name, filters[name]);
+}
 
-  //VUE APPLICATION STARTUP
-  new Vue({
-    router,
-    render: h => h(App)
-  }).$mount('#app');
+async function startup() {
+  await securityService.RenewToken();
+  await InitializeApp();
+}
 
-});
+startup().then(() => new Vue({
+  router,
+  render: h => h(App)
+}).$mount('#app'));

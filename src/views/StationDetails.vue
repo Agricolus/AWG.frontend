@@ -1,8 +1,7 @@
 <template>
-	<div class="stationDetails">
+	<div class="stationDetails" v-if="station">
 		<header>
 			<select @change="changeStation">
-				<option disabled>Select station</option>
 				<option
 					v-for="s in stations"
 					:key="s.id"
@@ -29,55 +28,47 @@
 				:below="lastMeasureDateObserved | dateformat('DD MMM YYYY')"
 			></card>
 			<card
-				v-if="checkProperty('weatherType')"
 				title="Weather Condition"
 				:main-information="lastMeasureWeatherType | weatherConditionIcon"
 				:icon="true"
 			></card>
 			<card
-				v-if="checkProperty('windDirection')"
 				title="Wind Direction"
 				:main-information="lastMeasureWindDirection ? 'wi wi-wind from-' + lastMeasureWindDirection + '-deg' : null"
 				:icon="true"
 			></card>
 			<card
-				v-if="checkProperty('solarRadiation')"
 				title="Solar Radiation"
 				:main-information="lastMeasureSolarRadiation"
 				:unit="unitsMeasure['solarRadiation']"
 			></card>
 			<card
-				v-if="checkProperty('temperature')"
 				title="Temperature"
 				:main-information="lastMeasureTemperature"
 				:unit="unitsMeasure['temperature']"
 			></card>
 			<card
-				v-if="checkProperty('precipitation')"
 				title="Precipitation"
 				:main-information="lastMeasurePrecipitation"
 				:unit="unitsMeasure['precipitation']"
 			></card>
 			<card
-				v-if="checkProperty('relativeHumidity')"
-				title="Relaty Humidity"
+				title="Relative Humidity"
 				:main-information="lastMeasureRelativeHumidity"
 				:unit="unitsMeasure['relativeHumidity']"
 			></card>
 			<card
-				v-if="checkProperty('windSpeed')"
 				title="Wind Speed"
 				:main-information="lastMeasureWindSpeed"
 				:unit="unitsMeasure['windSpeed']"
 			></card>
 			<card
-				v-if="checkProperty('atmosphericPressure')"
 				title="Atmoshperic Pressure"
 				:main-information="lastMeasureAtmosphericPressure"
 				:unit="unitsMeasure['atmosphericPressure']"
 			></card>
 		</section>
-		<section class="map-container" v-if="station && stations">
+		<section class="map-container" v-if="station && stations.length">
 			<l-map
 				class="map"
 				:zoom="mapSettings.zoom"
@@ -105,18 +96,14 @@
 
 		<hr />
 		<section class="daily-summary-section" v-if="timeSelectedInterval == timeIntervals.daily">
-			<label>Weather Details</label>
 			<div class="daily-summary-cards">
 				<template v-for="measure in cardValues">
 					<card
 						class="card-daily-summary"
-						:weatherIcon="measure.condition | weatherConditionIcon"
+						:icon="measure.condition | weatherConditionIcon"
 						:key="measure.id"
 						:title="measure.date | dateformat(measure.dateformat)"
-						:main-information="false"
-						:min="measure.minTemperature"
-						:max="measure.maxTemperature"
-						unit="°C"
+						:condition="measure.condition"
 					></card>
 				</template>
 			</div>
@@ -127,19 +114,20 @@
 			</select>
 		</section>
 		<section class="charts">
-			<div class="card precipitation" v-if="checkProperty('precipitation')">
+			<div class="card precipitation" v-if="precipitations.length">
 				<precipitations-chart :precipitations="precipitations"></precipitations-chart>
 			</div>
-			<div class="card temperature" v-if="checkProperty('temperature')">
+			<div class="card temperature" v-if="temperatures.length">
 				<temperatures-chart :temperatures="temperatures"></temperatures-chart>
 			</div>
-			<div class="card pressure" v-if="checkProperty('atmosphericPressure')">
+			<div class="card pressure" v-if="pressures.length">
 				<pressures-chart :pressures="pressures"></pressures-chart>
 			</div>
-			<div class="card humidity" v-if="checkProperty('relativeHumidity')">
+			<div class="card humidity" v-if="humidity.length">
 				<humidity-chart :humidity="humidity"></humidity-chart>
 			</div>
 		</section>
 	</div>
 </template>
+
 <script src="./StationDetails.ts" lang="ts"/>

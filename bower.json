@@ -1,8 +1,0 @@
-{
-  "name": "asp.net",
-  "private": true,
-  "dependencies": {
-    "font-awesome": "latest",
-    "weather-icons": "latest"
-  }
-}

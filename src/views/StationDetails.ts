@@ -11,7 +11,7 @@ import PressuresChart from "./charts/pressures.vue";
 import HumidityChart from "./charts/humidity.vue";
 import { CSVHelper } from '@/helpers/CSVHelper';
 import { defaultMapSettings, MapSettings, stationIcon, stationHighlightIcon } from '@/components/moduleMap';
-import { UnitsMeasure } from '@/@types/dto/fiware/unitMeasures';
+import { UnitsMeasure } from '@/@types/dto/fiware/enums/unitMeasures';
 
 @Component({
   name: "stationDetails",
@@ -30,7 +30,8 @@ export default class StationDetails extends Vue {
   timeIntervals = {
     daily: "Last 24 hours",
     weekly: "Last week",
-    monthly: "Last month"
+    monthly: "Last month",
+    yearly: "Last year"
   };
 
   timeSelectedInterval: string = "Last week";
@@ -38,7 +39,7 @@ export default class StationDetails extends Vue {
   mapSettings: MapSettings = defaultMapSettings;
   icon: L.Icon = stationIcon;
   highlighticon: L.Icon = stationHighlightIcon;
-  stations: dto.Device[] = null;
+  stations: dto.Device[] = [];
   station: dto.Device = null;
   highlightMarker: Array<number> | null = null;
 
@@ -51,7 +52,7 @@ export default class StationDetails extends Vue {
   get temperatures() {
     if (this.timeSelectedInterval != this.timeIntervals.daily) {
       if (!this.dailyMeasures) return [];
-      return this.dailyMeasures.map(dm => {
+      return this.dailyMeasures.filter(f => f.avgTemperature != null || f.minTemperature != null || f.maxTemperature != null).map(dm => {
         return {
           time: dayjs(dm.date).startOf('day').toDate(),
           avg: round(dm.avgTemperature),
@@ -61,7 +62,7 @@ export default class StationDetails extends Vue {
       });
     }
     if (!this.rawMeasures) return [];
-    return this.rawMeasures.map(dm => {
+    return this.rawMeasures.filter(f => f.temperature != null).map(dm => {
       return { time: dm.dateObserved, avg: round(dm.temperature) }
     })
   }
@@ -69,12 +70,12 @@ export default class StationDetails extends Vue {
   get precipitations() {
     if (this.timeSelectedInterval != this.timeIntervals.daily) {
       if (!this.dailyMeasures) return [];
-      return this.dailyMeasures.map(dm => {
+      return this.dailyMeasures.filter(f => f.precipitations != null).map(dm => {
         return { time: dayjs(dm.date).startOf('day').toDate(), precipitation: round(dm.precipitations) }
       });
     }
     if (!this.rawMeasures) return [];
-    return this.rawMeasures.map(dm => {
+    return this.rawMeasures.filter(f => f.precipitation != null).map(dm => {
       return { time: dm.dateObserved, precipitation: round(dm.precipitation) }
     })
   }
@@ -82,17 +83,17 @@ export default class StationDetails extends Vue {
   get pressures() {
     if (this.timeSelectedInterval != this.timeIntervals.daily) {
       if (!this.dailyMeasures) return [];
-      return this.dailyMeasures.map(dm => {
+      return this.dailyMeasures.filter(f => f.avgAtmosphericPressure != null || f.minAtmosphericPressure != null || f.maxAtmosphericPressure != null).map(dm => {
         return {
           time: dayjs(dm.date).startOf('day').toDate(),
-          avg: round(dm.avgTemperature),
-          min: round(dm.minTemperature),
-          max: round(dm.maxTemperature)
+          avg: round(dm.avgAtmosphericPressure),
+          min: round(dm.minAtmosphericPressure),
+          max: round(dm.maxAtmosphericPressure)
         }
       });
     }
     if (!this.rawMeasures) return [];
-    return this.rawMeasures.map(dm => {
+    return this.rawMeasures.filter(f => f.atmosphericPressure != null).map(dm => {
       return { time: dm.dateObserved, avg: round(dm.atmosphericPressure) }
     });
   }
@@ -100,7 +101,7 @@ export default class StationDetails extends Vue {
   get humidity() {
     if (this.timeSelectedInterval != this.timeIntervals.daily) {
       if (!this.dailyMeasures) return [];
-      return this.dailyMeasures.map(dm => {
+      return this.dailyMeasures.filter(f => f.avgRelativeHumidity != null || f.minRelativeHumidity != null || f.maxRelativeHumidity != null).map(dm => {
         return {
           time: dayjs(dm.date).startOf('day').toDate(),
           avg: round(dm.avgRelativeHumidity),
@@ -110,7 +111,7 @@ export default class StationDetails extends Vue {
       });
     }
     if (!this.rawMeasures) return [];
-    return this.rawMeasures.map(dm => {
+    return this.rawMeasures.filter(f => f.relativeHumidity != null).map(dm => {
       return { time: dm.dateObserved, avg: round(dm.relativeHumidity) }
     });
   }
@@ -118,7 +119,7 @@ export default class StationDetails extends Vue {
   get cardValues() {
     if (this.timeSelectedInterval != this.timeIntervals.daily) {
       if (!this.dailyMeasures) return [];
-      return this.dailyMeasures.slice(-7).reverse().map(dm => {
+      return this.dailyMeasures.filter(f => f.avgTemperature != null || f.minTemperature != null || f.maxTemperature != null).slice(-7).reverse().map(dm => {
         return {
           id: dm.date.getTime(),
           dateformat: 'ddd DD',
@@ -131,7 +132,7 @@ export default class StationDetails extends Vue {
       });
     }
     if (!this.rawMeasures) return [];
-    return this.rawMeasures.slice(-7).reverse().map(dm => {
+    return this.rawMeasures.filter(f => f.temperature != null || f.weatherType != null).slice(-7).reverse().map(dm => {
       return {
         id: dm.id,
         dateformat: 'ddd DD HH:MM',
@@ -146,6 +147,7 @@ export default class StationDetails extends Vue {
   get lastMeasureDateObserved() {
     return this.lastMeasure ? this.lastMeasure.dateObserved : null;
   }
+
   get lastMeasureWeatherType() {
     return this.lastMeasure ? this.lastMeasure.weatherType : null;
   }
@@ -182,14 +184,6 @@ export default class StationDetails extends Vue {
     return UnitsMeasure;
   }
 
-
-
-
-  checkProperty(prop: string) {
-    if (!this.station || !this.station.controlledProperty) return false;
-    return this.station.controlledProperty.indexOf(prop) >= 0;
-  }
-
   openPopup(event: any) {
     event.openPopup();
   }
@@ -197,6 +191,7 @@ export default class StationDetails extends Vue {
   goToEdit() {
     this.$router.push({ name: "station-editing", params: { stationId: this.stationId } })
   }
+
   changeStation(evt: Event) {
     this.$router.push({ name: "station-details", params: { stationId: (evt.target as any).value } })
   }
@@ -217,8 +212,11 @@ export default class StationDetails extends Vue {
       if (n == this.timeIntervals.monthly) {
         from = dayjs(to).subtract(1, 'month');
       }
+      //yearly period
+      if (n == this.timeIntervals.yearly) {
+        from = dayjs(to).subtract(1, 'year');
+      }
       this.dailyMeasures = await measuresService.getLastDailyMeasures(this.stationId, from.toDate(), to);
-
     }
   }
 

@@ -6,7 +6,7 @@ import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
 import 'echarts/lib/component/axis';
 import 'echarts/lib/chart/line';
-import { UnitsMeasure } from '@/@types/dto/fiware/unitMeasures';
+import { UnitsMeasure } from '@/@types/dto/fiware/enums/unitMeasures';
 
 @Component({ components: { chart: ECharts } })
 export default class TemperaturesChart extends Vue {

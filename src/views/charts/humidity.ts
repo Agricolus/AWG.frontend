@@ -6,7 +6,7 @@ import Vue from 'vue';
 import ECharts from 'vue-echarts';
 import { Component, Prop } from 'vue-property-decorator';
 import { HumidityDefaultChartSettings, xAxisDateFormatterGenerator, tooltipFormatterGenerator } from "./chartSettings";
-import { UnitsMeasure } from '@/@types/dto/fiware/unitMeasures';
+import { UnitsMeasure } from '@/@types/dto/fiware/enums/unitMeasures';
 
 @Component({ components: { chart: ECharts } })
 export default class HumidityChart extends Vue {

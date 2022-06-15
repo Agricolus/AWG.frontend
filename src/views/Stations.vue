@@ -31,24 +31,24 @@
 					>
 						<td>
 							{{ station.deviceState }}
-							<i class="wi wi-na fa-2x" v-if="!station.deviceState"></i>
+							<i class="fas fa-minus fa-2x" v-if="!station.deviceState"></i>
 						</td>
 						<td>{{ station.name }}</td>
 						<td
 							v-if="station.dateLastValueReported"
 						>{{ station.dateLastValueReported | dateformat('DD MMM YYYY, HH:mm') }}</td>
 						<td v-else>
-							<i class="wi wi-na fa-2x"></i>
+							<i class="fas fa-minus fa-2x"></i>
 						</td>
 						<td
 							v-if="station.dateInstalled"
 						>{{ station.dateInstalled | dateformat('DD MMM YYYY, HH:mm') }}</td>
 						<td v-else>
-							<i class="wi wi-na fa-2x"></i>
+							<i class="fas fa-minus fa-2x"></i>
 						</td>
 						<td>
 							{{ station.serialNumber }}
-							<i class="wi wi-na fa-2x" v-if="!station.serialNumber"></i>
+							<i class="fas fa-minus fa-2x" v-if="!station.serialNumber"></i>
 						</td>
 					</tr>
 				</tbody>

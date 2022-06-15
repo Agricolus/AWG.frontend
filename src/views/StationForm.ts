@@ -14,8 +14,7 @@ import { AlertHelper } from '@/helpers/AlertHelper';
   components: {
     LMap, LTileLayer, LMarker, LPopup, Datepicker
   }
-}
-)
+})
 export default class StationForm extends Vue {
 
   @Prop()
@@ -23,10 +22,8 @@ export default class StationForm extends Vue {
 
   stationForm = {
     name: '',
-    controlledProperty: [],
     location: null,
     dateInstalled: null,
-    source: '',
     dataProvider: '',
     description: '',
     serialNumber: '',
@@ -53,39 +50,10 @@ export default class StationForm extends Vue {
   })
 
   showOptionData: boolean = false;
+  deleting: boolean = false;
 
-
-  get controlledProperties() {
-
-    return [
-      { id: 'atmosphericPressure', description: 'Atmospheric pressure' },
-      { id: 'dewPoint', description: 'Dew point' },
-      { id: 'illuminance', description: 'Illuminance' },
-      { id: 'precipitation', description: 'Precipitation' },
-      { id: 'pressureTendency', description: 'Pressure tendency' },
-      { id: 'relativeHumidity', description: 'Relative humidity' },
-      { id: 'snowHeight', description: 'Snow height' },
-      { id: 'solarRadiation', description: 'Solar radiation' },
-      { id: 'streamGauge', description: 'Stream gauge' },
-      { id: 'temperature', description: 'Temperature' },
-      { id: 'visibility', description: 'Visibility' },
-      { id: 'weatherType', description: 'Weather type' },
-      { id: 'windDirection', description: 'Wind direction' },
-      { id: 'windSpeed', description: 'Wind speed' }
-    ]
-  }
-
-  addControlledProperty(p) {
-    if (!this.isSelected(p)) {
-      this.stationForm.controlledProperty.push(p)
-    } else {
-      let idx = this.stationForm.controlledProperty.indexOf(p);
-      this.stationForm.controlledProperty.splice(idx, 1)
-    }
-  }
-
-  isSelected(p) {
-    return this.stationForm.controlledProperty.indexOf(p) > -1
+  mounted() {
+    this.initData();
   }
 
   onclickMap(e) {
@@ -119,16 +87,18 @@ export default class StationForm extends Vue {
 
   async save() {
     this.stationForm.location = (GeoJSON as any).parse({ lat: this.lat, lng: this.lng }, { Point: ['lat', 'lng'] }).geometry;
+
     if (this.stationId) {
       await stationsService.updateStation(this.stationForm as dto.Device);
     } else {
       await stationsService.createStation(this.stationForm as dto.Device);
     }
+
     AlertHelper.showInfo('Station successfully saved', '');
+
     this.back();
   }
 
-  deleting: boolean = false;
   async deleteStation() {
     if (this.deleting) return;
 
@@ -141,9 +111,5 @@ export default class StationForm extends Vue {
     AlertHelper.showInfo('Station successfully deleted', '')
 
     this.$router.push({ name: 'stations' });
-  }
-
-  mounted() {
-    this.initData()
   }
 }

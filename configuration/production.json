@@ -1,0 +1,14 @@
+{
+  "env": "production",
+  "applicationVersion": "1.0.0",
+  "auth": {
+    "authenticationServerUrl": "",
+    "clientId": "",
+    "clientSecret": "",
+    "checkSessionInterval": 30000,
+    "renewSessionTimeLimit": 1000000
+  },
+  "api": {
+    "apiServerUrl": ""
+  }
+}

@@ -1,8 +1,8 @@
-# FIWARE AgroWeatherGateway
+# FIWARE Agri Weather Gateway
 
 [![FIWARE Banner](https://fiware.github.io/tutorials.Context-Providers/img/fiware.png)](https://www.fiware.org/developers)
 
-### A first FIWARE Domain Application: AgroWeatherGateway
+### A first FIWARE Domain Application: Agri Weather Gateway
 
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
 [![License badge](https://img.shields.io/github/license/FIWARE/context.Orion-LD.svg)](https://opensource.org/licenses/AGPL-3.0)
@@ -44,7 +44,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 These configuration parameters are in **config.json**:
 * **env**: deploy environment
-* **isAuthenticationNeeded**: authentication enabler
 * **authenticationServerUrl**: authentication server url
 * **apiServerUrl**: API server url
 

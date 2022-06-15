@@ -39,7 +39,7 @@ function weatherConditionIcon(value: string): string {
 
     case 'thunderShower': return 'wi wi-day-thunderstorm'
     case 'thunder': return 'wi wi-day-thunderstorm'
-    default: return 'wi wi-na'
+    default: return 'fas fa-minus'
   }
 }
 

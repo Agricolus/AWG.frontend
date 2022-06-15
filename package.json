@@ -3,22 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "serve": "vue-cli-service serve --env development",
+    "serves": "vue-cli-service serve --env staging",
+    "servep": "vue-cli-service serve --env production",
+    "builds": "vue-cli-service build --env staging",
+    "build": "vue-cli-service build --env production",
+    "watch": "vue-cli-service build --env staging --watch"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.1",
     "@types/chart.js": "^2.9.13",
     "@types/leaflet": "^1.5.8",
-    "axios": "^0.21.1",
-    "chart.js": "^2.9.4",
+    "axios": "^0.19.2",
+    "chart.js": "^2.9.3",
     "core-js": "^3.6.4",
     "dayjs": "^1.8.20",
     "echarts": "^4.6.0",
     "geojson": "^0.5.0",
     "izitoast": "^1.4.0",
     "leaflet": "^1.6.0",
-    "vee-validate": "2.1.1",
     "v-tooltip": "2.0.2",
+    "vee-validate": "2.1.1",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.0",
     "vue-class-component": "^7.2.2",
@@ -27,7 +32,8 @@
     "vue-router": "^3.1.5",
     "vue2-leaflet": "^2.5.2",
     "vuejs-datepicker": "^1.6.2",
-    "vuex": "^3.1.2"
+    "vuex": "^3.1.2",
+    "weather-icons": "^1.3.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.2.2",

@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { UnitsMeasure } from '@/@types/dto/fiware/unitMeasures';
+import { UnitsMeasure } from '@/@types/dto/fiware/enums/unitMeasures';
 
 ////#region GENERAL
 const titleColor = '#4D4F5C';

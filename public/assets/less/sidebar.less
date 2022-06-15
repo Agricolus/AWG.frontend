@@ -103,13 +103,55 @@
 
           }
         }
-
-
-
-
       }
     }
 
+    .user-info {
+      display: grid;
+      grid-template-columns: auto;
+      grid-template-rows: auto;
+      gap: 10px 10px;
+      grid-template-areas: 
+        "logo     logo" 
+        "email    email"
+        "username logout";
+      justify-items: center;
+      align-items: center;
+
+      .user-initals {
+        width: 70px;
+        height: 70px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #a3a0fb;
+        font-weight: 700;
+        font-size: 1.6rem;
+        grid-area: logo;
+      }
+
+      .user-initals.rounded {
+        border-radius: 50px;
+        border: 1px solid #43425d;
+      }
+
+      .username {
+        font-weight: bold;
+        grid-area: username;
+        justify-self: end;
+      }
+
+      .email {
+        font-style: italic;
+        grid-area: email;
+      }
+
+      .logout {
+        grid-area: logout;
+        cursor: pointer;
+      }
+    }
   }
 
   footer {

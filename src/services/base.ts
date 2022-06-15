@@ -1,56 +1,183 @@
-import axios from "axios";
-import CONFIGURATION from "@/config";
+import Axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from "axios";
+import Qs from "qs";
+import { toDate } from '@/helpers/DateHelper';
 
+export class baseRestService {
+  protected allwaysSendAuthenticationToken: boolean = true;
+  protected saveToSessionStorage: boolean = true;
 
-export default class BaseRestService {
-  private static accessToken: string | null = null;
+  baseUrl: string = "";
+  xSourceHeader: string = null;
 
-  restClient = axios.create();
+  OnError: OnErrorDelegate;
+  OnHeadersPreparing: OnHeadersPreparingDelegate;
+
+  protected http: AxiosInstance;
 
   constructor() {
-    //check authentication setting
-    if (CONFIGURATION.auth?.isAuthenticationNeeded) {
+    this.http = Axios.create();
 
-      if (!BaseRestService.accessToken) {
-      } else {
-        //token ok
-        //register a transformer for the authentication header
-        this.restClient.defaults.transformRequest = (data, headers) => {
-          headers['Authorization'] = `Basic ${BaseRestService.accessToken}`;
-          return data;
-        }
+    baseRestService._token = JSON.parse(window.localStorage.getItem("authorizationData")) as AuthToken;
 
+    this.setArraySerializationMethod();
+  }
+
+  private setArraySerializationMethod() {
+    this.http.interceptors.request.use(async (reqConfig) => {
+      //change the default serializer only if the method is a GET
+      if (reqConfig.method !== "get") {
+        return reqConfig;
       }
-    }
-    //register response interceptor for unauthorized access
-    this.restClient.interceptors.response.use((response) => {
-      return response;
-    },
-      (error) => {
-        //check for 401 error code and in case redirect to login ???
-        // if (error.response.status == 401) {
-        //   //redirect to auth service
-        // }
-        //other server error response
-        throw "api_error";
+      //the 'repeat' is the standard behavior for array: arrKey=x&arrKey=y&arrKey=z....
+      reqConfig.paramsSerializer = (params) => {
+        return Qs.stringify(params, { arrayFormat: "repeat" });
+      };
+      return reqConfig;
+    });
+  }
+
+  protected async getRaw(uri: string, params: object = {}, sendAuthenticationToken: boolean = false): Promise<AxiosResponse> {
+    let response = await this.http.get(this.baseUrl + uri,
+      {
+        headers: this.prepareHeaders(this.allwaysSendAuthenticationToken || sendAuthenticationToken, false),
+        params: params,
+        responseType: 'arraybuffer'
       });
-    //custom deserialization
-    this.restClient.defaults.transformResponse = (data, header) => {
-      if (header['content-type'] && header['content-type'].indexOf("application/json") >= 0) {
-        return JSON.parse(data || null, this.JSONDeserializer)
+
+    if (response.status != 200 && this.OnError) this.OnError(response);
+    return response;
+  };
+
+  protected async get(uri: string, params: object = {}, sendAuthenticationToken: boolean = false): Promise<AxiosResponse> {
+    let response = await this.http.get(this.baseUrl + uri,
+      {
+        headers: this.prepareHeaders(this.allwaysSendAuthenticationToken || sendAuthenticationToken, false),
+        params: params,
+        transformResponse: (resp => resp ? JSON.parse(resp, toDate) : null)
+      });
+
+    if (response.status != 200 && this.OnError) this.OnError(response);
+    return response;
+  };
+
+  protected async Get<TResult>(uri: string, params: object = {}, sendAuthenticationToken: boolean = false): Promise<TResult> {
+    let result = await this.get(uri, params, sendAuthenticationToken);
+    if (result.status == 200)
+      return result.data as TResult;
+    else if (this.OnError) this.OnError(result);
+    return null;
+  }
+
+  protected async post(uri: string, data: any, params: object = {}, sendAuthenticationToken: boolean = false): Promise<AxiosResponse> {
+    let response = await this.http.post(this.baseUrl + uri, data,
+      {
+        headers: this.prepareHeaders(this.allwaysSendAuthenticationToken || sendAuthenticationToken, true),
+        params: params,
+        transformResponse: (resp => resp ? JSON.parse(resp, toDate) : null)
+      } as AxiosRequestConfig);
+    if (response.status != 200 && this.OnError) this.OnError(response);
+    return response;
+  };
+
+  protected async Post<TResult>(uri: string, data: any, params: object = {}, sendAuthenticationToken: boolean = false): Promise<TResult> {
+    let result = await this.post(uri, data, params, sendAuthenticationToken);
+    if (result.status == 200)
+      return result.data as TResult;
+    else if (this.OnError) this.OnError(result);
+    return null;
+  }
+
+  protected async put(uri: string, data: any, params: object = {}, sendAuthenticationToken: boolean = false): Promise<AxiosResponse> {
+    let response = await this.http.put(this.baseUrl + uri, data,
+      {
+        headers: this.prepareHeaders(this.allwaysSendAuthenticationToken || sendAuthenticationToken, true),
+        params: params,
+        transformResponse: (resp => resp ? JSON.parse(resp, toDate) : null)
+      });
+    if (response.status != 200 && this.OnError) this.OnError(response);
+    return response;
+  }
+
+  protected async Put<TResult>(uri: string, data: any, params: object = {}, sendAuthenticationToken: boolean = false): Promise<TResult> {
+    let result = await this.put(uri, data, params, sendAuthenticationToken);
+    if (result.status == 200)
+      return result.data as TResult;
+    else if (this.OnError) this.OnError(result);
+    return null;
+  }
+
+  protected async delete(uri: string, params: object = {}, sendAuthenticationToken: boolean = false): Promise<AxiosResponse> {
+    let response = await this.http.delete(this.baseUrl + uri,
+      {
+        headers: this.prepareHeaders(this.allwaysSendAuthenticationToken || sendAuthenticationToken, false),
+        params: params,
+        transformResponse: (resp => resp ? JSON.parse(resp, toDate) : null)
+      });
+    if (response.status != 200 && this.OnError) this.OnError(response);
+    return response;
+  }
+
+  protected async Delete<TResult>(uri: string, params: object = {}, sendAuthenticationToken: boolean = false): Promise<TResult> {
+    let result = await this.delete(uri, params, sendAuthenticationToken);
+    if (result.status == 200)
+      return result.data as TResult;
+    else if (this.OnError) this.OnError(result);
+    return null;
+  }
+
+  protected prepareHeaders(auth: boolean = false, json: boolean = true): any {
+    let headers: any = {};
+
+    if (auth) {
+      let authData = this.getAuthenticationToken();
+      if (authData) {
+        headers['Authorization'] = 'Bearer ' + authData.access_token;
       }
-      return data;
-    };
-  }
-
-
-  //custom JSON deserializer to give back date strings as date object
-  private JSONDeserializer(key: string, value: any) {
-    const dateFormat = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z?$/;
-    if (typeof value === "string" && dateFormat.test(value)) {
-      return new Date(value);
     }
-    return value;
+    if (json) headers['Content-Type'] = 'application/json';
+
+    if (this.OnHeadersPreparing) this.OnHeadersPreparing(headers);
+
+    return headers;
   }
 
+  protected static _token: AuthToken;
+
+  protected getAuthenticationToken(): AuthToken {
+    return baseRestService._token;
+  }
+
+  public static getAuthenticationToken(): AuthToken {
+    return baseRestService._token;
+  }
+
+  protected async setAuthenticationToken(data: AuthToken) {
+    window.localStorage.setItem("authorizationData", JSON.stringify(data));
+    baseRestService._token = data;
+  }
+
+  protected async deleteAuthenticationToken() {
+    window.localStorage.removeItem("authorizationData");
+    baseRestService._token = null;
+  }
+}
+
+export interface OnErrorDelegate { (data: DataResponse): void; }
+interface OnHeadersPreparingDelegate { (headers: Headers): void; }
+
+export class AuthToken {
+  access_token: string;
+  refresh_token: string;
+  id_token: string;
+  expires_in: number;
+  expiration_date: number;
+  resource: string;
+  userName: string;
+  token_type: string;
+}
+
+export class DataResponse {
+  status: number;
+  statusText: string;
+  data: any;
 }

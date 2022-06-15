@@ -224,6 +224,44 @@ html {
 .sidebar section .nav .nav-item .nav-link.router-link-active i {
   color: #a3a0fb;
 }
+.sidebar section .user-info {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  gap: 10px 10px;
+  grid-template-areas: "logo     logo" "email    email" "username logout";
+  justify-items: center;
+  align-items: center;
+}
+.sidebar section .user-info .user-initals {
+  width: 70px;
+  height: 70px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a3a0fb;
+  font-weight: 700;
+  font-size: 1.6rem;
+  grid-area: logo;
+}
+.sidebar section .user-info .user-initals.rounded {
+  border-radius: 50px;
+  border: 1px solid #43425d;
+}
+.sidebar section .user-info .username {
+  font-weight: bold;
+  grid-area: username;
+  justify-self: end;
+}
+.sidebar section .user-info .email {
+  font-style: italic;
+  grid-area: email;
+}
+.sidebar section .user-info .logout {
+  grid-area: logout;
+  cursor: pointer;
+}
 .sidebar footer {
   width: 100%;
   position: absolute;
@@ -484,12 +522,16 @@ html {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  min-width: 800px;
 }
 .stationForm header .title {
   font-size: 2rem;
   color: #a5a4bf;
   font-weight: bold;
   letter-spacing: 3px;
+}
+.stationForm div.form {
+  min-width: 800px;
 }
 .home {
   font-family: source-sans-pro;
@@ -621,6 +663,177 @@ html {
 .card .body .info label {
   font-size: 1rem;
 }
+.login {
+  background: #f6f5f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: source-sans-pro;
+  height: 100vh;
+  margin: -20px 0 50px;
+}
+.login * {
+  box-sizing: border-box;
+}
+.login h1 {
+  font-weight: bold;
+  margin: 0;
+}
+.login h2 {
+  text-align: center;
+}
+.login span {
+  font-size: 12px;
+}
+.login a {
+  color: #333;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 15px 0;
+}
+.login button {
+  border-radius: 20px;
+  border: 1px solid #43425d;
+  background-color: #43425d;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  cursor: pointer;
+}
+.login button:active {
+  transform: scale(0.95);
+}
+.login button:focus,
+.login input:focus {
+  outline: none;
+}
+.login button.ghost {
+  background-color: transparent;
+  border-color: #FFFFFF;
+}
+.login button.action {
+  margin-top: 10px;
+}
+.login button.register {
+  background-color: #FFFFFF;
+  color: #43425d;
+}
+.login input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+}
+.login .title {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 20px 0 30px;
+}
+.login .form {
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  text-align: center;
+}
+.login .form .error {
+  color: #dc3545;
+  font-size: 14px;
+}
+.login .error-input {
+  border: 1px solid #dc3545;
+}
+.login .container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  position: relative;
+  overflow: hidden;
+  width: 768px;
+  max-width: 100%;
+  min-height: 480px;
+}
+.login .form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+.login .sign-in-container {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+.login .container.right-panel-active .sign-in-container {
+  transform: translateX(100%);
+}
+.login .overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+.login .container.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+.login .overlay {
+  background: #43425d;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 0;
+  color: #FFFFFF;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+.login .container.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+.login .overlay-panel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  text-align: center;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+.login .overlay-left {
+  transform: translateX(-20%);
+}
+.login .container.right-panel-active .overlay-left {
+  transform: translateX(0);
+}
+.login .overlay-right {
+  right: 0;
+  transform: translateX(0);
+}
+.login .container.right-panel-active .overlay-right {
+  transform: translateX(20%);
+}
 .form {
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
   background: #ffffff 0% 0%;
@@ -723,7 +936,7 @@ html {
   color: #a9a9a9;
 }
 .form .map-form {
-  height: 40vh;
+  height: 32vh;
 }
 .form .map-form .map {
   border-radius: 5px;
@@ -744,9 +957,11 @@ html {
   align-items: center;
   justify-content: space-between;
   color: #43425d;
+  cursor: pointer;
 }
 .form .option-data label {
   font-size: 1.2rem;
+  cursor: pointer;
   font-weight: bold;
 }
 .form .option-data i {
